@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/KLineCard"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/klinecard" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/KLineName"
+        app:layout_constraintLeft_toLeftOf="@id/KLineCard"
+        app:layout_constraintTop_toTopOf="@id/KLineCard"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s18"
+        android:textColor="@color/black_333"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/KLineRead"
+        app:layout_constraintLeft_toRightOf="@id/KLineName"
+        app:layout_constraintBottom_toBottomOf="@id/KLineName"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s14"
+        android:layout_marginLeft="@dimen/d24"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/KLineSum"
+        app:layout_constraintLeft_toRightOf="@id/KLineRead"
+        app:layout_constraintTop_toTopOf="@id/KLineRead"
+        app:layout_constraintBottom_toBottomOf="@id/KLineRead"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/KLineTheme"
+        app:layout_constraintLeft_toLeftOf="@id/KLineName"
+        app:layout_constraintTop_toBottomOf="@id/KLineName"
+        android:layout_marginTop="@dimen/d8"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/KLineIsLearn"
+        app:layout_constraintRight_toRightOf="@id/KLineCard"
+        app:layout_constraintTop_toTopOf="@id/KLineName"
+        app:layout_constraintBottom_toBottomOf="@id/KLineName"
+        android:layout_marginRight="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/gray_666"
+        android:background="@drawable/gray_radius_10_shape"
+        android:text="已加入"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/KLineDes"
+        app:layout_constraintLeft_toLeftOf="@id/KLineTheme"
+        app:layout_constraintRight_toRightOf="@id/KLineCard"
+        app:layout_constraintTop_toBottomOf="@id/KLineTheme"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:lines="2"
+        android:ellipsize="end"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/KLineRefresh"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/KLineCard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:overScrollMode="never">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/KLineList"
+            android:overScrollMode="never"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d48"
+        android:id="@+id/KLineAdd"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/red_corner_10_shape"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s18"
+        android:text="加入学习"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/d14"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/ErrorTip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/trans_50_black"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/d14"
+        android:paddingRight="@dimen/d14"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

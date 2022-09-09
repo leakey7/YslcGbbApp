@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: io.github.youth5201314:banner:2.2.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1d37ee5cfba7fd7d271df583ca05f954/transformed/banner-2.2.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1d37ee5cfba7fd7d271df583ca05f954/transformed/banner-2.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1d37ee5cfba7fd7d271df583ca05f954/transformed/banner-2.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1d37ee5cfba7fd7d271df583ca05f954/transformed/banner-2.2.1/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.youth5201314/banner/2.2.1/9ba5f5f8be3f4e096fee637947dbb1ef2309a91e/banner-2.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

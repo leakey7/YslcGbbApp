@@ -1,0 +1,48 @@
+package com.gzyslczx.yslc.presenter;
+
+import android.util.Log;
+
+import com.gzyslczx.yslc.BaseActivity;
+import com.gzyslczx.yslc.presenter.yourui.YRBasePresenter;
+import com.gzyslczx.yslc.tools.ConnTool;
+import com.gzyslczx.yslc.tools.yourui.RequestApi;
+import com.yourui.sdk.message.use.Stock;
+
+import java.util.ArrayList;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Consumer;
+
+public class StockMarketPresenter {
+
+    private final String TAG = "StockMPres";
+
+    /*
+    * 请求分时数据
+    * */
+    public void RequestMinuteChart(BaseActivity baseActivity, Stock stock){
+        if (stock.getCodeType()!=-1) {
+            ArrayList<Stock> stockArrayList = new ArrayList<Stock>();
+            stockArrayList.add(stock);
+            Observable<Long> observable = YRBasePresenter.Create().RequestMinuteChart();
+            observable = ConnTool.AddExtraReqOfAct(observable, TAG, baseActivity);
+            observable.subscribe(new Consumer<Long>() {
+                @Override
+                public void accept(Long aLong) throws Throwable {
+                    RequestApi.getInstance().loadTrend(stock, null);
+                    RequestApi.getInstance().loadRealTime(stockArrayList, null);
+                }
+            });
+        }else {
+            Log.d(TAG, "匹配不到相应股票类型代码");
+        }
+    }
+
+    /*
+    * 请求日K数据
+    * */
+    public void RequestDailyChart(Stock stock, short period, short remitMode, int offset){
+        YRBasePresenter.Create().RequestDailyChart(stock, period, remitMode, offset);
+    }
+
+}

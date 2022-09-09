@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SpecialSupActivity"
+    android:clipChildren="false"
+    android:background="@drawable/special_sup_bg">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/SSupToolBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/white_left"
+        app:menu="@menu/white_share_menu">
+
+        <TextView
+            android:id="@+id/SSupToolBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="盘前特供"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s18" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/SSupDataBg"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d40"
+        android:layout_marginTop="@dimen/d14"
+        android:background="@drawable/white_radius_10_shape"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SSupToolBar"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <TextView
+        android:id="@+id/SSupDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        app:layout_constraintBottom_toBottomOf="@id/SSupDataBg"
+        app:layout_constraintLeft_toLeftOf="@id/SSupDataBg"
+        app:layout_constraintRight_toRightOf="@id/SSupDataBg"
+        app:layout_constraintTop_toTopOf="@id/SSupDataBg" />
+
+    <ImageView
+        android:id="@+id/SSupDateImg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d16"
+        android:layout_marginRight="12dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/data"
+        app:layout_constraintBottom_toBottomOf="@id/SSupDate"
+        app:layout_constraintRight_toLeftOf="@id/SSupDate"
+        app:layout_constraintTop_toTopOf="@id/SSupDate" />
+
+    <TextView
+        android:id="@+id/SSupDateTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="今天"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/SSupDate"
+        app:layout_constraintLeft_toRightOf="@id/SSupDate"
+        app:layout_constraintTop_toTopOf="@id/SSupDate" />
+
+    <ImageView
+        android:id="@+id/SSupHeadImg"
+        android:layout_width="@dimen/d44"
+        android:layout_height="@dimen/d44"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/special_sup"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SSupDataBg" />
+
+    <TextView
+        android:id="@+id/SSupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="盘前特供"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s16"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/SSupHeadImg"
+        app:layout_constraintLeft_toRightOf="@id/SSupHeadImg"
+        app:layout_constraintTop_toTopOf="@id/SSupHeadImg" />
+
+    <TextView
+        android:id="@+id/SSupFocus"
+        android:layout_width="@dimen/d60"
+        android:layout_height="@dimen/d24"
+        android:layout_marginRight="@dimen/d14"
+        android:background="@drawable/white_border_focus_radius_10_shape"
+        android:gravity="center"
+        android:text="@string/AddFocus"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toBottomOf="@id/SSupHeadImg"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/SSupHeadImg" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:id="@+id/SSupPager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SSupHeadImg"
+        android:layout_marginTop="@dimen/d14"
+        android:clipChildren="false"
+        android:overScrollMode="never"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/SSupCenterTag"
+        app:layout_constraintLeft_toLeftOf="@id/SSupPager"
+        app:layout_constraintRight_toRightOf="@id/SSupPager"
+        app:layout_constraintTop_toBottomOf="@id/SSupPager"
+        android:layout_marginTop="@dimen/d14"
+        android:scaleType="fitCenter"
+        android:src="@drawable/special_sup_selected" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/SSupLeftTag"
+        app:layout_constraintRight_toLeftOf="@id/SSupCenterTag"
+        app:layout_constraintTop_toTopOf="@id/SSupCenterTag"
+        app:layout_constraintBottom_toBottomOf="@id/SSupCenterTag"
+        android:scaleType="fitCenter"
+        android:src="@drawable/special_sup_unselect"
+        android:layout_marginRight="@dimen/d4" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/SSupRightTag"
+        app:layout_constraintLeft_toRightOf="@id/SSupCenterTag"
+        app:layout_constraintTop_toTopOf="@id/SSupCenterTag"
+        app:layout_constraintBottom_toBottomOf="@id/SSupCenterTag"
+        android:scaleType="fitCenter"
+        android:src="@drawable/special_sup_unselect"
+        android:layout_marginLeft="@dimen/d4" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/SSupRisk"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/d14"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:textColor="@color/gray_eee"
+        android:textSize="@dimen/s12"
+        android:text="@string/RiskText" />
+
+    <ProgressBar
+        android:layout_width="@dimen/d26"
+        android:layout_height="@dimen/d26"
+        android:id="@+id/SSupLoading"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

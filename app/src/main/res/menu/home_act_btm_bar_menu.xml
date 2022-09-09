@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/BtmBarHome"
+        android:icon="@drawable/home_act_home_btm_bar"
+        android:title="首页" />
+    <item
+        android:id="@+id/BtmBarLiving"
+        android:icon="@drawable/home_act_living_btm_bar"
+        android:title="直播" />
+    <item
+        android:id="@+id/BtmBarVip"
+        android:icon="@drawable/home_act_vip_btm_bar"
+        android:title="VIP" />
+    <item
+        android:id="@+id/BtmBarOptional"
+        android:icon="@drawable/home_act_option_btm_bar"
+        android:title="自选" />
+    <item
+        android:id="@+id/BtmBarMine"
+        android:icon="@drawable/home_act_mine_btm_bar"
+        android:title="我的" />
+
+</menu>

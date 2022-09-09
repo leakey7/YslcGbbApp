@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: C./AndroidSpace/YslcGuBbApp/app/libs/com.heytap.msp-push-3.0.0.aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ac3464ab519f63593a6fe6c442bcd59a/transformed/com.heytap.msp-push-3.0.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ac3464ab519f63593a6fe6c442bcd59a/transformed/com.heytap.msp-push-3.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ac3464ab519f63593a6fe6c442bcd59a/transformed/com.heytap.msp-push-3.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ac3464ab519f63593a6fe6c442bcd59a/transformed/com.heytap.msp-push-3.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

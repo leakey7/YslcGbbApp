@@ -1,0 +1,154 @@
+plugins {
+    id 'com.android.application'
+    id 'com.huawei.agconnect'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.gzyslczx.yslc"
+        minSdk 21
+        targetSdk 32
+        versionCode 14
+        versionName "v3.3"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY  : "ae006306de4d75ac14fa8256",
+                JPUSH_CHANNEL : "developer-default",
+                XIAOMI_APPKEY : "MI-5851834911360",
+                XIAOMI_APPID  : "MI-2882303761518349360",
+                MEIZU_APPKEY  : "MZ-acbee301273a4293b8962e13495e253c",
+                MEIZU_APPID   : "MZ-129350",
+                OPPO_APPKEY   : "OP-30b1277310794947808964f9d67bc0ee",
+                OPPO_APPID    : "OP-30257798",
+                OPPO_APPSECRET: "OP-350eb15ec59b4ed8bdb1b73e8175e0cd",
+                VIVO_APPKEY   : "c1371acc-f79a-486f-a937-649a62526807",
+                VIVO_APPID    : "20274",
+                YRMARKET_APPKEY : "YR183340513110001",
+                YRMARKET_APPSECRET : "83976ebf-175a-4c02-b658-7861c1ea6310"
+        ]
+
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("yslcapp.jks")
+            storePassword "87654321"
+            keyAlias "gzyslc"
+            keyPassword "87654321"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
+    packagingOptions {
+        jniLibs {
+            keepDebugSymbols += ['*/armeabi/libYTCommon.so', '*/armeabi-v7a/libYTCommon.so', '*/x86/libYTCommon.so', '*/arm64-v8a/libYTCommon.so']
+            pickFirsts += ['**/libc++_shared.so']
+        }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "gubaba_${variant.versionName}.apk"
+            }
+    }
+
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.gzyslczx.yslc.MyEventBusIndex' ]
+            }
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //EventBus
+    implementation "org.greenrobot:eventbus:3.3.1"
+    annotationProcessor "org.greenrobot:eventbus-annotation-processor:3.3.1"
+    //RefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    //RxJAVA
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.11'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+    implementation 'com.trello.rxlifecycle4:rxlifecycle:4.0.2'
+    implementation 'com.trello.rxlifecycle4:rxlifecycle-components:4.0.2'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    //Banner
+    implementation 'io.github.youth5201314:banner:2.2.1'
+    //BaseRecyclerViewAdapterHelper
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //TXY
+    implementation 'com.tencent.liteav:LiteAVSDK_Professional:latest.release'
+    //极光
+    implementation 'cn.jiguang.sdk:jverification:2.7.8'
+    implementation 'cn.jiguang.sdk:jpush:4.7.2'
+    implementation 'cn.jiguang.sdk:jcore:3.3.0'
+    //华为HMS SDK版本为:6.3.0.304
+    implementation 'com.huawei.hms:push:6.1.0.300'
+    implementation 'com.huawei.hms:base:6.2.0.300'
+    //厂商版本和 JPush SDK 版本保持一致
+    implementation 'cn.jiguang.sdk.plugin:huawei:4.6.3'
+    implementation 'cn.jiguang.sdk.plugin:xiaomi:4.6.3'
+    implementation 'cn.jiguang.sdk.plugin:meizu:4.6.3'
+    implementation 'cn.jiguang.sdk.plugin:vivo:4.6.3'
+    implementation 'cn.jiguang.sdk.plugin:oppo:4.6.3'
+    // oppo 厂商 aar 需要单独引入com.heytap.msp-push-x.x.x.aar
+    implementation files('libs/com.heytap.msp-push-3.0.0.aar')
+
+    //以下为 OPPO 3.0.0 aar需要依赖
+    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'commons-codec:commons-codec:1.6'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    //微信
+    api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
+    //日历
+    implementation 'com.haibin:calendarview:3.7.1'
+    //高亮引导
+    implementation 'com.github.soulqw:Curtain:0.2.1'
+    //预览图片
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    //行情
+    implementation files('libs/lib-yr-market-sdk-1.0.7.jar')
+
+}

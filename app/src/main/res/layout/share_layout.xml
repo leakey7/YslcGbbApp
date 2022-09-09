@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/trans_50_black">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d130"
+        android:id="@+id/ShareBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ShareCancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/s16"
+        android:textColor="@color/black_333"
+        android:text="@string/Cancel"
+        android:layout_marginBottom="@dimen/d10" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:id="@+id/ShareLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ShareCancel"
+        android:background="@color/gray_eee"
+        android:layout_marginBottom="@dimen/d10" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ShareWxText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ShareLine"
+        app:layout_constraintRight_toLeftOf="@id/ShareFriendsText"
+        android:layout_marginBottom="@dimen/d14"
+        android:textColor="@color/black_333"
+        android:text="@string/WeChat"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ShareFriendsText"
+        app:layout_constraintRight_toLeftOf="@id/SharLinkText"
+        app:layout_constraintBottom_toBottomOf="@id/ShareWxText"
+        app:layout_constraintLeft_toRightOf="@id/ShareWxText"
+        android:textColor="@color/black_333"
+        android:text="@string/Friends"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/SharLinkText"
+        app:layout_constraintBottom_toBottomOf="@id/ShareWxText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ShareFriendsText"
+        android:textColor="@color/black_333"
+        android:text="@string/CopyLink"
+        android:gravity="center"/>
+
+    <ImageView
+        android:layout_width="@dimen/d36"
+        android:layout_height="@dimen/d36"
+        android:id="@+id/ShareWxImg"
+        app:layout_constraintLeft_toLeftOf="@id/ShareWxText"
+        app:layout_constraintRight_toRightOf="@id/ShareWxText"
+        app:layout_constraintBottom_toTopOf="@id/ShareWxText"
+        android:layout_marginBottom="@dimen/d4"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/wechat_img" />
+
+    <ImageView
+        android:layout_width="@dimen/d36"
+        android:layout_height="@dimen/d36"
+        android:id="@+id/ShareFriendsImg"
+        app:layout_constraintLeft_toLeftOf="@id/ShareFriendsText"
+        app:layout_constraintRight_toRightOf="@id/ShareFriendsText"
+        app:layout_constraintBottom_toBottomOf="@id/ShareWxImg"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/friends_img" />
+
+    <ImageView
+        android:layout_width="@dimen/d36"
+        android:layout_height="@dimen/d36"
+        android:id="@+id/ShareCopyLinkImg"
+        app:layout_constraintLeft_toLeftOf="@id/SharLinkText"
+        app:layout_constraintRight_toRightOf="@id/SharLinkText"
+        app:layout_constraintBottom_toBottomOf="@id/ShareWxImg"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/link_img" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

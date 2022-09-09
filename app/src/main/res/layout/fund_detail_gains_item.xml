@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/d70"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:id="@+id/datesImg"
+        app:layout_constraintRight_toLeftOf="@id/datesValue"
+        app:layout_constraintTop_toTopOf="@id/datesValue"
+        app:layout_constraintBottom_toBottomOf="@id/datesValue"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datesValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="6dp"
+        android:textSize="12sp"
+        android:textColor="@color/black_333"
+        android:layout_marginRight="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datesTag"
+        app:layout_constraintLeft_toLeftOf="@id/datesImg"
+        app:layout_constraintRight_toRightOf="@id/datesValue"
+        app:layout_constraintTop_toBottomOf="@id/datesValue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/black_333"
+        android:textSize="12sp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d110"
+    android:background="@android:color/transparent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/MainSupListItemCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/d2"
+        app:cardCornerRadius="@dimen/d4"
+        app:cardElevation="@dimen/d2"
+        app:contentPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/MainSupListItemCons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/MainSupListItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d10"
+                android:gravity="center"
+                android:lines="1"
+                android:textColor="@color/main_red"
+                android:textSize="@dimen/s16"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/MainSupListItemCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d4"
+                android:lines="1"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/s12"
+                app:layout_constraintLeft_toLeftOf="@id/MainSupListItemName"
+                app:layout_constraintRight_toRightOf="@id/MainSupListItemName"
+                app:layout_constraintTop_toBottomOf="@id/MainSupListItemName" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/MainSupListItemLookBg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/d8"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/MainSupListItemCode">
+
+                <TextView
+                    android:id="@+id/dailyStockCheck"
+                    android:layout_width="@dimen/d64"
+                    android:layout_height="wrap_content"
+                    android:background="@color/main_red"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/d4"
+                    android:paddingBottom="@dimen/d4"
+                    android:text="查看理由"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/s14" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

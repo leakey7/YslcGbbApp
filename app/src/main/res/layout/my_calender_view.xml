@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/trans_50_black">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d44"
+        android:id="@+id/CalendarTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/CalendarMonth"
+        android:textSize="@dimen/s18"
+        android:text="选择日期"
+        android:textColor="@color/black_333"
+        android:gravity="center"
+        android:background="@color/white"/>
+
+    <ImageView
+        android:layout_width="@dimen/d24"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/CalendarClose"
+        app:layout_constraintRight_toRightOf="@id/CalendarMonth"
+        app:layout_constraintTop_toTopOf="@id/CalendarTitle"
+        app:layout_constraintBottom_toBottomOf="@id/CalendarTitle"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/close_img"
+        android:layout_marginRight="@dimen/d14"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d44"
+        android:id="@+id/CalendarMonth"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/CalendarLayout"
+        android:textSize="@dimen/s16"
+        android:textColor="@color/black_333"
+        android:gravity="center"
+        android:background="@color/white"/>
+
+    <ImageView
+        android:layout_width="@dimen/d24"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/CalendarLeft"
+        app:layout_constraintLeft_toLeftOf="@id/CalendarMonth"
+        app:layout_constraintTop_toTopOf="@id/CalendarMonth"
+        app:layout_constraintBottom_toBottomOf="@id/CalendarMonth"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/black_left"
+        android:layout_marginLeft="@dimen/d18"/>
+
+    <ImageView
+        android:layout_width="@dimen/d24"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/CalendarRight"
+        app:layout_constraintRight_toRightOf="@id/CalendarMonth"
+        app:layout_constraintTop_toTopOf="@id/CalendarMonth"
+        app:layout_constraintBottom_toBottomOf="@id/CalendarMonth"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/black_right"
+        android:layout_marginRight="@dimen/d18"/>
+
+    <com.haibin.calendarview.CalendarLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/CalendarLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <com.haibin.calendarview.CalendarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CalendarView"
+            app:month_view="com.gzyslczx.yslc.tools.customviews.MyMonthCalendar"
+            app:select_mode="single_mode"
+            app:week_start_with="sun"
+            app:month_view_show_mode="mode_only_current"
+            app:other_month_text_color="@color/gray_999"
+            app:selected_text_color="@color/white"
+            app:month_view_scrollable="false"
+            app:scheme_text_color="@color/main_red"
+            app:current_day_text_color="@color/main_red"
+            app:week_text_color="@color/gray_999"
+            app:week_line_background="@color/gray_999"
+            app:current_month_text_color="@color/black_333"
+            app:day_text_size="@dimen/s14"
+            android:minHeight="368dp"/>
+
+        <TextView
+            android:layout_width="@dimen/d80"
+            android:layout_height="@dimen/d28"
+            android:id="@+id/CalendarCommit"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/d14"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s18"
+            android:background="@drawable/red_corner_10_shape"
+            android:text="确定"
+            android:gravity="center" />
+
+    </com.haibin.calendarview.CalendarLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

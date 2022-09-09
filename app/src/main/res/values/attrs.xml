@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StockChartView">
+        <attr name="RealPLineColor" format="color" />
+        <attr name="AvePLineColor" format="color" />
+        <attr name="DottedLineColor" format="color" />
+        <attr name="UpColor" format="color" />
+        <attr name="DownColor" format="color" />
+        <attr name="GrayColor" format="color" />
+        <attr name="BlackColor" format="color" />
+        <attr name="equalColor" format="color" />
+        <attr name="VolumeType" format="integer"/>
+        <attr name="WhiteColor" format="color" />
+        <attr name="MaFiveColor" format="color" />
+        <attr name="MaTenColor" format="color" />
+        <attr name="MaTwentyColor" format="color" />
+        <attr name="MaThirtyColor" format="color" />
+        <attr name="KColor" format="color" />
+        <attr name="DColor" format="color" />
+        <attr name="JColor" format="color" />
+    </declare-styleable>
+
+</resources>

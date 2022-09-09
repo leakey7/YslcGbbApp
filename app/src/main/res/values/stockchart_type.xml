@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="default_volume">1</integer>
+    <integer name="default_kdj">11</integer>
+    <integer name="default_macd">12</integer>
+</resources>

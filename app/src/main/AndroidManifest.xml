@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.gzyslczx.yslc">
+
+    <permission
+        android:name="com.gzyslczx.yslc.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.gzyslczx.yslc.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <queries>
+        <package android:name="com.tencent.mm" />
+    </queries>
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_img"
+        android:label="@string/app_name"
+        android:preserveLegacyExternalStorage="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_img_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.YslcGbbApp"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".StockMarketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LogoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LaunchActivity"
+            android:exported="true"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter> <!-- URL Scheme启动 -->
+                <!-- 必有项 -->
+                <action android:name="android.intent.action.VIEW" />
+                <!-- 如果希望该应用可以通过浏览器的连接启动，则添加该项 -->
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 表示该页面可以被隐式调用，必须加上该项 -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- 协议部分 -->
+                <data
+                    android:host="yslcgbbactivity"
+                    android:scheme="gbbscheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MsgInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MsgBoxActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SuggestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserConfigActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConceptSelectorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FundTongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerOptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FundDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SpecialSupDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SpecialSupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherAllActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SmallVideoActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".YsFlashDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KLineArticleActivity"
+            android:exported="false"
+            android:launchMode="standard" />
+        <activity
+            android:name=".KLineVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KLineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WebActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".BigVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TeacherArtActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LabelArtActivity"
+            android:exported="false"
+            android:launchMode="standard" />
+        <activity
+            android:name=".TeacherSelfActivity"
+            android:exported="false"
+            android:launchMode="standard" />
+        <activity
+            android:name=".LabelSelfActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="com.gzyslczx.yslc.HomeActivity" />
+                <action android:name="cn.jiguang.myaction" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.gzyslczx.yslc.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider> <!-- Since JCore2.0.0 Required SDK核心功能 -->
+        <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
+        <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
+        <service
+            android:name=".tools.jigunagpush.JiGuangService"
+            android:enabled="true"
+            android:exported="false">
+
+            <!-- android:process=":pushcore"> -->
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service> <!-- Required since 3.0.7 -->
+        <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
+        <!-- 3.3.0开始所有事件将通过该类回调 -->
+        <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
+        <receiver
+            android:name=".tools.jigunagpush.JiGuangReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
+                <category android:name="${applicationId}" />
+
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="cn.jpush.android.asus.AsusPushMessageReceiver" />
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false"
+            tools:node="replace">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <!-- Required  显示通知栏 -->
+                <category android:name="${applicationId}" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver> <!-- Required. For publish channel feature -->
+        <!-- JPUSH_CHANNEL 是为了方便开发者统计 APK 分发渠道。 -->
+        <!-- 例如: -->
+        <!-- 发到 Google Play 的 APK 可以设置为 google-play; -->
+        <!-- 发到其他市场的 APK 可以设置为 xxx-market。 -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" /> <!-- Required. AppKey copied from Portal -->
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="ae006306de4d75ac14fa8256" />
+
+        <receiver
+            android:name="com.yourui.sdk.message.receiver.YRPushReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.market.HEALTH_CHECK" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="YRMARKET_APPKEY"
+            android:value="${YRMARKET_APPKEY}" />
+        <meta-data
+            android:name="YRMARKET_APPSECRET"
+            android:value="${YRMARKET_APPSECRET}" />
+    </application>
+
+</manifest>

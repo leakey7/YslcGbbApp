@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="@dimen/d100"
+        android:layout_height="@dimen/d48"
+        android:id="@+id/FundTongLeftDataBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/FundTongLeftNumber"
+        app:layout_constraintLeft_toLeftOf="@id/FundTongLeftSortImg"
+        app:layout_constraintRight_toRightOf="@+id/FundTongLeftSortImg"
+        app:layout_constraintTop_toTopOf="@id/FundTongLeftDataBg"
+        app:layout_constraintBottom_toBottomOf="@id/FundTongLeftDataBg"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s14"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="@dimen/d16"
+        android:layout_height="wrap_content"
+        android:id="@+id/FundTongLeftSortImg"
+        app:layout_constraintLeft_toLeftOf="@id/FundTongLeftDataBg"
+        app:layout_constraintTop_toTopOf="@id/FundTongLeftDataBg"
+        app:layout_constraintBottom_toBottomOf="@id/FundTongLeftDataBg"
+        android:layout_marginLeft="6dp"
+        android:src="@drawable/no_1"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/FundTongLeftName"
+        app:layout_constraintTop_toTopOf="@id/FundTongLeftDataBg"
+        app:layout_constraintLeft_toRightOf="@id/FundTongLeftSortImg"
+        app:layout_constraintRight_toRightOf="@id/FundTongLeftDataBg"
+        app:layout_constraintBottom_toTopOf="@id/FundTongLeftCode"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="6dp"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        android:gravity="left"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/FundTongLeftCode"
+        app:layout_constraintTop_toBottomOf="@id/FundTongLeftName"
+        app:layout_constraintBottom_toBottomOf="@id/FundTongLeftDataBg"
+        app:layout_constraintLeft_toLeftOf="@id/FundTongLeftName"
+        app:layout_constraintRight_toRightOf="@id/FundTongLeftName"
+        android:textSize="12sp"
+        android:lines="1"
+        android:gravity="left"
+        android:textColor="@color/gray_999" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

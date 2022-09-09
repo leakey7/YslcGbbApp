@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <com.tencent.rtmp.ui.TXCloudVideoView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/SmallVideo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/SmallVideoBtmBg"
+        android:background="@color/black"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:id="@+id/SmallVideoBtmBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/black" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/SmallVideoDes"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/SmallVideoBtmBg"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/white"
+        android:paddingBottom="@dimen/d2"
+        android:paddingTop="@dimen/d2"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:background="@color/trans_80_white"
+        android:lines="2"
+        android:ellipsize="end"
+        android:layout_marginBottom="8dp"/>
+
+    <ImageView
+        android:layout_width="@dimen/d36"
+        android:layout_height="@dimen/d36"
+        android:id="@+id/SmallVideoHeadImg"
+        app:layout_constraintLeft_toLeftOf="@id/SmallVideoBtmBg"
+        app:layout_constraintTop_toTopOf="@id/SmallVideoBtmBg"
+        app:layout_constraintBottom_toBottomOf="@id/SmallVideoBtmBg"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="@dimen/d14"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SmallVideoName"
+        app:layout_constraintLeft_toRightOf="@id/SmallVideoHeadImg"
+        app:layout_constraintTop_toTopOf="@id/SmallVideoBtmBg"
+        app:layout_constraintBottom_toBottomOf="@id/SmallVideoBtmBg"
+        android:layout_marginLeft="8dp"
+        android:textSize="@dimen/s16"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/SmallVideoFocus"
+        app:layout_constraintLeft_toRightOf="@id/SmallVideoName"
+        app:layout_constraintTop_toTopOf="@id/SmallVideoBtmBg"
+        app:layout_constraintBottom_toBottomOf="@id/SmallVideoBtmBg"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/white"
+        android:background="@drawable/red_corner_10_shape"
+        android:textSize="@dimen/s14"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:gravity="center"
+        android:text="+关注" />
+
+    <ImageView
+        android:layout_width="@dimen/d24"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/SmallVideoShare"
+        app:layout_constraintRight_toRightOf="@id/SmallVideoBtmBg"
+        app:layout_constraintTop_toTopOf="@id/SmallVideoBtmBg"
+        app:layout_constraintBottom_toTopOf="@id/SmallVideoShareTag"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/video_share"
+        android:layout_marginRight="@dimen/d14" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SmallVideoShareTag"
+        app:layout_constraintRight_toRightOf="@id/SmallVideoShare"
+        app:layout_constraintLeft_toLeftOf="@id/SmallVideoShare"
+        app:layout_constraintBottom_toBottomOf="@id/SmallVideoBtmBg"
+        app:layout_constraintTop_toBottomOf="@id/SmallVideoShare"
+        android:textSize="@dimen/s12"
+        android:textColor="@color/white"
+        android:text="分享" />
+
+    <ImageView
+        android:layout_width="@dimen/d24"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/SmallVideoPraise"
+        app:layout_constraintRight_toLeftOf="@id/SmallVideoShare"
+        app:layout_constraintTop_toTopOf="@id/SmallVideoShare"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/white_praise"
+        android:layout_marginRight="@dimen/d36" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SmallVideoPraiseNum"
+        app:layout_constraintLeft_toLeftOf="@id/SmallVideoPraise"
+        app:layout_constraintRight_toRightOf="@id/SmallVideoPraise"
+        app:layout_constraintBottom_toBottomOf="@id/SmallVideoShareTag"
+        android:textSize="@dimen/s12"
+        android:text="@string/Praise"
+        android:textColor="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

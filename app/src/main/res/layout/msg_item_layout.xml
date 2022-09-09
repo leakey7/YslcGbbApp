@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/MsgItemTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        app:layout_constraintRight_toLeftOf="@id/MsgItemNews"
+        android:layout_marginRight="@dimen/d8"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MsgItemNews"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/MsgItemTitle"
+        android:layout_marginRight="@dimen/d14"
+        android:textSize="@dimen/s12"
+        android:textColor="@color/white"
+        android:text="New"
+        android:background="@drawable/red_corner_10_shape"
+        android:paddingLeft="@dimen/d6"
+        android:paddingRight="@dimen/d6"
+        android:paddingTop="@dimen/d2"
+        android:paddingBottom="@dimen/d2"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/MsgItemDes"
+        app:layout_constraintLeft_toLeftOf="@id/MsgItemTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MsgItemTitle"
+        android:layout_marginRight="@dimen/d14"
+        android:layout_marginTop="@dimen/d8"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MsgItemTime"
+        app:layout_constraintLeft_toLeftOf="@id/MsgItemTitle"
+        app:layout_constraintTop_toBottomOf="@id/MsgItemDes"
+        android:layout_marginTop="@dimen/d14"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s14" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d4"
+        android:id="@+id/MsgItemLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MsgItemTime"
+        android:background="@color/gray_eee"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/d14" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

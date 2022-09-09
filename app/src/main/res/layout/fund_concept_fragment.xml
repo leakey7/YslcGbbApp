@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="14dp"
+        android:id="@+id/conceptSelectLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/conceptSelectTag"
+        app:layout_constraintBottom_toBottomOf="@id/conceptSelectTag"
+        android:layout_marginLeft="16dp"
+        android:background="@color/orange_FF753E" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/conceptSelectTag"
+        app:layout_constraintLeft_toRightOf="@id/conceptSelectLine"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:text="概念筛选" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/conceptSelectName"
+        app:layout_constraintLeft_toLeftOf="@id/conceptSelectTag"
+        app:layout_constraintTop_toBottomOf="@id/conceptSelectTag"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/orange_FF753E"
+        android:textSize="@dimen/s18" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:id="@+id/conceptSelector"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/conceptSelectName"
+        app:layout_constraintBottom_toBottomOf="@id/conceptSelectName"
+        android:textColor="@color/orange_FF753E"
+        android:textSize="@dimen/s14"
+        android:gravity="center"
+        android:background="@drawable/fund_concept_select_bg"
+        android:text="筛选"
+        android:layout_marginRight="@dimen/d14"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:id="@+id/conceptSelectLine1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/conceptSelectName"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray_eee" />
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="14dp"
+        android:id="@+id/conceptChartLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/conceptChartTag"
+        app:layout_constraintBottom_toBottomOf="@id/conceptChartTag"
+        android:layout_marginLeft="16dp"
+        android:background="@color/orange_FF753E" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/conceptChartTag"
+        app:layout_constraintLeft_toRightOf="@id/conceptChartLine"
+        app:layout_constraintTop_toBottomOf="@id/conceptSelectLine1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:text="@string/FundIndex" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="136dp"
+        android:id="@+id/conceptChartFrame"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/conceptChartTag"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginRight="@dimen/d14" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:id="@+id/conceptChartLine1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/conceptChartFrame"
+        android:layout_marginTop="@dimen/d14"
+        android:background="@color/gray_eee" />
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="14dp"
+        android:id="@+id/conceptRankLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/conceptRankTag"
+        app:layout_constraintBottom_toBottomOf="@id/conceptRankTag"
+        android:layout_marginLeft="16dp"
+        android:background="@color/orange_FF753E" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/conceptRankTag"
+        app:layout_constraintLeft_toRightOf="@id/conceptRankLine"
+        app:layout_constraintTop_toBottomOf="@id/conceptChartLine1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:text="@string/FundFindForecast" />
+
+    <TextView
+        android:id="@+id/conceptFundNameTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="基金名称"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/conceptRankTag"
+        android:background="@drawable/trade_list_text_bg"
+        android:layout_marginTop="@dimen/d14"/>
+    <TextView
+        android:id="@+id/conceptFundHeavyTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="行业重仓度"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toRightOf="@id/conceptFundNameTag"
+        app:layout_constraintTop_toTopOf="@id/conceptFundNameTag"
+        app:layout_constraintBottom_toBottomOf="@id/conceptFundNameTag"
+        android:background="@drawable/trade_list_text_bg" />
+
+    <com.gzyslczx.yslc.tools.customviews.MyHorScroll
+        android:id="@+id/conceptFundRightHeadScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fadingEdge="horizontal"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="@id/conceptFundNameTag"
+        app:layout_constraintLeft_toRightOf="@id/conceptFundHeavyTag"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/conceptFundNameTag">
+
+        <include
+            android:id="@+id/FundTongRightScroll"
+            layout="@layout/trade_rank_list_head_layout" />
+
+    </com.gzyslczx.yslc.tools.customviews.MyHorScroll>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/conceptFundLeftList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/conceptFundNameTag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/conceptFundNameTag"
+        app:layout_constraintRight_toRightOf="@id/conceptFundHeavyTag"/>
+
+    <com.gzyslczx.yslc.tools.customviews.MyHorScroll
+        android:id="@+id/conceptFundDataScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="@id/conceptFundLeftList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@id/conceptFundLeftList"
+        app:layout_constraintRight_toRightOf="@id/conceptFundRightHeadScroll"
+        app:layout_constraintTop_toTopOf="@+id/conceptFundLeftList">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/conceptFundRightList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </com.gzyslczx.yslc.tools.customviews.MyHorScroll>
+
+    <ProgressBar
+        android:layout_width="@dimen/d26"
+        android:layout_height="@dimen/d26"
+        android:id="@+id/conceptLoading"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

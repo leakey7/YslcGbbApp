@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/FundTongCoor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/FundTongAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/FundTongColl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/FundTongTopCons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_F7"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0">
+
+                <View
+                    android:id="@+id/FundTongSearchBg"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/d44"
+                    android:background="@color/main_blue"
+                    app:layout_constraintLeft_toLeftOf="@id/FundTongTopCons"
+                    app:layout_constraintRight_toRightOf="@id/FundTongTopCons"
+                    app:layout_constraintTop_toTopOf="@id/FundTongTopCons" />
+
+                <TextView
+                    android:id="@+id/FundTongSearchText"
+                    android:layout_width="0dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="@dimen/d14"
+                    android:layout_marginRight="@dimen/d14"
+                    android:background="@drawable/white_radius_10_shape"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/d44"
+                    android:text="@string/search_fund"
+                    android:textColor="@color/black_333"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/FundTongSearchBg"
+                    app:layout_constraintLeft_toLeftOf="@id/FundTongSearchBg"
+                    app:layout_constraintRight_toRightOf="@id/FundTongSearchBg"
+                    app:layout_constraintTop_toTopOf="@id/FundTongSearchBg" />
+
+                <ImageView
+                    android:id="@+id/FundTongSearchImg"
+                    android:layout_width="@dimen/d16"
+                    android:layout_height="@dimen/d16"
+                    android:layout_marginLeft="@dimen/d14"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/black_search"
+                    app:layout_constraintBottom_toBottomOf="@id/FundTongSearchText"
+                    app:layout_constraintLeft_toLeftOf="@id/FundTongSearchText"
+                    app:layout_constraintTop_toTopOf="@id/FundTongSearchText" />
+
+                <ImageView
+                    android:id="@+id/FundTongSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="@dimen/d14"
+                    android:layout_marginRight="@dimen/d14"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/FundTongSearchBg" />
+
+                <View
+                    android:layout_width="@dimen/d4"
+                    android:layout_height="@dimen/d14"
+                    android:id="@+id/FundTongChartLine"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/FundTongChartTitle"
+                    app:layout_constraintBottom_toBottomOf="@id/FundTongChartTitle"
+                    android:background="@color/main_blue"
+                    android:layout_marginLeft="@dimen/d14"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FundTongChartTitle"
+                    app:layout_constraintLeft_toRightOf="@id/FundTongChartLine"
+                    app:layout_constraintTop_toBottomOf="@+id/FundTongSelector"
+                    android:textSize="@dimen/s14"
+                    android:textColor="@color/black_333"
+                    android:text="高分基金组合VC沪深300走势比较"
+                    android:layout_marginLeft="@dimen/d8"
+                    android:layout_marginTop="@dimen/d14"/>
+
+                <View
+                    android:layout_width="@dimen/d8"
+                    android:layout_height="@dimen/d2"
+                    android:id="@+id/FundTongBlueStock"
+                    app:layout_constraintLeft_toLeftOf="@id/FundTongChartLine"
+                    app:layout_constraintTop_toTopOf="@+id/FundTongBlueStockTag"
+                    app:layout_constraintBottom_toBottomOf="@+id/FundTongBlueStockTag"
+                    android:background="@color/main_blue" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FundTongBlueStockTag"
+                    app:layout_constraintLeft_toRightOf="@id/FundTongBlueStock"
+                    app:layout_constraintTop_toBottomOf="@id/FundTongChartTitle"
+                    android:layout_marginTop="@dimen/d6"
+                    android:layout_marginLeft="@dimen/d6"
+                    android:textSize="@dimen/s12"
+                    android:textColor="@color/main_blue"
+                    android:text="股票型" />
+                <View
+                    android:layout_width="@dimen/d8"
+                    android:layout_height="@dimen/d2"
+                    android:id="@+id/FundTongYellowMixed"
+                    app:layout_constraintLeft_toRightOf="@id/FundTongBlueStockTag"
+                    app:layout_constraintTop_toTopOf="@+id/FundTongYellowMixedTag"
+                    app:layout_constraintBottom_toBottomOf="@+id/FundTongYellowMixedTag"
+                    android:background="@color/yellow_FFCF00"
+                    android:layout_marginLeft="@dimen/d14"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FundTongYellowMixedTag"
+                    app:layout_constraintLeft_toRightOf="@id/FundTongYellowMixed"
+                    app:layout_constraintTop_toBottomOf="@id/FundTongChartTitle"
+                    android:layout_marginTop="@dimen/d6"
+                    android:layout_marginLeft="@dimen/d6"
+                    android:textSize="@dimen/s12"
+                    android:textColor="@color/yellow_FFCF00"
+                    android:text="混合型" />
+                <View
+                    android:layout_width="@dimen/d8"
+                    android:layout_height="@dimen/d2"
+                    android:id="@+id/FundTongRedHuShen"
+                    app:layout_constraintLeft_toRightOf="@id/FundTongYellowMixedTag"
+                    app:layout_constraintTop_toTopOf="@+id/FundTongYellowMixedTag"
+                    app:layout_constraintBottom_toBottomOf="@+id/FundTongRedHuShenTag"
+                    android:background="@color/main_red"
+                    android:layout_marginLeft="@dimen/d14"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FundTongRedHuShenTag"
+                    app:layout_constraintLeft_toRightOf="@id/FundTongRedHuShen"
+                    app:layout_constraintTop_toBottomOf="@id/FundTongChartTitle"
+                    android:layout_marginTop="@dimen/d6"
+                    android:layout_marginLeft="@dimen/d6"
+                    android:textSize="@dimen/s12"
+                    android:textColor="@color/main_red"
+                    android:text="沪深300" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FundTongChartPager"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/FundTongBlueStockTag"
+                    android:layout_marginLeft="@dimen/d14"
+                    android:layout_marginRight="@dimen/d14"
+                    android:layout_marginTop="@dimen/d6"
+                    android:background="@color/white" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/d44"
+                    android:id="@+id/FundTongChatTab"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/FundTongTopCons"
+                    app:layout_constraintTop_toBottomOf="@id/FundTongChartPager"
+                    android:layout_marginLeft="@dimen/d14"
+                    android:layout_marginRight="@dimen/d14"
+                    android:layout_marginBottom="@dimen/d14"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="auto"
+                    app:tabMinWidth="@dimen/d60"
+                    app:tabMaxWidth="@dimen/d80"
+                    app:tabPaddingStart="@dimen/d4"
+                    android:paddingEnd="@dimen/d4"
+                    app:tabGravity="center"
+                    app:tabRippleColor="@android:color/transparent"
+                    android:overScrollMode="never"/>
+
+<!--                <com.gzyslczx.yslc.views.IGridView-->
+<!--                    android:id="@+id/FundTongIcon"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/dp14"-->
+<!--                    android:layout_marginBottom="@dimen/dp14"-->
+<!--                    android:background="@drawable/radius_8_white_shape"-->
+<!--                    android:numColumns="4"-->
+<!--                    android:paddingTop="10dp"-->
+<!--                    android:paddingBottom="10dp"-->
+<!--                    android:verticalSpacing="10dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/FundTongTopCons"-->
+<!--                    app:layout_constraintLeft_toLeftOf="@id/FundTongSelector"-->
+<!--                    app:layout_constraintRight_toRightOf="@id/FundTongSelector"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/FundTongSelector" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/FundTongBtmCons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/FundTongFirstTab"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d44"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="@id/FundTongBtmCons"
+                app:layout_constraintRight_toRightOf="@id/FundTongBtmCons"
+                app:layout_constraintTop_toTopOf="@id/FundTongBtmCons"
+                app:tabBackground="@android:color/transparent"
+                app:tabIndicator="@drawable/blue_line_tab_indicator"
+                app:tabIndicatorColor="@null"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabMinWidth="0dp"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="@color/main_blue"
+                app:tabTextColor="@color/gray_666" />
+
+            <View
+                android:id="@+id/FundTongLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/gray_e6"
+                app:layout_constraintLeft_toLeftOf="@id/FundTongBtmCons"
+                app:layout_constraintRight_toRightOf="@id/FundTongBtmCons"
+                app:layout_constraintTop_toBottomOf="@id/FundTongFirstTab" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/FundTongTab"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d44"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="@id/FundTongBtmCons"
+                app:layout_constraintRight_toRightOf="@id/FundTongBtmCons"
+                app:layout_constraintTop_toBottomOf="@id/FundTongLine"
+                app:tabBackground="@android:color/transparent"
+                app:tabIndicator="@drawable/blue_line_tab_indicator"
+                app:tabIndicatorColor="@null"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorHeight="0dp"
+                app:tabMinWidth="0dp"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="@color/main_blue"
+                app:tabTextColor="@color/gray_666" />
+
+            <TextView
+                android:id="@+id/FundTongName"
+                android:layout_width="@dimen/d100"
+                android:layout_height="@dimen/d48"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="名称代码"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/s14"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FundTongTab" />
+
+
+            <com.gzyslczx.yslc.tools.customviews.MyHorScroll
+                android:id="@+id/FundTongBtmScroll"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fadingEdge="horizontal"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="@id/FundTongName"
+                app:layout_constraintLeft_toRightOf="@id/FundTongName"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/FundTongName">
+
+                <include
+                    android:id="@+id/FundTongRightScroll"
+                    layout="@layout/fund_tong_list_head" />
+
+            </com.gzyslczx.yslc.tools.customviews.MyHorScroll>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/FundTongListCons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/FundTongLeftList"
+            android:layout_width="@dimen/d100"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="@id/FundTongListCons"
+            app:layout_constraintLeft_toLeftOf="@id/FundTongListCons"
+            app:layout_constraintTop_toTopOf="@id/FundTongListCons" />
+
+        <com.gzyslczx.yslc.tools.customviews.MyHorScroll
+            android:id="@+id/FundTongDataScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="@id/FundTongLeftList"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@id/FundTongLeftList"
+            app:layout_constraintRight_toRightOf="@id/FundTongListCons"
+            app:layout_constraintTop_toTopOf="@+id/FundTongLeftList">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/FundTongRightList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+        </com.gzyslczx.yslc.tools.customviews.MyHorScroll>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

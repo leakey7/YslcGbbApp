@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KLineArticleActivity"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/KLArtToolBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/black_left">
+
+        <TextView
+            android:id="@+id/KLArtTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="K线秘籍"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/s18" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/KLArtRefresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/KLArtToolBar">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/KLArtScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/KLArtCons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/KLArtTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/d14"
+                    android:layout_marginTop="@dimen/d14"
+                    android:layout_marginRight="@dimen/d14"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black_333"
+                    android:textSize="@dimen/s18"
+                    app:layout_constraintLeft_toLeftOf="@id/KLArtCons"
+                    app:layout_constraintRight_toRightOf="@id/KLArtCons"
+                    app:layout_constraintTop_toTopOf="@id/KLArtCons" />
+
+                <View
+                    android:id="@+id/KLArtLine"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/d14"
+                    android:background="@color/gray_eee"
+                    app:layout_constraintLeft_toLeftOf="@id/KLArtTitle"
+                    app:layout_constraintRight_toRightOf="@id/KLArtTitle"
+                    app:layout_constraintTop_toBottomOf="@id/KLArtTitle" />
+
+                <WebView
+                    android:id="@+id/KLArtContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d14"
+                    android:scrollbars="none"
+                    app:layout_constraintLeft_toLeftOf="@id/KLArtLine"
+                    app:layout_constraintRight_toRightOf="@id/KLArtLine"
+                    app:layout_constraintTop_toBottomOf="@id/KLArtLine" />
+
+
+                <ImageView
+                    android:id="@+id/KLArtReadImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="@dimen/d18"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/read_img"
+                    app:layout_constraintLeft_toLeftOf="@id/KLArtContent"
+                    app:layout_constraintTop_toBottomOf="@id/KLArtContent" />
+
+                <TextView
+                    android:id="@+id/KLArtReadTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="观看："
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/KLArtReadImg"
+                    app:layout_constraintLeft_toRightOf="@id/KLArtReadImg"
+                    app:layout_constraintTop_toTopOf="@id/KLArtReadImg" />
+
+                <TextView
+                    android:id="@+id/KLArtRead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/KLArtReadTag"
+                    app:layout_constraintLeft_toRightOf="@id/KLArtReadTag"
+                    app:layout_constraintTop_toTopOf="@id/KLArtReadTag" />
+
+                <TextView
+                    android:id="@+id/KLArtPraiseNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="赞"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/KLArtReadImg"
+                    app:layout_constraintRight_toRightOf="@id/KLArtContent"
+                    app:layout_constraintTop_toTopOf="@id/KLArtReadImg" />
+
+                <ImageView
+                    android:id="@+id/KLArtPraiseImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="2dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/un_praise"
+                    app:layout_constraintBottom_toBottomOf="@id/KLArtPraiseNum"
+                    app:layout_constraintRight_toLeftOf="@id/KLArtPraiseNum"
+                    app:layout_constraintTop_toTopOf="@id/KLArtPraiseNum" />
+
+                <TextView
+                    android:id="@+id/KLArtRecommend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d20"
+                    android:text="推荐"
+                    android:textColor="@color/gray_666"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintLeft_toLeftOf="@id/KLArtContent"
+                    app:layout_constraintTop_toBottomOf="@id/KLArtReadImg" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/KLArtRecList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@id/KLArtRecommend"
+                    app:layout_constraintRight_toRightOf="@id/KLArtContent"
+                    app:layout_constraintTop_toBottomOf="@id/KLArtRecommend"
+                    android:overScrollMode="never"/>
+
+                <TextView
+                    android:id="@+id/KLArtRisk"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d20"
+                    android:background="@drawable/gray_radius_10_shape"
+                    android:padding="@dimen/d14"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintLeft_toLeftOf="@id/KLArtContent"
+                    app:layout_constraintRight_toRightOf="@id/KLArtContent"
+                    app:layout_constraintTop_toBottomOf="@id/KLArtRecList" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

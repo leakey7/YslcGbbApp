@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_radius_10_shape">
+
+    <ImageView
+        android:layout_width="@dimen/d18"
+        android:layout_height="@dimen/d18"
+        android:id="@+id/DefOptionItemSelect"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="@dimen/d14"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/unselect"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/DefOptionItemName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/DefOptionItemSelect"
+        app:layout_constraintRight_toLeftOf="@id/DefOptionItemSelect"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        android:lines="1"
+        android:gravity="center"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/DefOptionItemCode"
+        app:layout_constraintRight_toRightOf="@id/DefOptionItemName"
+        app:layout_constraintLeft_toLeftOf="@id/DefOptionItemName"
+        app:layout_constraintTop_toBottomOf="@id/DefOptionItemName"
+        android:layout_marginTop="4dp"
+        android:textSize="@dimen/s12"
+        android:textColor="@color/gray_999"
+        android:lines="1"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/DefOptionItemType"
+        app:layout_constraintLeft_toLeftOf="@id/DefOptionItemName"
+        app:layout_constraintRight_toRightOf="@id/DefOptionItemName"
+        app:layout_constraintTop_toBottomOf="@id/DefOptionItemCode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s12"
+        android:background="@color/gray_F7"
+        android:padding="6dp"
+        android:gravity="center"/>
+    
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

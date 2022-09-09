@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        jcenter()
+        maven {url 'https://developer.huawei.com/repo/'}
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        jcenter()
+        maven {url 'https://developer.huawei.com/repo/'}
+    }
+}
+rootProject.name = "YslcGbbApp"
+include ':app'
+include ':stockmarketlibrary'

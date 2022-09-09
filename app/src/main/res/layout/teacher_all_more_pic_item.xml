@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/tMPicHeadImg"
+        android:layout_width="@dimen/d44"
+        android:layout_height="@dimen/d44"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tMPicFocus"
+        android:layout_width="@dimen/d60"
+        android:layout_height="@dimen/d24"
+        android:layout_marginRight="@dimen/d14"
+        android:background="@drawable/red_border_focus_radius_10_shape"
+        android:gravity="center"
+        android:text="@string/AddFocus"
+        android:textColor="@color/main_red"
+        android:textSize="@dimen/s14"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tMPicHeadImg" />
+
+    <TextView
+        android:id="@+id/tMPicName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        app:layout_constraintLeft_toRightOf="@id/tMPicHeadImg"
+        app:layout_constraintRight_toLeftOf="@id/tMPicFocus"
+        app:layout_constraintTop_toTopOf="@id/tMPicHeadImg" />
+
+    <TextView
+        android:id="@+id/tMPicIntro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintLeft_toLeftOf="@id/tMPicName"
+        app:layout_constraintRight_toRightOf="@+id/tMPicName"
+        app:layout_constraintTop_toBottomOf="@id/tMPicName" />
+
+    <ImageView
+        android:id="@+id/tMPicCodeImg"
+        android:layout_width="@dimen/d14"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/blue_code"
+        app:layout_constraintLeft_toLeftOf="@id/tMPicName"
+        app:layout_constraintTop_toBottomOf="@id/tMPicIntro" />
+
+    <TextView
+        android:id="@+id/tMPicCodeTag"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:text="@string/TagTCode"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/tMPicCodeImg"
+        app:layout_constraintLeft_toRightOf="@id/tMPicCodeImg"
+        app:layout_constraintTop_toTopOf="@id/tMPicCodeImg" />
+
+    <TextView
+        android:id="@+id/tMPicCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/tMPicCodeTag"
+        app:layout_constraintLeft_toRightOf="@id/tMPicCodeTag"
+        app:layout_constraintRight_toRightOf="@id/tMPicFocus"
+        app:layout_constraintTop_toTopOf="@id/tMPicCodeTag" />
+
+    <TextView
+        android:id="@+id/tMPicTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        app:layout_constraintLeft_toLeftOf="@id/tMPicHeadImg"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tMPicCodeImg" />
+
+    <TextView
+        android:id="@+id/tMPicDes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toLeftOf="@id/tMPicTitle"
+        app:layout_constraintRight_toRightOf="@id/tMPicTitle"
+        app:layout_constraintTop_toBottomOf="@id/tMPicTitle" />
+
+    <com.gzyslczx.yslc.tools.customviews.IGridView
+        android:id="@+id/tMPicImgGrid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:numColumns="3"
+        android:verticalSpacing="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/tMPicTitle"
+        app:layout_constraintRight_toRightOf="@id/tMPicTitle"
+        app:layout_constraintTop_toBottomOf="@id/tMPicDes" />
+
+    <TextView
+        android:id="@+id/tMPicPraiseNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:text="@string/Praise"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s14"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tMPicImgGrid" />
+
+    <ImageView
+        android:id="@+id/tMPicPraiseImg"
+        android:layout_width="@dimen/d16"
+        android:layout_height="@dimen/d16"
+        android:layout_marginRight="2dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/un_praise"
+        app:layout_constraintBottom_toBottomOf="@id/tMPicPraiseNum"
+        app:layout_constraintRight_toLeftOf="@id/tMPicPraiseNum"
+        app:layout_constraintTop_toTopOf="@id/tMPicPraiseNum" />
+
+    <TextView
+        android:id="@+id/tMPicShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/d36"
+        android:text="@string/Share"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toBottomOf="@id/tMPicPraiseNum"
+        app:layout_constraintRight_toLeftOf="@id/tMPicPraiseNum"
+        app:layout_constraintTop_toTopOf="@id/tMPicPraiseNum" />
+
+    <ImageView
+        android:id="@+id/tMPicShareImg"
+        android:layout_width="@dimen/d16"
+        android:layout_height="@dimen/d16"
+        android:layout_marginRight="2dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gray_share"
+        app:layout_constraintBottom_toBottomOf="@id/tMPicShare"
+        app:layout_constraintRight_toLeftOf="@id/tMPicShare"
+        app:layout_constraintTop_toTopOf="@id/tMPicShare" />
+
+    <View
+        android:id="@+id/tMPicLine"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/d14"
+        android:background="@color/gray_F7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tMPicPraiseNum" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

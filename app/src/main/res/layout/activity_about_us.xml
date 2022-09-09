@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_F7"
+    tools:context=".AboutUsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/AboutUsToolBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/black_left">
+
+        <TextView
+            android:id="@+id/AboutUsToolBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="关于我们"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/s18" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/AboutUsIcon"
+        android:layout_width="@dimen/d58"
+        android:layout_height="@dimen/d58"
+        android:layout_marginTop="@dimen/d28"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsToolBar" />
+
+    <TextView
+        android:id="@+id/AboutUsIconText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toLeftOf="@id/AboutUsIcon"
+        app:layout_constraintRight_toRightOf="@id/AboutUsIcon"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsIcon" />
+
+    <TextView
+        android:id="@+id/AboutUsDes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:text="@string/AboutUsDes"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsIconText" />
+
+    <View
+        android:id="@+id/AboutUsBg"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d156"
+        android:layout_marginTop="@dimen/d20"
+        android:background="@drawable/white_radius_10_shape"
+        app:layout_constraintLeft_toLeftOf="@id/AboutUsDes"
+        app:layout_constraintRight_toRightOf="@id/AboutUsDes"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsDes" />
+
+    <TextView
+        android:id="@+id/AboutUsUserXY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/d14"
+        android:text="用户协议"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toTopOf="@id/AboutUsPrivateXY"
+        app:layout_constraintLeft_toLeftOf="@id/AboutUsBg"
+        app:layout_constraintRight_toLeftOf="@id/AboutUsPrivateXYRightImg"
+        app:layout_constraintTop_toTopOf="@id/AboutUsBg" />
+
+    <TextView
+        android:id="@+id/AboutUsPrivateXY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/d14"
+        android:src="@drawable/mine_msg"
+        android:text="隐私协议"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toTopOf="@id/AboutUsThird"
+        app:layout_constraintLeft_toLeftOf="@id/AboutUsUserXY"
+        app:layout_constraintRight_toLeftOf="@id/AboutUsPrivateXYRightImg"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsUserXY" />
+
+    <TextView
+        android:id="@+id/AboutUsThird"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/d14"
+        android:src="@drawable/mine_msg"
+        android:text="第三方SDK目录"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toTopOf="@id/AboutUsLogout"
+        app:layout_constraintLeft_toLeftOf="@id/AboutUsPrivateXY"
+        app:layout_constraintRight_toLeftOf="@id/AboutUsThirdRightImg"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsPrivateXY" />
+
+    <TextView
+        android:id="@+id/AboutUsLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/d14"
+        android:src="@drawable/mine_msg"
+        android:text="注销账号"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toBottomOf="@id/AboutUsBg"
+        app:layout_constraintLeft_toLeftOf="@id/AboutUsPrivateXY"
+        app:layout_constraintRight_toLeftOf="@id/AboutUsThirdRightImg"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsThird" />
+
+    <ImageView
+        android:id="@+id/AboutUsUserXYRightImg"
+        android:layout_width="@dimen/d14"
+        android:layout_height="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/mine_right"
+        app:layout_constraintBottom_toBottomOf="@id/AboutUsUserXY"
+        app:layout_constraintRight_toRightOf="@id/AboutUsBg"
+        app:layout_constraintTop_toTopOf="@id/AboutUsUserXY" />
+
+    <ImageView
+        android:id="@+id/AboutUsPrivateXYRightImg"
+        android:layout_width="@dimen/d14"
+        android:layout_height="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/mine_right"
+        app:layout_constraintBottom_toBottomOf="@id/AboutUsPrivateXY"
+        app:layout_constraintRight_toRightOf="@id/AboutUsBg"
+        app:layout_constraintTop_toTopOf="@id/AboutUsPrivateXY" />
+
+    <ImageView
+        android:id="@+id/AboutUsThirdRightImg"
+        android:layout_width="@dimen/d14"
+        android:layout_height="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/mine_right"
+        app:layout_constraintBottom_toBottomOf="@id/AboutUsThird"
+        app:layout_constraintRight_toRightOf="@id/AboutUsBg"
+        app:layout_constraintTop_toTopOf="@id/AboutUsThird" />
+
+    <ImageView
+        android:id="@+id/AboutUsLogoutImg"
+        android:layout_width="@dimen/d14"
+        android:layout_height="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/mine_right"
+        app:layout_constraintBottom_toBottomOf="@id/AboutUsLogout"
+        app:layout_constraintRight_toRightOf="@id/AboutUsBg"
+        app:layout_constraintTop_toTopOf="@id/AboutUsLogout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

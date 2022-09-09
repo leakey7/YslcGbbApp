@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.jiguang.sdk.plugin:meizu:4.6.3@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2c3dee75e01fc3a11c9896de0c287d18/transformed/meizu-4.6.3/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2c3dee75e01fc3a11c9896de0c287d18/transformed/meizu-4.6.3/jars/libs/jpush-android-plugin-meizu-v4.6.3.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2c3dee75e01fc3a11c9896de0c287d18/transformed/meizu-4.6.3/jars/libs/meizu-push-4.1.4.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2c3dee75e01fc3a11c9896de0c287d18/transformed/meizu-4.6.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2c3dee75e01fc3a11c9896de0c287d18/transformed/meizu-4.6.3/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.jiguang.sdk.plugin/meizu/4.6.3/bc019256ba7befc8f539d7bd38e00a3b7a5b6740/meizu-4.6.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

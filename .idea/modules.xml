@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/YslcGbbApp.iml" filepath="$PROJECT_DIR$/.idea/modules/YslcGbbApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YslcGbbApp.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.unitTest.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.soulqw:Curtain:0.2.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c999200a7fcd1c2f6ce1534c8da6ec2f/transformed/Curtain-0.2.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c999200a7fcd1c2f6ce1534c8da6ec2f/transformed/Curtain-0.2.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c999200a7fcd1c2f6ce1534c8da6ec2f/transformed/Curtain-0.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c999200a7fcd1c2f6ce1534c8da6ec2f/transformed/Curtain-0.2.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.soulqw/Curtain/0.2.1/eec79e27243081510babca434813477da5ca425c/Curtain-0.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

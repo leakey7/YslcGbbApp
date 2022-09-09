@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d26"
+        android:id="@+id/HVideoBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/trans_20_black"/>
+
+    <ImageView
+        android:layout_width="@dimen/d18"
+        android:layout_height="@dimen/d18"
+        android:id="@+id/HVideoPlay"
+        app:layout_constraintLeft_toLeftOf="@id/HVideoBar"
+        app:layout_constraintTop_toTopOf="@id/HVideoBar"
+        app:layout_constraintBottom_toBottomOf="@id/HVideoBar"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="@dimen/d14"
+        android:src="@drawable/stop"
+        android:tag="START" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/HVideoOnTime"
+        app:layout_constraintLeft_toLeftOf="@id/HVideoBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/white"
+        android:layout_marginLeft="46dp" />
+
+    <ImageView
+        android:layout_width="@dimen/d18"
+        android:layout_height="@dimen/d18"
+        android:id="@+id/HVideoScale"
+        app:layout_constraintRight_toRightOf="@id/HVideoBar"
+        app:layout_constraintTop_toTopOf="@id/HVideoPlay"
+        app:layout_constraintBottom_toBottomOf="@id/HVideoPlay"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:layout_marginRight="@dimen/d14"
+        android:src="@drawable/scale"
+        android:tag="SMALL"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/HVideoSumTime"
+        app:layout_constraintRight_toRightOf="@id/HVideoBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/white"
+        android:layout_marginRight="46dp" />
+
+    <SeekBar
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/HVideoProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        app:layout_constraintLeft_toRightOf="@id/HVideoOnTime"
+        app:layout_constraintRight_toLeftOf="@id/HVideoSumTime"
+        app:layout_constraintTop_toTopOf="@id/HVideoBar"
+        app:layout_constraintBottom_toBottomOf="@id/HVideoBar"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:max="0"
+        android:secondaryProgressTint="@color/gray_eee" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

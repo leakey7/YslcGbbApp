@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ConceptItemWord"
+        android:textSize="10sp"
+        android:textColor="@color/black_333"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="4dp"
+        android:minWidth="60dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/concept_item_word_unselect_shape"/>
+
+</FrameLayout>

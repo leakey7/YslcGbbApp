@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="@dimen/d100"
+        android:layout_height="@dimen/d48"
+        android:id="@+id/MyOpNameBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MyOpNameData"
+        app:layout_constraintLeft_toLeftOf="@id/MyOpNameBg"
+        app:layout_constraintRight_toRightOf="@id/MyOpNameBg"
+        app:layout_constraintTop_toTopOf="@id/MyOpNameBg"
+        app:layout_constraintBottom_toTopOf="@id/MyOpNameImg"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d12"
+        android:id="@+id/MyOpNameImg"
+        app:layout_constraintLeft_toLeftOf="@id/MyOpNameData"
+        app:layout_constraintBottom_toBottomOf="@id/MyOpCode"
+        app:layout_constraintTop_toTopOf="@id/MyOpCode"
+        app:layout_constraintRight_toLeftOf="@id/MyOpCode"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/finance" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MyOpCode"
+        app:layout_constraintRight_toRightOf="@id/MyOpNameData"
+        app:layout_constraintBottom_toBottomOf="@id/MyOpNameBg"
+        app:layout_constraintTop_toBottomOf="@id/MyOpNameData"
+        app:layout_constraintLeft_toRightOf="@id/MyOpNameImg"
+        android:textSize="@dimen/s12"
+        android:textColor="@color/gray_999"
+        android:gravity="center"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

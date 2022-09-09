@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tradeFundEvaTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="总得分"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/trade_list_text_bg" />
+
+    <TextView
+        android:id="@+id/tradeFundNetWorthTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="最新净值"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundEvaTag"
+        app:layout_constraintTop_toTopOf="@id/tradeFundEvaTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundEvaTag"
+        android:background="@drawable/trade_list_text_bg" />
+
+    <TextView
+        android:id="@+id/tradeFundMonthGainsTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="月内涨幅(%)"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundNetWorthTag"
+        app:layout_constraintTop_toTopOf="@id/tradeFundEvaTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundEvaTag"
+        android:background="@drawable/trade_list_text_bg" />
+
+    <TextView
+        android:id="@+id/tradeFundQuarterGainsTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="季度涨幅(%)"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundMonthGainsTag"
+        app:layout_constraintTop_toTopOf="@id/tradeFundEvaTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundEvaTag"
+        android:background="@drawable/trade_list_text_bg" />
+
+    <TextView
+        android:id="@+id/tradeFundHalfYearGainsTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="半年涨幅(%)"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundQuarterGainsTag"
+        app:layout_constraintTop_toTopOf="@id/tradeFundEvaTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundEvaTag"
+        android:background="@drawable/trade_list_text_bg" />
+
+    <TextView
+        android:id="@+id/tradeFundYearGainsTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="一年涨幅(%)"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundHalfYearGainsTag"
+        app:layout_constraintTop_toTopOf="@id/tradeFundEvaTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundEvaTag"
+        android:background="@drawable/trade_list_text_bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

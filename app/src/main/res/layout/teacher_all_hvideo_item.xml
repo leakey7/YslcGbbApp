@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/tHVHeadImg"
+        android:layout_width="@dimen/d44"
+        android:layout_height="@dimen/d44"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tHVFocus"
+        android:layout_width="@dimen/d60"
+        android:layout_height="@dimen/d24"
+        android:layout_marginRight="@dimen/d14"
+        android:background="@drawable/red_border_focus_radius_10_shape"
+        android:gravity="center"
+        android:text="@string/AddFocus"
+        android:textColor="@color/main_red"
+        android:textSize="@dimen/s14"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tHVHeadImg" />
+
+    <TextView
+        android:id="@+id/tHVName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        app:layout_constraintLeft_toRightOf="@id/tHVHeadImg"
+        app:layout_constraintRight_toLeftOf="@id/tHVFocus"
+        app:layout_constraintTop_toTopOf="@id/tHVHeadImg" />
+
+    <TextView
+        android:id="@+id/tHVIntro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintLeft_toLeftOf="@id/tHVName"
+        app:layout_constraintRight_toRightOf="@id/tHVName"
+        app:layout_constraintTop_toBottomOf="@id/tHVName" />
+
+    <ImageView
+        android:id="@+id/tHVCodeImg"
+        android:layout_width="@dimen/d14"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/blue_code"
+        app:layout_constraintLeft_toLeftOf="@id/tHVName"
+        app:layout_constraintTop_toBottomOf="@id/tHVIntro" />
+
+    <TextView
+        android:id="@+id/tHVCodeTag"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:text="@string/TagTCode"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/tHVCodeImg"
+        app:layout_constraintLeft_toRightOf="@id/tHVCodeImg"
+        app:layout_constraintTop_toTopOf="@id/tHVCodeImg" />
+
+    <TextView
+        android:id="@+id/tHVCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/tHVCodeTag"
+        app:layout_constraintLeft_toRightOf="@id/tHVCodeTag"
+        app:layout_constraintRight_toRightOf="@id/tHVFocus"
+        app:layout_constraintTop_toTopOf="@id/tHVCodeTag" />
+
+    <TextView
+        android:id="@+id/tHVTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        app:layout_constraintLeft_toLeftOf="@id/tHVHeadImg"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tHVCodeImg" />
+
+    <ImageView
+        android:id="@+id/tHVImg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="h,1.8:1"
+        app:layout_constraintLeft_toLeftOf="@id/tHVHeadImg"
+        app:layout_constraintRight_toRightOf="@id/tHVTitle"
+        app:layout_constraintTop_toBottomOf="@id/tHVTitle" />
+
+    <ImageView
+        android:id="@+id/tHVPlay"
+        android:layout_width="@dimen/d44"
+        android:layout_height="@dimen/d44"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gray_play"
+        app:layout_constraintBottom_toBottomOf="@id/tHVImg"
+        app:layout_constraintLeft_toLeftOf="@id/tHVImg"
+        app:layout_constraintRight_toRightOf="@id/tHVImg"
+        app:layout_constraintTop_toTopOf="@id/tHVImg" />
+
+    <TextView
+        android:id="@+id/tHVPraiseNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:text="@string/Praise"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s14"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tHVImg" />
+
+    <ImageView
+        android:id="@+id/tHVPraiseImg"
+        android:layout_width="@dimen/d16"
+        android:layout_height="@dimen/d16"
+        android:layout_marginRight="2dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/un_praise"
+        app:layout_constraintBottom_toBottomOf="@id/tHVPraiseNum"
+        app:layout_constraintRight_toLeftOf="@id/tHVPraiseNum"
+        app:layout_constraintTop_toTopOf="@id/tHVPraiseNum" />
+
+    <TextView
+        android:id="@+id/tHVShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/d36"
+        android:text="@string/Share"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toBottomOf="@id/tHVPraiseNum"
+        app:layout_constraintRight_toLeftOf="@id/tHVPraiseNum"
+        app:layout_constraintTop_toTopOf="@id/tHVPraiseNum" />
+
+    <ImageView
+        android:id="@+id/tHVShareImg"
+        android:layout_width="@dimen/d16"
+        android:layout_height="@dimen/d16"
+        android:layout_marginRight="2dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gray_share"
+        app:layout_constraintBottom_toBottomOf="@id/tHVShare"
+        app:layout_constraintRight_toLeftOf="@id/tHVShare"
+        app:layout_constraintTop_toTopOf="@id/tHVShare" />
+
+    <View
+        android:id="@+id/tHVLine"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/d14"
+        android:background="@color/gray_F7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tHVPraiseNum" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

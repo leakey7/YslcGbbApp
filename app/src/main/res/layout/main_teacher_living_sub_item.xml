@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/SubLiveImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/SubLiveTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/d6"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/main_teacher_living_state_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:paddingLeft="@dimen/d28"
+        android:paddingRight="@dimen/d8"
+        android:paddingTop="@dimen/d2"
+        android:paddingBottom="@dimen/d2" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/SubLiveTimeImg"
+        app:layout_constraintLeft_toLeftOf="@id/SubLiveTime"
+        app:layout_constraintTop_toTopOf="@id/SubLiveTime"
+        app:layout_constraintBottom_toBottomOf="@id/SubLiveTime"
+        android:layout_marginTop="@dimen/d2"
+        android:layout_marginBottom="@dimen/d2"
+        android:layout_marginLeft="@dimen/d8"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/wait_img" />
+
+    <TextView
+        android:id="@+id/SubLiveBook"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/d6"
+        android:background="@drawable/red_radius_8_shape"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s12"
+        app:layout_constraintLeft_toLeftOf="@id/SubLiveTime"
+        app:layout_constraintBottom_toBottomOf="@id/SubLiveImg"
+        android:text="@string/UnSub"
+        android:gravity="center"
+        android:paddingBottom="@dimen/d2"
+        android:paddingTop="@dimen/d2"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/long_click_option">
+
+    <TextView
+        android:id="@+id/OptionDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="删自选"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="4dp"/>
+
+    <View
+        android:id="@+id/OptionLeftLine"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/d14"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/OptionDel"
+        app:layout_constraintLeft_toRightOf="@id/OptionDel"
+        app:layout_constraintTop_toTopOf="@id/OptionDel" />
+
+    <TextView
+        android:id="@+id/OptionSetTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="置顶"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/OptionDel"
+        app:layout_constraintLeft_toRightOf="@id/OptionLeftLine"
+        app:layout_constraintTop_toTopOf="@id/OptionDel" />
+
+    <View
+        android:id="@+id/OptionRightLine"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/d14"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/OptionLeftLine"
+        app:layout_constraintLeft_toRightOf="@id/OptionSetTop"
+        app:layout_constraintTop_toTopOf="@id/OptionLeftLine" />
+
+    <TextView
+        android:id="@+id/OptionSetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="编辑管理"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/OptionDel"
+        app:layout_constraintLeft_toRightOf="@id/OptionRightLine"
+        app:layout_constraintTop_toTopOf="@id/OptionDel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,35 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.YslcGbbAppNight" parent="Theme.YslcGbbApp">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="UserConfigEditText" parent="Theme.YslcGbbApp">
+        <item name="colorControlNormal">@color/gray_e6</item>
+        <item name="colorControlActivated">@color/main_red</item>
+    </style>
+
+    <style name="LaunchTheme" parent="Theme.YslcGbbApp">
+        <item name="android:windowBackground">@drawable/launch</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="ProtocolDialogThem" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/white_radius_10_shape</item>
+        <item name="background">@drawable/white_radius_10_shape</item>
+    </style>
+
+</resources>

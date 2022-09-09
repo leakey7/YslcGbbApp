@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:layout_width="@dimen/d168"
+        android:layout_height="0dp"
+        android:id="@+id/SVideoImg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/d14"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        app:layout_constraintDimensionRatio="h,0.8:1"/>
+
+    <ImageView
+        android:layout_width="@dimen/d18"
+        android:layout_height="@dimen/d18"
+        android:id="@+id/SVideoPlay"
+        app:layout_constraintTop_toTopOf="@id/SVideoImg"
+        app:layout_constraintRight_toRightOf="@id/SVideoImg"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/white_play"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/SVideoTitle"
+        app:layout_constraintLeft_toLeftOf="@id/SVideoImg"
+        app:layout_constraintRight_toRightOf="@id/SVideoImg"
+        app:layout_constraintTop_toBottomOf="@id/SVideoImg"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:lines="2"
+        android:ellipsize="end"/>
+
+    <ImageView
+        android:layout_width="@dimen/d26"
+        android:layout_height="@dimen/d26"
+        android:id="@+id/SVideoHeadImg"
+        app:layout_constraintLeft_toLeftOf="@id/SVideoImg"
+        app:layout_constraintTop_toBottomOf="@id/SVideoTitle"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="@dimen/d14"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SVideoName"
+        app:layout_constraintLeft_toRightOf="@id/SVideoHeadImg"
+        app:layout_constraintTop_toTopOf="@id/SVideoHeadImg"
+        app:layout_constraintBottom_toBottomOf="@id/SVideoHeadImg"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        android:layout_marginLeft="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SVideoPraiseNum"
+        app:layout_constraintRight_toRightOf="@id/SVideoImg"
+        app:layout_constraintTop_toTopOf="@id/SVideoHeadImg"
+        app:layout_constraintBottom_toBottomOf="@id/SVideoHeadImg"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/gray_999"
+        android:text="@string/Praise" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/SVideoPraiseImg"
+        app:layout_constraintRight_toLeftOf="@id/SVideoPraiseNum"
+        app:layout_constraintTop_toTopOf="@id/SVideoPraiseNum"
+        app:layout_constraintBottom_toBottomOf="@id/SVideoPraiseNum"
+        android:layout_marginRight="2dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/un_praise" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/LSelfAPicHeadImg"
+        android:layout_width="@dimen/d44"
+        android:layout_height="@dimen/d44"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/LSelfAPicName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        app:layout_constraintBottom_toTopOf="@id/LSelfAPicTime"
+        app:layout_constraintLeft_toRightOf="@id/LSelfAPicHeadImg"
+        app:layout_constraintTop_toTopOf="@id/LSelfAPicHeadImg" />
+
+    <TextView
+        android:id="@+id/LSelfAPicTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s12"
+        app:layout_constraintBottom_toBottomOf="@id/LSelfAPicHeadImg"
+        app:layout_constraintLeft_toLeftOf="@id/LSelfAPicName"
+        app:layout_constraintTop_toBottomOf="@id/LSelfAPicName" />
+
+    <TextView
+        android:id="@+id/LSelfAPicTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        app:layout_constraintLeft_toLeftOf="@id/LSelfAPicHeadImg"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LSelfAPicHeadImg" />
+
+    <TextView
+        android:id="@+id/LSelfAPicDes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toLeftOf="@id/LSelfAPicTitle"
+        app:layout_constraintRight_toRightOf="@id/LSelfAPicTitle"
+        app:layout_constraintTop_toBottomOf="@id/LSelfAPicTitle" />
+
+    <ImageView
+        android:id="@+id/LSelfAPicImg"
+        android:layout_width="@dimen/d168"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toLeftOf="@id/LSelfAPicHeadImg"
+        app:layout_constraintTop_toBottomOf="@id/LSelfAPicDes" />
+
+    <TextView
+        android:id="@+id/LSelfAPicPraiseNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:text="赞"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s14"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LSelfAPicImg" />
+
+    <ImageView
+        android:id="@+id/LSelfAPicPraiseImg"
+        android:layout_width="@dimen/d16"
+        android:layout_height="@dimen/d16"
+        android:layout_marginRight="@dimen/d2"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/un_praise"
+        app:layout_constraintBottom_toBottomOf="@id/LSelfAPicPraiseNum"
+        app:layout_constraintRight_toLeftOf="@id/LSelfAPicPraiseNum"
+        app:layout_constraintTop_toTopOf="@id/LSelfAPicPraiseNum" />
+
+    <TextView
+        android:id="@+id/LSelfAPicShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/d36"
+        android:text="@string/Share"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/s14"
+        app:layout_constraintBottom_toBottomOf="@id/LSelfAPicPraiseNum"
+        app:layout_constraintRight_toLeftOf="@id/LSelfAPicPraiseNum"
+        app:layout_constraintTop_toTopOf="@id/LSelfAPicPraiseNum" />
+
+    <ImageView
+        android:id="@+id/LSelfAPicShareImg"
+        android:layout_width="@dimen/d16"
+        android:layout_height="@dimen/d16"
+        android:layout_marginRight="@dimen/d2"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gray_share"
+        app:layout_constraintBottom_toBottomOf="@id/LSelfAPicShare"
+        app:layout_constraintRight_toLeftOf="@id/LSelfAPicShare"
+        app:layout_constraintTop_toTopOf="@id/LSelfAPicShare" />
+
+    <View
+        android:id="@+id/LSelfAPicLine"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d2"
+        android:layout_marginTop="@dimen/d14"
+        android:background="@color/gray_F7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LSelfAPicPraiseNum" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

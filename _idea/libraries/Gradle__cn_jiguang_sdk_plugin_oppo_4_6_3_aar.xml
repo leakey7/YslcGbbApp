@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.jiguang.sdk.plugin:oppo:4.6.3@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/32ec94dafe3e66ebac5e1f9115704cef/transformed/oppo-4.6.3/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/32ec94dafe3e66ebac5e1f9115704cef/transformed/oppo-4.6.3/jars/libs/jpush-android-plugin-oppo-v4.6.3.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/32ec94dafe3e66ebac5e1f9115704cef/transformed/oppo-4.6.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/32ec94dafe3e66ebac5e1f9115704cef/transformed/oppo-4.6.3/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.jiguang.sdk.plugin/oppo/4.6.3/cd43929df02500abba240f30d85ad90eda1c6f1d/oppo-4.6.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

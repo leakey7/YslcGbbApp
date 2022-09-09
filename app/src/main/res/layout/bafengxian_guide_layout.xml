@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+
+    <ImageView
+        android:layout_width="@dimen/d36"
+        android:layout_height="wrap_content"
+        android:id="@+id/bafengxian"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bafengxian_guide"
+        android:adjustViewBounds="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bafengxian_text"
+        app:layout_constraintLeft_toRightOf="@id/bafengxian"
+        app:layout_constraintTop_toBottomOf="@id/bafengxian"
+        app:layout_constraintCircle="@id/bafengxian"
+        android:textSize="@dimen/s16"
+        android:textColor="@color/white"
+        android:text="大数据检测个股风险"
+        app:layout_constraintCircleAngle="130"
+        app:layout_constraintCircleRadius="@dimen/d80" />
+
+    <TextView
+        android:layout_width="@dimen/d90"
+        android:layout_height="@dimen/d28"
+        android:id="@+id/bafengxian_know"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="知道了"
+        android:textSize="@dimen/s18"
+        android:textColor="@color/white"
+        android:background="@drawable/white_border_6_shape"
+        android:gravity="center"
+        app:layout_constraintVertical_bias="0.8"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

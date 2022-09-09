@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="14dp"
+        android:id="@+id/tradeSelectLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tradeSelectTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeSelectTag"
+        android:layout_marginLeft="16dp"
+        android:background="@color/orange_FF753E" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tradeSelectTag"
+        app:layout_constraintLeft_toRightOf="@id/tradeSelectLine"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:text="数据筛选" />
+
+    <TextView
+        android:layout_width="98dp"
+        android:layout_height="34dp"
+        android:id="@+id/findA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tradeSelectTag"
+        app:layout_constraintRight_toLeftOf="@id/findB"
+        android:textSize="14sp"
+        android:textColor="@color/gray_666"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/FirstLevel"
+        android:background="@drawable/trade_unselect_shape"
+        android:lines="1"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+    <TextView
+        android:layout_width="98dp"
+        android:layout_height="34dp"
+        android:id="@+id/findB"
+        app:layout_constraintLeft_toRightOf="@id/findA"
+        app:layout_constraintTop_toTopOf="@id/findA"
+        app:layout_constraintRight_toLeftOf="@id/findC"
+        android:textSize="14sp"
+        android:textColor="@color/gray_666"
+        android:gravity="center"
+        android:text="@string/SecondLevel"
+        android:background="@drawable/trade_unselect_shape"
+        android:lines="1"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+    <TextView
+        android:layout_width="98dp"
+        android:layout_height="34dp"
+        android:id="@+id/findC"
+        app:layout_constraintLeft_toRightOf="@id/findB"
+        app:layout_constraintTop_toTopOf="@id/findA"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="14sp"
+        android:textColor="@color/gray_666"
+        android:gravity="center"
+        android:text="@string/ThirdLevel"
+        android:background="@drawable/trade_unselect_shape"
+        android:lines="1"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:id="@+id/tradeSelectLine1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/findA"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray_eee" />
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="14dp"
+        android:id="@+id/tradeChartLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tradeChartTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeChartTag"
+        android:layout_marginLeft="16dp"
+        android:background="@color/orange_FF753E" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tradeChartTag"
+        app:layout_constraintLeft_toRightOf="@id/tradeChartLine"
+        app:layout_constraintTop_toBottomOf="@id/tradeSelectLine1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:text="@string/FundIndex" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="136dp"
+        android:id="@+id/tradeChartFrame"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tradeChartTag"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginRight="@dimen/d14" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:id="@+id/tradeChartLine1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tradeChartFrame"
+        android:layout_marginTop="@dimen/d14"
+        android:background="@color/gray_eee" />
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="14dp"
+        android:id="@+id/tradeRankLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tradeRankTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeRankTag"
+        android:layout_marginLeft="16dp"
+        android:background="@color/orange_FF753E" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tradeRankTag"
+        app:layout_constraintLeft_toRightOf="@id/tradeRankLine"
+        app:layout_constraintTop_toBottomOf="@id/tradeChartLine1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/d14"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:text="@string/FundFindForecast" />
+
+    <TextView
+        android:id="@+id/tradeFundNameTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="基金名称"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tradeRankTag"
+        android:background="@drawable/trade_list_text_bg"
+        android:layout_marginTop="@dimen/d14"/>
+    <TextView
+        android:id="@+id/tradeFundHeavyTag"
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="行业重仓度"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s14"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundNameTag"
+        app:layout_constraintTop_toTopOf="@id/tradeFundNameTag"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundNameTag"
+        android:background="@drawable/trade_list_text_bg" />
+
+    <com.gzyslczx.yslc.tools.customviews.MyHorScroll
+        android:id="@+id/tradeFundRightHeadScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fadingEdge="horizontal"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundNameTag"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundHeavyTag"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tradeFundNameTag">
+
+        <include
+            android:id="@+id/FundTongRightScroll"
+            layout="@layout/trade_rank_list_head_layout" />
+
+    </com.gzyslczx.yslc.tools.customviews.MyHorScroll>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tradeFundLeftList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/tradeFundNameTag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tradeFundNameTag"
+        app:layout_constraintRight_toRightOf="@id/tradeFundHeavyTag"/>
+
+    <com.gzyslczx.yslc.tools.customviews.MyHorScroll
+        android:id="@+id/tradeFundDataScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="@id/tradeFundLeftList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@id/tradeFundLeftList"
+        app:layout_constraintRight_toRightOf="@id/tradeFundRightHeadScroll"
+        app:layout_constraintTop_toTopOf="@+id/tradeFundLeftList">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tradeFundRightList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </com.gzyslczx.yslc.tools.customviews.MyHorScroll>
+
+    <ProgressBar
+        android:layout_width="@dimen/d26"
+        android:layout_height="@dimen/d26"
+        android:id="@+id/tradeLoading"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

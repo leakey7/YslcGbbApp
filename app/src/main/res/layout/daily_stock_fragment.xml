@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <!--MD类型-->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/MDSignBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/gray_FAF8F9" />
+    <View
+        android:layout_width="@dimen/d48"
+        android:layout_height="0dp"
+        android:id="@+id/MDSetBg"
+        app:layout_constraintLeft_toLeftOf="@id/MDSignBg"
+        app:layout_constraintTop_toTopOf="@id/MDSignBg"
+        app:layout_constraintBottom_toBottomOf="@id/MDSignBg"
+        android:background="@color/gray_e6" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MDSetSign"
+        app:layout_constraintLeft_toLeftOf="@id/MDSetBg"
+        app:layout_constraintRight_toLeftOf="@id/MDSetImg"
+        app:layout_constraintTop_toTopOf="@id/MDSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/MDSetBg"
+        android:textSize="@dimen/s10"
+        android:textColor="@color/black_333"
+        android:text="MD"
+        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="@dimen/d8"
+        android:layout_height="@dimen/d8"
+        android:id="@+id/MDSetImg"
+        app:layout_constraintLeft_toRightOf="@id/MDSetSign"
+        app:layout_constraintRight_toRightOf="@id/MDSetBg"
+        app:layout_constraintTop_toTopOf="@id/MDSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/MDSetBg"
+        android:src="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MD5Sign"
+        app:layout_constraintLeft_toRightOf="@id/MDSetBg"
+        app:layout_constraintTop_toTopOf="@id/MDSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/MDSetBg"
+        android:layout_marginLeft="@dimen/d4"
+        android:textSize="@dimen/s10"
+        android:text="MD5:--"
+        android:textColor="@color/black_333"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MD10Sign"
+        app:layout_constraintLeft_toRightOf="@id/MD5Sign"
+        app:layout_constraintTop_toTopOf="@id/MDSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/MDSetBg"
+        android:layout_marginLeft="@dimen/d4"
+        android:textSize="@dimen/s10"
+        android:text="MD10:--"
+        android:textColor="@color/orange_FF8C00"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MD20Sign"
+        app:layout_constraintLeft_toRightOf="@id/MD10Sign"
+        app:layout_constraintTop_toTopOf="@id/MDSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/MDSetBg"
+        android:layout_marginLeft="@dimen/d4"
+        android:textSize="@dimen/s10"
+        android:text="MD20:--"
+        android:textColor="@color/yellow_FFCF00"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MD30Sign"
+        app:layout_constraintLeft_toRightOf="@id/MD20Sign"
+        app:layout_constraintTop_toTopOf="@id/MDSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/MDSetBg"
+        android:layout_marginLeft="@dimen/d4"
+        android:textSize="@dimen/s10"
+        android:text="MD30:--"
+        android:textColor="@color/blue_2F7DFF"/>
+
+    <com.gzyslczx.yslc.tools.yourui.myviews.DailyKLineChartView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d210"
+        android:id="@+id/DailyKlineChartView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MDSignBg"
+        app:WhiteColor="@color/white"
+        app:BlackColor="@color/black_333"
+        app:GrayColor="@color/gray_eee"
+        app:UpColor="@color/red_up"
+        app:DownColor="@color/green_down"
+        app:MaFiveColor="@color/black_333"
+        app:MaTenColor="@color/orange_FF8C00"
+        app:MaTwentyColor="@color/yellow_FFCF00"
+        app:MaThirtyColor="@color/blue_2F7DFF"
+        android:background="@color/white" />
+
+    <ProgressBar
+        android:layout_width="@dimen/d28"
+        android:layout_height="@dimen/d28"
+        android:id="@+id/dailyStockLoadMore"
+        app:layout_constraintLeft_toLeftOf="@id/DailyKlineChartView"
+        app:layout_constraintTop_toTopOf="@id/DailyKlineChartView"
+        app:layout_constraintBottom_toBottomOf="@id/DailyKlineChartView"
+        android:layout_marginBottom="@dimen/d10"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/TopSubSignBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/DailyKlineChartView"
+        android:background="@color/gray_FAF8F9"
+        android:layout_marginTop="@dimen/d2"/>
+
+    <View
+        android:layout_width="@dimen/d48"
+        android:layout_height="0dp"
+        android:id="@+id/TopSubSetBg"
+        app:layout_constraintLeft_toLeftOf="@id/TopSubSignBg"
+        app:layout_constraintTop_toTopOf="@id/TopSubSignBg"
+        app:layout_constraintBottom_toBottomOf="@id/TopSubSignBg"
+        android:background="@color/gray_e6" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TopSubSetSign"
+        app:layout_constraintLeft_toLeftOf="@id/TopSubSetBg"
+        app:layout_constraintRight_toLeftOf="@id/TopSubSetImg"
+        app:layout_constraintTop_toTopOf="@id/TopSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/TopSubSetBg"
+        android:textSize="@dimen/s10"
+        android:textColor="@color/black_333"
+        android:text="KDJ"
+        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="@dimen/d8"
+        android:layout_height="@dimen/d8"
+        android:id="@+id/TopSubSetImg"
+        app:layout_constraintLeft_toRightOf="@id/TopSubSetSign"
+        app:layout_constraintRight_toRightOf="@id/TopSubSetBg"
+        app:layout_constraintTop_toTopOf="@id/TopSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/TopSubSetBg"
+        android:src="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/KSign"
+        app:layout_constraintLeft_toRightOf="@id/TopSubSetBg"
+        app:layout_constraintTop_toTopOf="@id/TopSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/TopSubSetBg"
+        android:layout_marginLeft="@dimen/d8"
+        android:textSize="@dimen/s10"
+        android:text="K:--"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DSign"
+        app:layout_constraintLeft_toRightOf="@id/KSign"
+        app:layout_constraintTop_toTopOf="@id/TopSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/TopSubSetBg"
+        android:layout_marginLeft="@dimen/d8"
+        android:textSize="@dimen/s10"
+        android:text="D:--"
+        android:textColor="@color/orange_FF8C00"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/JSign"
+        app:layout_constraintLeft_toRightOf="@id/DSign"
+        app:layout_constraintTop_toTopOf="@id/TopSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/TopSubSetBg"
+        android:layout_marginLeft="@dimen/d8"
+        android:textSize="@dimen/s10"
+        android:text="J:--"
+        android:textColor="@color/pink_FF69B4"/>
+
+    <com.gzyslczx.yslc.tools.yourui.myviews.VolumeChartView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d100"
+        android:id="@+id/TopSubChartView"
+        app:layout_constraintLeft_toLeftOf="@id/DailyKlineChartView"
+        app:layout_constraintRight_toRightOf="@id/DailyKlineChartView"
+        app:layout_constraintTop_toBottomOf="@id/TopSubSignBg"
+        app:DottedLineColor="@color/gray_999"
+        app:KColor="@color/black"
+        app:GrayColor="@color/gray_eee"
+        app:DColor="@color/orange_FF8C00"
+        app:JColor="@color/pink_FF69B4"
+        app:VolumeType="@integer/default_kdj"
+        android:background="@color/white" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d24"
+        android:id="@+id/BtmSubSignBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TopSubChartView"
+        android:background="@color/gray_FAF8F9"
+        android:layout_marginTop="@dimen/d2"/>
+    <View
+        android:layout_width="@dimen/d48"
+        android:layout_height="0dp"
+        android:id="@+id/BtmSubSetBg"
+        app:layout_constraintLeft_toLeftOf="@id/BtmSubSignBg"
+        app:layout_constraintTop_toTopOf="@id/BtmSubSignBg"
+        app:layout_constraintBottom_toBottomOf="@id/BtmSubSignBg"
+        android:background="@color/gray_e6" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/BtmSubSetSign"
+        app:layout_constraintLeft_toLeftOf="@id/BtmSubSetBg"
+        app:layout_constraintRight_toLeftOf="@id/BtmSubSetImg"
+        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
+        android:textSize="@dimen/s10"
+        android:textColor="@color/black_333"
+        android:text="MACD"
+        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="@dimen/d8"
+        android:layout_height="@dimen/d8"
+        android:id="@+id/BtmSubSetImg"
+        app:layout_constraintLeft_toRightOf="@id/BtmSubSetSign"
+        app:layout_constraintRight_toRightOf="@id/BtmSubSetBg"
+        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
+        android:src="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MACDSign"
+        app:layout_constraintLeft_toRightOf="@id/BtmSubSetBg"
+        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
+        android:layout_marginLeft="@dimen/d8"
+        android:textSize="@dimen/s10"
+        android:text="MACD:--"
+        android:textColor="@color/red_up"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DIFFSign"
+        app:layout_constraintLeft_toRightOf="@id/MACDSign"
+        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
+        android:layout_marginLeft="@dimen/d8"
+        android:textSize="@dimen/s10"
+        android:text="DIFF:--"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DEASign"
+        app:layout_constraintLeft_toRightOf="@id/DIFFSign"
+        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
+        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
+        android:layout_marginLeft="@dimen/d8"
+        android:textSize="@dimen/s10"
+        android:text="DEA:--"
+        android:textColor="@color/orange_FF8C00"/>
+
+    <com.gzyslczx.yslc.tools.yourui.myviews.VolumeChartView
+        android:id="@+id/BtmSubChartView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d100"
+        android:background="@color/white"
+        app:DColor="@color/orange_FF8C00"
+        app:DottedLineColor="@color/gray_999"
+        app:DownColor="@color/green_down"
+        app:GrayColor="@color/gray_eee"
+        app:JColor="@color/pink_FF69B4"
+        app:KColor="@color/black"
+        app:UpColor="@color/red_up"
+        app:VolumeType="@integer/default_macd"
+        app:equalColor="@color/gray_666"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@id/DailyKlineChartView"
+        app:layout_constraintRight_toRightOf="@id/DailyKlineChartView"
+        app:layout_constraintTop_toBottomOf="@id/BtmSubSignBg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

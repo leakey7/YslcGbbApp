@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="@dimen/d80"
+        android:layout_height="@dimen/d48"
+        android:id="@+id/MyOpBelongDataBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MyOpBelongData"
+        app:layout_constraintLeft_toLeftOf="@id/MyOpBelongDataBg"
+        app:layout_constraintRight_toRightOf="@id/MyOpBelongDataBg"
+        app:layout_constraintTop_toTopOf="@id/MyOpBelongDataBg"
+        app:layout_constraintBottom_toBottomOf="@id/MyOpBelongDataBg"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/s12"
+        android:paddingLeft="@dimen/d4"
+        android:paddingRight="@dimen/d4"
+        android:paddingTop="@dimen/d2"
+        android:paddingBottom="@dimen/d2"
+        android:background="@color/gray_F7"
+        android:maxWidth="@dimen/d80"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="@dimen/d104"
+        android:layout_height="0dp"
+        android:id="@+id/MyOpNorthData"
+        app:layout_constraintLeft_toRightOf="@id/MyOpBelongDataBg"
+        app:layout_constraintTop_toTopOf="@id/MyOpBelongDataBg"
+        app:layout_constraintBottom_toBottomOf="@id/MyOpBelongDataBg"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="@dimen/d104"
+        android:layout_height="0dp"
+        android:id="@+id/MyOpFinanceData"
+        app:layout_constraintLeft_toRightOf="@id/MyOpNorthData"
+        app:layout_constraintTop_toTopOf="@id/MyOpBelongDataBg"
+        app:layout_constraintBottom_toBottomOf="@id/MyOpBelongDataBg"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="@dimen/d80"
+        android:layout_height="0dp"
+        android:id="@+id/MyOpNetProfitData"
+        app:layout_constraintLeft_toRightOf="@id/MyOpFinanceData"
+        app:layout_constraintTop_toTopOf="@id/MyOpBelongDataBg"
+        app:layout_constraintBottom_toBottomOf="@id/MyOpBelongDataBg"
+        android:textSize="@dimen/s14"
+        android:textColor="@color/black_333"
+        android:gravity="center" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

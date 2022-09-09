@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.jiguang.sdk:jpush:4.6.3@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/776d825bc8ea80955593c51fa0c1cf32/transformed/jpush-4.6.3/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/776d825bc8ea80955593c51fa0c1cf32/transformed/jpush-4.6.3/jars/libs/jpush-android-4.6.3.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/776d825bc8ea80955593c51fa0c1cf32/transformed/jpush-4.6.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/776d825bc8ea80955593c51fa0c1cf32/transformed/jpush-4.6.3/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.jiguang.sdk/jpush/4.6.3/5714858d9beada70e1f70b761f26e0cd9acc41cb/jpush-4.6.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

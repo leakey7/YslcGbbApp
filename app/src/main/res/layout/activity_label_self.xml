@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LabelSelfActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/LabelSelfAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d240"
+        android:background="@drawable/label_bg">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/LabelSelfColl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@android:color/white"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LabelSelfCons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0">
+
+                <ImageView
+                    android:id="@+id/LabelSelfLogo"
+                    android:layout_width="@dimen/d64"
+                    android:layout_height="@dimen/d64"
+                    android:layout_marginLeft="@dimen/d14"
+                    android:layout_marginTop="62dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintLeft_toLeftOf="@id/LabelSelfCons"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfCons" />
+
+                <TextView
+                    android:id="@+id/LabelSelfName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/d14"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/s18"
+                    app:layout_constraintLeft_toRightOf="@id/LabelSelfLogo"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfLogo" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="@dimen/d24"
+                    android:id="@+id/LabelSelfFocus"
+                    app:layout_constraintRight_toRightOf="@id/LabelSelfCons"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfName"
+                    android:layout_marginRight="@dimen/d14"
+                    android:background="@drawable/white_border_focus_radius_10_shape"
+                    android:textSize="@dimen/s14"
+                    android:textColor="@color/white"
+                    android:text="@string/AddFocus"
+                    android:gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/LabelSelfStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d16"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/star"
+                    app:layout_constraintLeft_toLeftOf="@id/LabelSelfName"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfStarTag"
+                    app:layout_constraintBottom_toBottomOf="@id/LabelSelfStarTag"/>
+
+                <TextView
+                    android:id="@+id/LabelSelfStarNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/LabelSelfStarTag"
+                    app:layout_constraintLeft_toRightOf="@id/LabelSelfStar"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfStarTag" />
+
+                <TextView
+                    android:id="@+id/LabelSelfStarTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Focus"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintLeft_toRightOf="@id/LabelSelfStarNum"
+                    app:layout_constraintTop_toBottomOf="@id/LabelSelfName"
+                    android:layout_marginTop="8dp"/>
+
+                <ImageView
+                    android:id="@+id/LabelSelfPraise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d16"
+                    android:layout_marginLeft="@dimen/d24"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/white_praise"
+                    app:layout_constraintBottom_toBottomOf="@id/LabelSelfStar"
+                    app:layout_constraintLeft_toRightOf="@id/LabelSelfStarTag"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfStar" />
+
+                <TextView
+                    android:id="@+id/LabelSelfPraiseNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/LabelSelfPraise"
+                    app:layout_constraintLeft_toRightOf="@id/LabelSelfPraise"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfPraise" />
+
+                <TextView
+                    android:id="@+id/LabelSelfPraiseTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Praise"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/LabelSelfPraiseNum"
+                    app:layout_constraintLeft_toRightOf="@id/LabelSelfPraiseNum"
+                    app:layout_constraintTop_toTopOf="@id/LabelSelfPraiseNum" />
+
+                <TextView
+                    android:id="@+id/LabelSelfDes"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="@dimen/d14"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/s14"
+                    app:layout_constraintBottom_toBottomOf="@id/LabelSelfCons"
+                    app:layout_constraintLeft_toLeftOf="@id/LabelSelfName"
+                    app:layout_constraintRight_toRightOf="@id/LabelSelfCons"
+                    app:layout_constraintTop_toBottomOf="@id/LabelSelfStar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/LabelSelfToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d48"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/white_left"
+                app:titleTextColor="@color/black_333" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/LabelSelfToolBarCons">
+
+                    <ImageView
+                        android:layout_width="@dimen/d26"
+                        android:layout_height="@dimen/d26"
+                        android:id="@+id/LabelSelfToolBarLogo"
+                        app:layout_constraintLeft_toLeftOf="@id/LabelSelfToolBarCons"
+                        app:layout_constraintTop_toTopOf="@id/LabelSelfToolBarCons"
+                        app:layout_constraintBottom_toBottomOf="@id/LabelSelfToolBarCons"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/LabelSelfToolBarTitle"
+                        app:layout_constraintLeft_toRightOf="@id/LabelSelfToolBarLogo"
+                        app:layout_constraintTop_toTopOf="@id/LabelSelfToolBarCons"
+                        app:layout_constraintBottom_toBottomOf="@id/LabelSelfToolBarCons"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/s16"
+                        android:layout_marginLeft="@dimen/d14"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:layout_width="@dimen/d60"
+                        android:layout_height="@dimen/d24"
+                        android:id="@+id/LabelSelfToolBarFocus"
+                        app:layout_constraintRight_toRightOf="@id/LabelSelfToolBarCons"
+                        app:layout_constraintTop_toTopOf="@id/LabelSelfToolBarCons"
+                        app:layout_constraintBottom_toBottomOf="@id/LabelSelfToolBarCons"
+                        android:layout_marginRight="@dimen/d14"
+                        android:background="@drawable/red_border_focus_radius_10_shape"
+                        android:textSize="@dimen/s14"
+                        android:textColor="@color/main_red"
+                        android:text="@string/AddFocus"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LabelSelfRefresh"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/LabelSelfList"
+            android:overScrollMode="never"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

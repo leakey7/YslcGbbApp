@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="RecoVideoPres" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2380a18f-6349-4949-8664-3ecc18825b81" name="Default Changelist" comment="20220610 finish">
+      <change beforePath="$PROJECT_DIR$/app/release/gubaba_v3.2.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/gubaba_v3.2.apk" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="layoutResourceFile" />
+        <option value="valueResourceFile" />
+        <option value="resourceFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="EXPORT_PRIVATE_KEY" value="false" />
+    <option name="KEY_STORE_PATH" value="C:\AndroidSpace\YslcGuBbApp\app\yslcapp.jks" />
+    <option name="KEY_ALIAS" value="gzyslc" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="2" />
+  </component>
+  <component name="ProjectId" id="27UZmHJPNodCUBOu4AfFwJMhUM9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ApkExportedModule" value="YslcGbbApp.app" />
+    <property name="BundleExportedModule" value="YslcGbbApp.app" />
+    <property name="ExportApk.ApkPath" value="C:\AndroidSpace\YslcGuBbApp\app" />
+    <property name="ExportApk.BuildVariants" value="release" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="android-custom-viewC:/AndroidSpace/YslcGuBbApp/app/src/main/java/com/gzyslczx/yslc/tools/customviews/BlackVideoBarView.java_SELECTED" value="BlackVideoBarView" />
+    <property name="android-custom-viewC:/AndroidSpace/YslcGuBbApp/app/src/main/java/com/gzyslczx/yslc/tools/customviews/HuShenCharView.java_SELECTED" value="HuShenCharView" />
+    <property name="android-custom-viewC:/AndroidSpace/YslcGuBbApp/app/src/main/java/com/gzyslczx/yslc/tools/customviews/LineChartView.java_SELECTED" value="LineChartView" />
+    <property name="android-custom-viewC:/AndroidSpace/YslcGuBbApp/app/src/main/java/com/gzyslczx/yslc/tools/customviews/MyConstraintLayout.java_SELECTED" value="MyConstraintLayout" />
+    <property name="android-custom-viewC:/AndroidSpace/YslcGuBbApp/app/src/main/java/com/gzyslczx/yslc/tools/customviews/MyHorScroll.java_SELECTED" value="MyHorScroll" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/androidx.viewpager2/viewpager2/1.0.0/3c3569044e6969f1ee5c3aa03b08e6717a2d782f/viewpager2-1.0.0-sources.jar!/androidx/viewpager2/widget/ViewPager2.java_SELECTED" value="ViewPager2" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/com.github.chrisbanes/PhotoView/2.0.0/da9515513124074a1cab76dd7a8054fe3a70b285/PhotoView-2.0.0-sources.jar!/com/github/chrisbanes/photoview/PhotoView.java_SELECTED" value="PhotoView" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/com.github.chrisbanes/PhotoView/2.3.0/57bec274331b8a5cac998b44af0364a96e2802e8/PhotoView-2.3.0-sources.jar!/com/github/chrisbanes/photoview/PhotoView.java_SELECTED" value="PhotoView" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.4.0/51035a8f6342c20d4d8f242d100e6f25e0c271ac/material-1.4.0-sources.jar!/com/google/android/material/bottomnavigation/BottomNavigationView.java_SELECTED" value="BottomNavigationView" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.4.0/51035a8f6342c20d4d8f242d100e6f25e0c271ac/material-1.4.0-sources.jar!/com/google/android/material/navigation/NavigationBarView.java_SELECTED" value="NavigationBarView" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/com.haibin/calendarview/3.7.1/6be532fa825b615ada6cfff6f07c756f47827c27/calendarview-3.7.1-sources.jar!/com/haibin/calendarview/BaseView.java_SELECTED" value="BaseView" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/com.haibin/calendarview/3.7.1/6be532fa825b615ada6cfff6f07c756f47827c27/calendarview-3.7.1-sources.jar!/com/haibin/calendarview/CalendarLayout.java_SELECTED" value="CalendarLayout" />
+    <property name="android-custom-viewC:/Users/leake/.gradle/caches/modules-2/files-2.1/com.haibin/calendarview/3.7.1/6be532fa825b615ada6cfff6f07c756f47827c27/calendarview-3.7.1-sources.jar!/com/haibin/calendarview/CalendarView.java_SELECTED" value="CalendarView" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../fundtong" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.gzyslczx.yslc.events" />
+      <recent name="com.gzyslczx.yslc.presenter" />
+      <recent name="com.gzyslczx.yslc.modes.response" />
+      <recent name="com.gzyslczx.yslc.modes.request" />
+      <recent name="com.gzyslczx.yslc.fragments.home" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\AndroidSpace\YslcGuBbApp\app\lib" />
+      <recent name="C:\AndroidSpace\YslcGuBbApp\app\src\main\res\xml" />
+      <recent name="C:\AndroidSpace\YslcGuBbApp\app\src\main\res\drawable-v24" />
+      <recent name="C:\AndroidSpace\YslcGuBbApp\app\src\main\res\layout" />
+      <recent name="C:\AndroidSpace\YslcGuBbApp\app\src\main\res\color" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="android.template.-1117776347">
+      <recent name="com.gzyslczx.yslc" />
+    </key>
+    <key name="android.template.-480513947">
+      <recent name="com.gzyslczx.yslc" />
+    </key>
+    <key name="android.template.-834699412">
+      <recent name="com.gzyslczx.yslc" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.gzyslczx.yslc" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gzyslczx.yslc.adapters.fundtong" />
+      <recent name="com.gzyslczx.yslc.adapters.fundtong.bean" />
+      <recent name="com.gzyslczx.yslc.tools.customviews" />
+      <recent name="com.gzyslczx.yslc.adapters.option" />
+      <recent name="com.gzyslczx.yslc.tools" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android App.app">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="YslcGbbApp.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fundtong" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="YslcGbbApp.fundtong" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2380a18f-6349-4949-8664-3ecc18825b81" name="Default Changelist" comment="" />
+      <created>1649376782037</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649376782037</updated>
+    </task>
+    <task id="LOCAL-00048" summary="20220428 Update Finish">
+      <created>1651112956511</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1651112956511</updated>
+    </task>
+    <task id="LOCAL-00049" summary="20220428 Update Finish">
+      <created>1651117028175</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1651117028175</updated>
+    </task>
+    <task id="LOCAL-00050" summary="20220428 Update Finish">
+      <created>1651126843862</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1651126843863</updated>
+    </task>
+    <task id="LOCAL-00051" summary="20220428 Update Finish">
+      <created>1651204654944</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1651204654944</updated>
+    </task>
+    <task id="LOCAL-00052" summary="20220505 Update Finish">
+      <created>1651720274638</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1651720274639</updated>
+    </task>
+    <task id="LOCAL-00053" summary="20220505 Update Finish">
+      <created>1651731204514</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1651731204514</updated>
+    </task>
+    <task id="LOCAL-00054" summary="20220505 Update Finish">
+      <created>1651732693903</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1651732693903</updated>
+    </task>
+    <task id="LOCAL-00055" summary="20220505 Update Finish">
+      <created>1651817991338</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1651817991338</updated>
+    </task>
+    <task id="LOCAL-00056" summary="20220507 Update Finish">
+      <created>1651902497615</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1651902497615</updated>
+    </task>
+    <task id="LOCAL-00057" summary="20220507 Finish">
+      <created>1651904757218</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1651904757218</updated>
+    </task>
+    <task id="LOCAL-00058" summary="20220507 Finish Update">
+      <created>1651905308685</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1651905308685</updated>
+    </task>
+    <task id="LOCAL-00059" summary="20220509 Finish Update">
+      <created>1652090392546</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1652090392547</updated>
+    </task>
+    <task id="LOCAL-00060" summary="20220510 Finish Update">
+      <created>1652166719678</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1652166719678</updated>
+    </task>
+    <task id="LOCAL-00061" summary="20220510 Finish Update">
+      <created>1652244688822</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1652244688823</updated>
+    </task>
+    <task id="LOCAL-00062" summary="20220511">
+      <created>1652252262215</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1652252262215</updated>
+    </task>
+    <task id="LOCAL-00063" summary="20220511">
+      <created>1652253767448</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1652253767448</updated>
+    </task>
+    <task id="LOCAL-00064" summary="20220511">
+      <created>1652337261123</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1652337261123</updated>
+    </task>
+    <task id="LOCAL-00065" summary="20220513">
+      <created>1652436866180</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1652436866181</updated>
+    </task>
+    <task id="LOCAL-00066" summary="20220515 finish update">
+      <created>1652602631570</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1652602631570</updated>
+    </task>
+    <task id="LOCAL-00067" summary="20220517">
+      <created>1652758071684</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1652758071685</updated>
+    </task>
+    <task id="LOCAL-00068" summary="20220518 update">
+      <created>1652838491071</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1652838491071</updated>
+    </task>
+    <task id="LOCAL-00069" summary="20220518 update finish">
+      <created>1652865472752</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1652865472752</updated>
+    </task>
+    <task id="LOCAL-00070" summary="20220518 finish">
+      <created>1652868082890</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1652868082890</updated>
+    </task>
+    <task id="LOCAL-00071" summary="20220523 finish">
+      <created>1653277730369</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1653277730370</updated>
+    </task>
+    <task id="LOCAL-00072" summary="20220524 finish">
+      <created>1653356450209</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1653356450209</updated>
+    </task>
+    <task id="LOCAL-00073" summary="20220524 finish update">
+      <created>1653360786169</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1653360786169</updated>
+    </task>
+    <task id="LOCAL-00074" summary="20220524 finish">
+      <created>1653361237071</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1653361237071</updated>
+    </task>
+    <task id="LOCAL-00075" summary="20220524 finish">
+      <created>1653365006036</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1653365006036</updated>
+    </task>
+    <task id="LOCAL-00076" summary="20220525 finish">
+      <created>1653469216168</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1653469216169</updated>
+    </task>
+    <task id="LOCAL-00077" summary="20220525 finish">
+      <created>1653471286212</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1653471286212</updated>
+    </task>
+    <task id="LOCAL-00078" summary="20220526 finish">
+      <created>1653552813693</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1653552813693</updated>
+    </task>
+    <task id="LOCAL-00079" summary="20220526 finish">
+      <created>1653553344294</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1653553344294</updated>
+    </task>
+    <task id="LOCAL-00080" summary="20220526 finish">
+      <created>1653553537573</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1653553537573</updated>
+    </task>
+    <task id="LOCAL-00081" summary="20220526 finish">
+      <created>1653556245637</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1653556245637</updated>
+    </task>
+    <task id="LOCAL-00082" summary="20220527 finish">
+      <created>1653613725206</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1653613725207</updated>
+    </task>
+    <task id="LOCAL-00083" summary="20220527 finish">
+      <created>1653613925959</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1653613925959</updated>
+    </task>
+    <task id="LOCAL-00084" summary="20220527 finish">
+      <created>1653614930621</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1653614930621</updated>
+    </task>
+    <task id="LOCAL-00085" summary="20220527">
+      <created>1653651812163</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1653651812164</updated>
+    </task>
+    <task id="LOCAL-00086" summary="20220528">
+      <created>1653828679625</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1653828679626</updated>
+    </task>
+    <task id="LOCAL-00087" summary="20220530">
+      <created>1653879905129</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1653879905129</updated>
+    </task>
+    <task id="LOCAL-00088" summary="20220530">
+      <created>1653991532700</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1653991532700</updated>
+    </task>
+    <task id="LOCAL-00089" summary="20220531">
+      <created>1653992642757</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1653992642757</updated>
+    </task>
+    <task id="LOCAL-00090" summary="20220601">
+      <created>1654046187156</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1654046187156</updated>
+    </task>
+    <task id="LOCAL-00091" summary="20220601 finish">
+      <created>1654048181491</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1654048181491</updated>
+    </task>
+    <task id="LOCAL-00092" summary="20220601 finish">
+      <created>1654563630059</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1654563630059</updated>
+    </task>
+    <task id="LOCAL-00093" summary="20220607 finish">
+      <created>1654563862782</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1654563862782</updated>
+    </task>
+    <task id="LOCAL-00094" summary="20220607 finish">
+      <created>1654564196053</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1654564196053</updated>
+    </task>
+    <task id="LOCAL-00095" summary="20220607 finish">
+      <created>1654591351772</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1654591351772</updated>
+    </task>
+    <task id="LOCAL-00096" summary="20220610 finish">
+      <created>1654821599490</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1654821599491</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="2fe55160-e90a-45e4-ac33-7637cd8babc1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/AndroidSpace/YslcGuBbApp/app/src/main/java" />
+                        <option value="dir:C:/AndroidSpace/YslcGuBbApp/app/src/test/java" />
+                        <option value="dir:C:/AndroidSpace/YslcGuBbApp/app/src/androidTest/java" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="2fe55160-e90a-45e4-ac33-7637cd8babc1" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="20220507 Finish" />
+    <MESSAGE value="20220507 Finish Update" />
+    <MESSAGE value="20220509 Finish Update" />
+    <MESSAGE value="20220510 Finish Update" />
+    <MESSAGE value="20220511" />
+    <MESSAGE value="20220513" />
+    <MESSAGE value="20220515 finish update" />
+    <MESSAGE value="20220517" />
+    <MESSAGE value="20220518 update" />
+    <MESSAGE value="20220518 update finish" />
+    <MESSAGE value="20220518 finish" />
+    <MESSAGE value="20220523 finish" />
+    <MESSAGE value="20220524 finish update" />
+    <MESSAGE value="20220524 finish" />
+    <MESSAGE value="20220525 finish" />
+    <MESSAGE value="20220526 finish" />
+    <MESSAGE value="20220527 finish" />
+    <MESSAGE value="20220527" />
+    <MESSAGE value="20220528" />
+    <MESSAGE value="20220530" />
+    <MESSAGE value="20220531" />
+    <MESSAGE value="20220601" />
+    <MESSAGE value="20220601 finish" />
+    <MESSAGE value="20220607 finish" />
+    <MESSAGE value="20220610 finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="20220610 finish" />
+  </component>
+</project>

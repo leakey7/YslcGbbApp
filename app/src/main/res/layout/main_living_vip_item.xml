@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/OnLiveVIPImg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/d14"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginRight="@dimen/d14"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="h,2:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/OnLiveVIPTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/main_teacher_living_state_bg"
+        android:gravity="center"
+        android:paddingLeft="36dp"
+        android:paddingTop="2dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="2dp"
+        android:text="直播中"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s18"
+        app:layout_constraintLeft_toLeftOf="@id/OnLiveVIPImg"
+        app:layout_constraintTop_toTopOf="@id/OnLiveVIPImg" />
+
+    <ImageView
+        android:id="@+id/OnLiveTagVIPImg"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/live_img"
+        app:layout_constraintBottom_toBottomOf="@id/OnLiveVIPTag"
+        app:layout_constraintLeft_toLeftOf="@id/OnLiveVIPTag"
+        app:layout_constraintTop_toTopOf="@id/OnLiveVIPTag" />
+
+    <ImageView
+        android:id="@+id/OnLiveVipTagImg"
+        android:layout_width="52dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/main_teacher_living_state_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s12"
+        app:layout_constraintLeft_toRightOf="@id/OnLiveVIPTag"
+        app:layout_constraintTop_toTopOf="@id/OnLiveVIPTag"
+        app:layout_constraintBottom_toBottomOf="@id/OnLiveVIPTag"
+        android:src="@drawable/vip_img"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true" />
+
+    <TextView
+        android:id="@+id/OnLiveVIPEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/red_radius_8_shape"
+        android:gravity="center"
+        android:paddingLeft="12dp"
+        android:paddingTop="2dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="2dp"
+        android:text="进入"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s18"
+        app:layout_constraintBottom_toBottomOf="@id/OnLiveVIPImg"
+        app:layout_constraintLeft_toLeftOf="@id/OnLiveVIPTag" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:id="@+id/OnLiveLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/OnLiveVIPImg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/d14"
+        android:background="@color/gray_F7" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

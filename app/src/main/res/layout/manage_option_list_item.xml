@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="@dimen/d110"
+        android:layout_height="@dimen/d48"
+        android:id="@+id/ManageOpListNameBg"
+        app:layout_constraintLeft_toRightOf="@id/ManageOpListCheck"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:layout_width="@dimen/d18"
+        android:layout_height="wrap_content"
+        android:id="@+id/ManageOpListCheck"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ManageOpListNameBg"
+        app:layout_constraintBottom_toBottomOf="@id/ManageOpListNameBg"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/stock_uncheck"
+        android:layout_marginLeft="@dimen/d14"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ManageOpListNameData"
+        app:layout_constraintLeft_toLeftOf="@id/ManageOpListNameBg"
+        app:layout_constraintRight_toRightOf="@id/ManageOpListNameBg"
+        app:layout_constraintTop_toTopOf="@id/ManageOpListNameBg"
+        app:layout_constraintBottom_toTopOf="@id/ManageOpListNameImg"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/s16"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <ImageView
+        android:layout_width="@dimen/d14"
+        android:layout_height="@dimen/d14"
+        android:id="@+id/ManageOpListNameImg"
+        app:layout_constraintLeft_toLeftOf="@id/ManageOpListNameData"
+        app:layout_constraintBottom_toBottomOf="@id/ManageOpListNameBg"
+        app:layout_constraintTop_toBottomOf="@id/ManageOpListNameData"
+        app:layout_constraintRight_toLeftOf="@id/ManageOpListCode"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/finance" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ManageOpListCode"
+        app:layout_constraintRight_toRightOf="@id/ManageOpListNameData"
+        app:layout_constraintTop_toTopOf="@id/ManageOpListNameImg"
+        app:layout_constraintBottom_toBottomOf="@id/ManageOpListNameImg"
+        app:layout_constraintLeft_toRightOf="@id/ManageOpListNameImg"
+        android:textSize="@dimen/s12"
+        android:textColor="@color/gray_999" />
+
+    <ImageView
+        android:layout_width="@dimen/d48"
+        android:layout_height="@dimen/d18"
+        android:id="@+id/MaOpListSortImg"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="@dimen/d20"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/stock_sort"/>
+
+    <ImageView
+        android:layout_width="@dimen/d48"
+        android:layout_height="@dimen/d18"
+        android:id="@+id/ManageOpSetTopImg"
+        app:layout_constraintRight_toLeftOf="@id/MaOpListSortImg"
+        app:layout_constraintTop_toTopOf="@id/MaOpListSortImg"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginRight="@dimen/d20"
+        android:src="@drawable/set_top"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

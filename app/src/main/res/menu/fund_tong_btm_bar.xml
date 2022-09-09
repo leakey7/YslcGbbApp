@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/FundTongHome"
+        android:title="基金通"
+        android:icon="@drawable/fund_btm_bar_home_selector" />
+    <item
+        android:id="@+id/FundTongFind"
+        android:title="发现"
+        android:icon="@drawable/fund_btm_bar_find_selector" />
+    <item
+        android:id="@+id/FundTongOption"
+        android:title="自选"
+        android:icon="@drawable/fund_btm_bar_find_selector" />
+
+</menu>
