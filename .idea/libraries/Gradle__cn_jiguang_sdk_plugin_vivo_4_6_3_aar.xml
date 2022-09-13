@@ -1,12 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: cn.jiguang.sdk.plugin:vivo:4.6.3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0f5c298a78662e854c54b8b034737dbf/transformed/vivo-4.6.3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/jars/libs/push_sdk_v3.0.0.4_484.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/jars/libs/jpush-android-plugin-vivo-v4.6.3.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/jars/libs/push_sdk_v3.0.0.4_484.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/da03f987068eba5adc981fb485d5d48b/transformed/vivo-4.6.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -22,7 +22,7 @@ import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.TeacherSelfActivity;
 import com.gzyslczx.yslc.adapters.teacher.TeacherSelfLivingAdapter;
 import com.gzyslczx.yslc.adapters.teacher.bean.TeacherSelfLivingData;
-import com.gzyslczx.yslc.databinding.JustRecyclerviewBinding;
+import com.gzyslczx.yslc.databinding.OnlyjustRecyclerviewBinding;
 import com.gzyslczx.yslc.databinding.NoneDataItemBinding;
 import com.gzyslczx.yslc.events.TeacherSelfLivingEvent;
 import com.gzyslczx.yslc.fragments.BaseFragment;
@@ -34,7 +34,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-public class TeacherSelfLivingFragment extends BaseFragment<JustRecyclerviewBinding> implements SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener, OnItemClickListener {
+public class TeacherSelfLivingFragment extends BaseFragment<OnlyjustRecyclerviewBinding> implements SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener, OnItemClickListener {
 
     private final String TAG = "TSelfLivingFrag";
     private TeacherSelfPresenter mPresenter;
@@ -45,7 +45,7 @@ public class TeacherSelfLivingFragment extends BaseFragment<JustRecyclerviewBind
 
     @Override
     protected void InitParentLayout(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewBinding = JustRecyclerviewBinding.inflate(inflater, container, false);
+        mViewBinding = OnlyjustRecyclerviewBinding.inflate(inflater, container, false);
         InitView();
     }
 

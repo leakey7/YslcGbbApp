@@ -3,6 +3,7 @@ package com.gzyslczx.yslc.presenter;
 import android.util.Log;
 
 import com.gzyslczx.yslc.BaseActivity;
+import com.gzyslczx.yslc.fragments.BaseFragment;
 import com.gzyslczx.yslc.presenter.yourui.YRBasePresenter;
 import com.gzyslczx.yslc.tools.ConnTool;
 import com.gzyslczx.yslc.tools.yourui.RequestApi;
@@ -24,7 +25,7 @@ public class StockMarketPresenter {
         if (stock.getCodeType()!=-1) {
             ArrayList<Stock> stockArrayList = new ArrayList<Stock>();
             stockArrayList.add(stock);
-            Observable<Long> observable = YRBasePresenter.Create().RequestMinuteChart();
+            Observable<Long> observable = YRBasePresenter.Create().RequestMinuteChart(3);
             observable = ConnTool.AddExtraReqOfAct(observable, TAG, baseActivity);
             observable.subscribe(new Consumer<Long>() {
                 @Override
@@ -43,6 +44,14 @@ public class StockMarketPresenter {
     * */
     public void RequestDailyChart(Stock stock, short period, short remitMode, int offset){
         YRBasePresenter.Create().RequestDailyChart(stock, period, remitMode, offset);
+    }
+
+    /*
+    * 请求明细
+    * */
+    public void RequestMinuteDeal(String TAG, BaseActivity baseActivity, BaseFragment baseFragment, String StockName_Code,
+                                  int count, boolean isLoop, int second){
+        YRBasePresenter.Create().RequestTick(TAG, baseActivity, baseFragment, StockName_Code, count, isLoop, second);
     }
 
 }

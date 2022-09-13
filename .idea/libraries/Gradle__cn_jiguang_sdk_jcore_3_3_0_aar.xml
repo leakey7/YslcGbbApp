@@ -1,11 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: cn.jiguang.sdk:jcore:3.3.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1380a9d0acc99ed5ea7fa0ac4a66cfdb/transformed/jcore-3.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d7cfbc5c787fd1839f6630cee92226ef/transformed/jcore-3.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d7cfbc5c787fd1839f6630cee92226ef/transformed/jcore-3.3.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d7cfbc5c787fd1839f6630cee92226ef/transformed/jcore-3.3.0/jars/classes.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d7cfbc5c787fd1839f6630cee92226ef/transformed/jcore-3.3.0/jars/libs/jcore-android-3.3.0.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d7cfbc5c787fd1839f6630cee92226ef/transformed/jcore-3.3.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d7cfbc5c787fd1839f6630cee92226ef/transformed/jcore-3.3.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

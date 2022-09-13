@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: com.huawei.android.hms:security-ssl:1.1.5.308@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0c784005ed4f370b7c5ae1e3687427ab/transformed/security-ssl-1.1.5.308/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2f978a69e603c088cfe965a679ff050a/transformed/security-ssl-1.1.5.308/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2f978a69e603c088cfe965a679ff050a/transformed/security-ssl-1.1.5.308/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2f978a69e603c088cfe965a679ff050a/transformed/security-ssl-1.1.5.308/AndroidManifest.xml" />

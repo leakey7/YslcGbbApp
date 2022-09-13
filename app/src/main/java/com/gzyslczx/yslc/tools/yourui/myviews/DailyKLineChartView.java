@@ -166,6 +166,13 @@ public class DailyKLineChartView extends View {
                     if (CurrentLevelIndex<MaxLevelIndex) {
                         ++CurrentLevelIndex;
                         PrintLogD(String.format("当前收缩ItemSize=%d", ItemSizeLevel[CurrentLevelIndex]));
+                        if (DataList.size()<ItemSizeLevel[CurrentLevelIndex]){
+                            if (loadMoreListener!=null && !isLoadMore && !isLoadMoreEnd){
+                                isLoadMore = true;
+                                loadMoreListener.onLoadMoreDailyStock(); //通知加载更多
+                                PrintLogD("通知加载更多");
+                            }
+                        }
                         X1 = x1;
                         Y1 = y1;
                         X2 = x2;
@@ -272,13 +279,15 @@ public class DailyKLineChartView extends View {
                 if (DataList.size()>=ItemSizeLevel[CurrentLevelIndex]) {
                     dis = (AveWidthOfItem + ItemInterval) * (DataList.size() - ItemSizeLevel[CurrentLevelIndex]); //可发生的最大滑动距离
                 }else {
-                    dis = (AveWidthOfItem + ItemInterval) * DataList.size()-((float) getMeasuredWidth()-AveWidthOfItem); //可发生的最大滑动距离
+                    dis = (AveWidthOfItem + ItemInterval) * (DataList.size()-((float) getMeasuredWidth()-AveWidthOfItem)); //可发生的最大滑动距离
                 }
-                if (dis>0 && ScrollSumDis > dis) {
+                PrintLogD("最大滑动距离:"+dis);
+                if (dis>=0 && ScrollSumDis > dis) {
                     ScrollSumDis = dis;
                     if (loadMoreListener!=null && !isLoadMore && !isLoadMoreEnd){
                         isLoadMore = true;
                         loadMoreListener.onLoadMoreDailyStock(); //通知加载更多
+                        PrintLogD("通知加载更多");
                     }
                 }else if (dis<0){
                     ScrollSumDis=0;
@@ -295,29 +304,59 @@ public class DailyKLineChartView extends View {
             double[] Max_Min_Dif = CountMaxValue(scrollIndex, endIndex); //计算最值
             float AveHeightOfItem = (float) (ChartViewHeight / Max_Min_Dif[2]); //每单位平均高度
             DrawTime(canvas, endIndex, scrollIndex, leftOnXAxis, rightOnXAxis, btmOnYAxis); //绘制时间
-            DrawKLine(canvas, AveWidthOfItem, AveHeightOfItem, Right, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex); //绘制蜡烛图
-            if (isLongPress){
-                if (IndicateLineX>rightOnXAxis){
-                    IndicateLineX=rightOnXAxis;
+            if (ItemSizeLevel[CurrentLevelIndex] <= DataList.size()) {
+                DrawKLine(canvas, AveWidthOfItem, AveHeightOfItem, Right, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex); //绘制蜡烛图
+                if (isLongPress) {
+                    if (IndicateLineX > rightOnXAxis) {
+                        IndicateLineX = rightOnXAxis;
+                    }
+                    float limitLeft = rightOnXAxis - AveWidthOfItem - (AveWidthOfItem + ItemInterval) * (endIndex - scrollIndex);
+                    if (IndicateLineX < limitLeft) {
+                        IndicateLineX = limitLeft;
+                    }
+                    if (IndicateLineY < topOnYAxis) {
+                        IndicateLineY = topOnYAxis;
+                    }
+                    if (IndicateLineY > btmWithoutTimeOnYAxis) {
+                        IndicateLineY = btmWithoutTimeOnYAxis;
+                    }
+                    DrawIndicateLine(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmWithoutTimeOnYAxis,
+                            AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
+                } else {
+                    if (longPressListener != null) {
+                        longPressListener.onDailyLongPress(false, DataList.get(scrollIndex), maEntityList.get(scrollIndex));
+                        if (SubLinkList != null) {
+                            for (DailyVolumeLink link : SubLinkList) {
+                                link.ShowDataOnLongPress(scrollIndex);
+                            }
+                        }
+                    }
                 }
-                float limitLeft = rightOnXAxis-AveWidthOfItem-(AveWidthOfItem + ItemInterval) * (endIndex-scrollIndex);
-                if (IndicateLineX<limitLeft){
-                    IndicateLineX = limitLeft;
-                }
-                if (IndicateLineY<topOnYAxis){
-                    IndicateLineY = topOnYAxis;
-                }
-                if (IndicateLineY>btmWithoutTimeOnYAxis){
-                    IndicateLineY = btmWithoutTimeOnYAxis;
-                }
-                DrawIndicateLine(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmWithoutTimeOnYAxis,
-                        AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
             }else {
-                if (longPressListener!=null){
-                    longPressListener.onDailyLongPress(false, DataList.get(scrollIndex), maEntityList.get(scrollIndex));
-                    if (SubLinkList!=null){
-                        for (DailyVolumeLink link : SubLinkList){
-                            link.ShowDataOnLongPress(scrollIndex);
+                DrawKLineOnLess(canvas, AveWidthOfItem, AveHeightOfItem, leftOnXAxis, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex);
+                if (isLongPress) {
+                    if (IndicateLineX < leftOnXAxis) {
+                        IndicateLineX = leftOnXAxis;
+                    }
+                    float limitRight = leftOnXAxis + AveWidthOfItem + (AveWidthOfItem + ItemInterval) * (endIndex - scrollIndex);
+                    if (IndicateLineX > limitRight) {
+                        IndicateLineX = limitRight;
+                    }
+                    if (IndicateLineY < topOnYAxis) {
+                        IndicateLineY = topOnYAxis;
+                    }
+                    if (IndicateLineY > btmWithoutTimeOnYAxis) {
+                        IndicateLineY = btmWithoutTimeOnYAxis;
+                    }
+                    DrawIndicateLine(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmWithoutTimeOnYAxis,
+                            AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
+                } else {
+                    if (longPressListener != null) {
+                        longPressListener.onDailyLongPress(false, DataList.get(scrollIndex), maEntityList.get(scrollIndex));
+                        if (SubLinkList != null) {
+                            for (DailyVolumeLink link : SubLinkList) {
+                                link.ShowDataOnLongPress(scrollIndex);
+                            }
                         }
                     }
                 }
@@ -342,7 +381,7 @@ public class DailyKLineChartView extends View {
     }
 
     /*
-     * 绘制蜡烛图
+     * 绘制蜡烛图-数据量大于默认显示量
      * */
     private void DrawKLine(Canvas canvas, float AveWidth, float AveHeight, float RightAxis, double Max, float ItemInterval, int starIndex, int endIndex) {
         PrintLogD("绘制蜡烛图");
@@ -400,6 +439,64 @@ public class DailyKLineChartView extends View {
     }
 
     /*
+    * 绘制蜡烛图-数据量少于默认显示量
+    * */
+    private void DrawKLineOnLess(Canvas canvas, float AveWidth, float AveHeight, float LeftAxis, double Max, float ItemInterval, int starIndex, int endIndex){
+        PrintLogD("绘制蜡烛图");
+        float HalfAveWidth = AveWidth * 0.5f;
+        float AveWidthWithInterval = (AveWidth + ItemInterval);
+        for (int i = endIndex; i >=starIndex; i--) {
+            float left = LeftAxis + AveWidthWithInterval * Math.abs(i-endIndex);
+            float LineOnX = left + HalfAveWidth;
+            if (DataList.get(i).getClosePrice() >= DataList.get(i).getOpenPrice()) {
+                //收盘价高于开盘价-上涨笔
+                canvas.drawRect(left, AveHeight * (float) (Max - DataList.get(i).getClosePrice()),
+                        left+AveWidth, AveHeight * (float) (Max - DataList.get(i).getOpenPrice()), UpPaint);
+                canvas.drawLine(LineOnX, AveHeight * (float) (Max - DataList.get(i).getHighPrice()),
+                        LineOnX, AveHeight * (float) (Max - DataList.get(i).getLowPrice()), UpPaint);
+            } else {
+                //收盘价低于开盘价-下跌笔
+                canvas.drawRect(left, AveHeight * (float) (Max - DataList.get(i).getOpenPrice()),
+                        left+AveWidth, AveHeight * (float) (Max - DataList.get(i).getClosePrice()), DownPaint);
+                canvas.drawLine(LineOnX, AveHeight * (float) (Max - DataList.get(i).getHighPrice()),
+                        LineOnX, AveHeight * (float) (Max - DataList.get(i).getLowPrice()), DownPaint);
+            }
+            if (i==0){
+                if (maEntityList.get(i).getMA5()!=-1) {
+                    canvas.drawCircle(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA5()), 1, MA5Paint);
+                }
+                if (maEntityList.get(i).getMA10()!=-1) {
+                    canvas.drawCircle(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA10()), 1, MA10Paint);
+                }
+                if (maEntityList.get(i).getMA20()!=-1) {
+                    canvas.drawCircle(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA20()), 1, MA20Paint);
+                }
+                if (maEntityList.get(i).getMA30()!=-1) {
+                    canvas.drawCircle(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA30()), 1, MA30Paint);
+                }
+            }else {
+                float nextLineOnX = LineOnX+AveWidthWithInterval;
+                if (maEntityList.get(i).getMA5()!=-1) {
+                    canvas.drawLine(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA5()),
+                            nextLineOnX, AveHeight * (float) (Max - maEntityList.get(i-1).getMA5()), MA5Paint);
+                }
+                if (maEntityList.get(i).getMA10()!=-1) {
+                    canvas.drawLine(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA10()),
+                            nextLineOnX, AveHeight * (float) (Max - maEntityList.get(i-1).getMA10()), MA10Paint);
+                }
+                if (maEntityList.get(i).getMA20()!=-1) {
+                    canvas.drawLine(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA20()),
+                            nextLineOnX, AveHeight * (float) (Max - maEntityList.get(i-1).getMA20()), MA20Paint);
+                }
+                if (maEntityList.get(i).getMA30()!=-1) {
+                    canvas.drawLine(LineOnX, AveHeight * (float) (Max - maEntityList.get(i).getMA30()),
+                            nextLineOnX, AveHeight * (float) (Max - maEntityList.get(i-1).getMA30()), MA30Paint);
+                }
+            }
+        }
+    }
+
+    /*
      * 绘制指示线
      * */
     private void DrawIndicateLine(Canvas canvas, float indicateLineX, float indicateLineY, float left, float top, float right, float btm,
@@ -430,7 +527,7 @@ public class DailyKLineChartView extends View {
         PrintLogD(String.format("endIndex=%s,index=%s", endIndex, index));
         int TargetIndex = endIndex-index;
         if (DataList.size()<ItemSizeLevel[CurrentLevelIndex]){
-            TargetIndex = ItemSizeLevel[CurrentLevelIndex]-1-index;
+            TargetIndex = DataList.size()-1-index;
         }
         if (longPressListener!=null){
             longPressListener.onDailyLongPress(true, DataList.get(TargetIndex), maEntityList.get(TargetIndex));

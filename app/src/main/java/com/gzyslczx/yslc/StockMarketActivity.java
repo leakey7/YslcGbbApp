@@ -8,10 +8,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 import com.gzyslczx.yslc.adapters.stockmarket.StockMarketValueGridAdapter;
 import com.gzyslczx.yslc.databinding.ActivityStockMarketBinding;
 import com.gzyslczx.yslc.events.yourui.FiveRangeEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDailyKLineLoadMoreEvent;
+import com.gzyslczx.yslc.events.yourui.NoticeDealEvent;
 import com.gzyslczx.yslc.events.yourui.RealTimeEvent;
 import com.gzyslczx.yslc.fragments.yourui.DailyStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.MinuteStockFragment;
@@ -43,6 +45,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     private WeekStockFragment weekStockFragment;
     private MonthStockFragment monthStockFragment;
     private Stock stock;
+    public static double PrePrice;
 
     @Override
     void InitParentLayout() {
@@ -259,6 +262,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
             if (event.getRealtimeList().size()>0){
                 Realtime realTime = event.getRealtimeList().get(0);
                 UpdateRealPriceView(realTime); //更新基础报价
+                PrePrice = event.getRealtimeList().get(0).getPreClosePrice();
                 if (realTime.getFiveRangeData()!=null){
                     EventBus.getDefault().post(new FiveRangeEvent(realTime.getFiveRangeData(),
                             realTime.getPreClosePrice()));
@@ -271,8 +275,12 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         }
     }
 
+    /*
+    * 接受到通知K线加载更多
+    * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnNoticeDailyLoadMoreEvent(NoticeDailyKLineLoadMoreEvent event){
+        Log.d(getClass().getSimpleName(), "请求更多K线");
         mPresenter.RequestDailyChart(stock, event.getPeriod(), event.getRemitMode(), event.getOffset());
     }
 
@@ -285,5 +293,17 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         }
     }
 
+    /*
+     * 接受到通知请求交易明细
+     * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnNoticeMinuteDeal(NoticeDealEvent event){
+        if (stock!=null) {
+            Log.d(event.getTAG(), "请求交易明细数:"+event.getCount());
+            mPresenter.RequestMinuteDeal(event.getTAG(), event.getBaseActivity(), event.getBaseFragment(),
+                    String.format("%s-%s", stock.getStockName(), stock.getStockcode()),
+                    event.getCount(), event.isLoop(), event.getSecond());
+        }
+    }
 
 }

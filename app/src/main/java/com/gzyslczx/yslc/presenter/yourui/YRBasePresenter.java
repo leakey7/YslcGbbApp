@@ -8,12 +8,17 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.gzyslczx.yslc.BaseActivity;
 import com.gzyslczx.yslc.events.yourui.YRTokenEvent;
+import com.gzyslczx.yslc.fragments.BaseFragment;
 import com.gzyslczx.yslc.modes.yourui.ReqToken;
+import com.gzyslczx.yslc.tools.ConnTool;
 import com.gzyslczx.yslc.tools.SpTool;
 import com.gzyslczx.yslc.tools.yourui.RequestApi;
 import com.gzyslczx.yslc.tools.yourui.YRConnMode;
 import com.gzyslczx.yslc.tools.yourui.YRConnUnit;
 import com.gzyslczx.yslc.tools.yourui.YRTokenRes;
+import com.yourui.sdk.message.api.protocol.QuoteConstants;
+import com.yourui.sdk.message.entity.CodeInfo;
+import com.yourui.sdk.message.entity.ReqLimitTick;
 import com.yourui.sdk.message.kline.KlineKDJ;
 import com.yourui.sdk.message.kline.KlineMACD;
 import com.yourui.sdk.message.kline.KlineVOL;
@@ -61,12 +66,41 @@ public class YRBasePresenter {
     }
 
     /*
-     * 分时图数据
+     * 轮询-数据
      * */
-    public Observable<Long> RequestMinuteChart(){
-        Observable<Long> observable = Observable.interval(0, 3, TimeUnit.SECONDS);
+    public Observable<Long> RequestMinuteChart(long second){
+        Observable<Long> observable = Observable.interval(0, second, TimeUnit.SECONDS);
         return observable;
     }
+
+    /*
+     * 分笔-明细
+     * */
+    public void RequestTick(String TAG, BaseActivity baseActivity, BaseFragment baseFragment, String name_code, int count, boolean isLoop, int second){
+        ReqLimitTick reqLimitTick = new ReqLimitTick();
+        CodeInfo codeInfo = new CodeInfo(name_code);
+        reqLimitTick.setCodeInfo(codeInfo);
+        if (count!=-1) {
+            reqLimitTick.setCount(count);
+        }
+        if (isLoop) {
+            Observable<Long> observable = YRBasePresenter.Create().RequestMinuteChart(second);
+            if (baseActivity != null) {
+                observable = ConnTool.AddExtraReqOfAct(observable, TAG, baseActivity);
+            } else if (baseFragment != null) {
+                observable = ConnTool.AddExtraReqOfFrag(observable, TAG, baseFragment);
+            }
+            observable.subscribe(new Consumer<Long>() {
+                @Override
+                public void accept(Long aLong) throws Throwable {
+                    RequestApi.getInstance().loadLimitTick(reqLimitTick, null);
+                }
+            });
+        }else {
+            RequestApi.getInstance().loadLimitTick(reqLimitTick, null);
+        }
+    }
+
 
     /*
      * 日K图数据

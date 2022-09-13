@@ -20,7 +20,7 @@ import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.YsFlashDetailActivity;
 import com.gzyslczx.yslc.adapters.main.MainYsFlashAdapter;
 import com.gzyslczx.yslc.adapters.main.bean.FlashData;
-import com.gzyslczx.yslc.databinding.JustRecyclerviewBinding;
+import com.gzyslczx.yslc.databinding.OnlyjustRecyclerviewBinding;
 import com.gzyslczx.yslc.events.GuBbYsFlashEvent;
 import com.gzyslczx.yslc.events.NoticeMainRefreshEvent;
 import com.gzyslczx.yslc.events.NoticeYSFlashRefreshEvent;
@@ -34,7 +34,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-public class YsFlashListFragment extends BaseFragment<JustRecyclerviewBinding> implements OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
+public class YsFlashListFragment extends BaseFragment<OnlyjustRecyclerviewBinding> implements OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
 
     private final String TAG = "YsFlashListFrag";
     public static final String YsFlashKey = "YsFlashType";
@@ -45,7 +45,7 @@ public class YsFlashListFragment extends BaseFragment<JustRecyclerviewBinding> i
 
     @Override
     protected void InitParentLayout(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewBinding = JustRecyclerviewBinding.inflate(inflater, container, false);
+        mViewBinding = OnlyjustRecyclerviewBinding.inflate(inflater, container, false);
         InitView();
     }
 

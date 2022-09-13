@@ -1,12 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: cn.jiguang.sdk.plugin:xiaomi:4.6.3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f32c196f88e97ed377b7f68e6e1750a3/transformed/xiaomi-4.6.3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/789ab9701f54f72cc16103a3f9e29671/transformed/xiaomi-4.6.3/jars/libs/jpush-android-plugin-xiaomi-v4.6.3.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/789ab9701f54f72cc16103a3f9e29671/transformed/xiaomi-4.6.3/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/789ab9701f54f72cc16103a3f9e29671/transformed/xiaomi-4.6.3/jars/libs/MiPush_SDK_Client_4_9_1.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/789ab9701f54f72cc16103a3f9e29671/transformed/xiaomi-4.6.3/jars/libs/jpush-android-plugin-xiaomi-v4.6.3.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/789ab9701f54f72cc16103a3f9e29671/transformed/xiaomi-4.6.3/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/789ab9701f54f72cc16103a3f9e29671/transformed/xiaomi-4.6.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/789ab9701f54f72cc16103a3f9e29671/transformed/xiaomi-4.6.3/jars/libs/MiPush_SDK_Client_4_9_1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

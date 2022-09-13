@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.gzyslczx.yslc.events.yourui.DailyKLineEvent;
+import com.gzyslczx.yslc.events.yourui.MinuteDealDetailEvent;
 import com.gzyslczx.yslc.events.yourui.MinuteTrendEvent;
 import com.gzyslczx.yslc.events.yourui.RealTimeEvent;
 import com.yourui.sdk.message.YRMarket;
@@ -60,11 +61,6 @@ import com.yourui.sdk.message.entity.YRHQColItem;
 import com.yourui.sdk.message.entity.YRIndexRealTimeData;
 import com.yourui.sdk.message.entity.YRStockAfterRealTimeExt;
 import com.yourui.sdk.message.entity.YRStockRealTimeData;
-import com.yourui.sdk.message.kline.KlineKDJ;
-import com.yourui.sdk.message.kline.KlineMACD;
-import com.yourui.sdk.message.kline.KlinePSY;
-import com.yourui.sdk.message.kline.KlineVOL;
-import com.yourui.sdk.message.kline.KlineWR;
 import com.yourui.sdk.message.listener.ClientListener;
 import com.yourui.sdk.message.listener.CommonTick;
 import com.yourui.sdk.message.listener.OnMessageCallback;
@@ -1057,7 +1053,11 @@ public class RequestApi implements IDataApi {
                     }
 
                     stockTickDetail.setStockTickInfoList(stockTickInfoList);
-                    sendMessage(stockTickDetail, handler, QuoteConstants.RT_LIMITTICK);
+                    Log.d(TAG,String.format("明细数量:%d;Count=%d",stockTickDetail.getStockTickInfoList().size(), codeInfo.getCount()));
+                    MinuteDealDetailEvent event = new MinuteDealDetailEvent();
+                    event.setStockTickDetail(stockTickDetail);
+                    EventBus.getDefault().post(event);
+//                    sendMessage(stockTickDetail, handler, QuoteConstants.RT_LIMITTICK);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

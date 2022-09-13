@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: cn.jiguang.sdk:jverification:2.7.8@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9d131fee2ede20aeafb9c13ee5a01228/transformed/jverification-2.7.8/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9d131fee2ede20aeafb9c13ee5a01228/transformed/jverification-2.7.8/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9d131fee2ede20aeafb9c13ee5a01228/transformed/jverification-2.7.8/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9d131fee2ede20aeafb9c13ee5a01228/transformed/jverification-2.7.8/jars/libs/jverification-android-not_support_dynamic-release-2.7.8.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9d131fee2ede20aeafb9c13ee5a01228/transformed/jverification-2.7.8/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9d131fee2ede20aeafb9c13ee5a01228/transformed/jverification-2.7.8/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

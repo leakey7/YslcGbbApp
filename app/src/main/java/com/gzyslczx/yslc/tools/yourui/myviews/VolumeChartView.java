@@ -163,29 +163,33 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
             double[] Max_Min_Dif = CountMaxValueOnDaily(scrollIndex, endIndex); //计算最值
             float AveHeightOfItem = (float) (getMeasuredHeight() / Max_Min_Dif[2]); //每单位平均高度
 //                DrawTime(canvas, endIndex, scrollIndex, leftOnXAxis, rightOnXAxis, btmOnYAxis); //绘制时间
-            DrawSubOnDaily(canvas, AveWidthOfItem, AveHeightOfItem, Right, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex); //绘制副图
-            if (isLongPress) {
-                if (IndicateLineX > rightOnXAxis) {
-                    IndicateLineX = rightOnXAxis;
+            if (kLineList.size() >= DefItemSize) {
+                DrawSubOnDaily(canvas, AveWidthOfItem, AveHeightOfItem, Right, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex); //绘制副图
+                if (isLongPress) {
+                    if (IndicateLineX > rightOnXAxis) {
+                        IndicateLineX = rightOnXAxis;
+                    }
+                    float limitLeft = rightOnXAxis - AveWidthOfItem - (AveWidthOfItem + ItemInterval) * (endIndex - scrollIndex);
+                    if (IndicateLineX < limitLeft) {
+                        IndicateLineX = limitLeft;
+                    }
+                    if (IndicateLineY < topOnYAxis) {
+                        IndicateLineY = topOnYAxis;
+                    }
+                    if (IndicateLineY > btmOnYAxis) {
+                        IndicateLineY = btmOnYAxis;
+                    }
+                    DrawIndicateLineOnDaily(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis,
+                            AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
                 }
-                float limitLeft = rightOnXAxis - AveWidthOfItem - (AveWidthOfItem + ItemInterval) * (endIndex - scrollIndex);
-                if (IndicateLineX < limitLeft) {
-                    IndicateLineX = limitLeft;
-                }
-                if (IndicateLineY < topOnYAxis) {
-                    IndicateLineY = topOnYAxis;
-                }
-                if (IndicateLineY > btmOnYAxis) {
-                    IndicateLineY = btmOnYAxis;
-                }
-                DrawIndicateLineOnDaily(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis,
-                        AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
-            }
 //            else {
 //                    if (longPressListener!=null){
 //                        longPressListener.onDailyLongPress(false, DataList.get(scrollIndex), maEntityList.get(scrollIndex));
 //                    }
 //            }
+            }else {
+                DrawSubOnDailyLess(canvas, AveWidthOfItem, AveHeightOfItem, leftOnXAxis, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex );
+            }
         }
 
     }
@@ -291,7 +295,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     }
 
     /*
-     * 绘制KDJ
+     * 绘制K线副图
      * */
     private void DrawSubOnDaily(Canvas canvas, float AveWidth, float AveHeight, float RightAxis, double Max, float ItemInterval, int starIndex, int endIndex) {
         if (type == VolumeTypeConstance.KDJ) {
@@ -349,6 +353,62 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
             }
         }
     }
+
+    private void DrawSubOnDailyLess(Canvas canvas, float AveWidth, float AveHeight, float LeftAxis, double Max, float ItemInterval, int starIndex, int endIndex){
+        if (type == VolumeTypeConstance.KDJ) {
+            PrintLogD("绘制KDJ");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineKDJ.getKData(i))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i))), 1, DPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineKDJ.getJData(i))), 1, JPaint);
+                } else {
+                    float nextLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineKDJ.getKData(i))),
+                            nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getKData(i+1))), KPaint);
+                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i))),
+                            nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i+1))), DPaint);
+                    canvas.drawLine(LineOnX, AveHeight * (float) (Max - klineKDJ.getJData(i)),
+                            nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getJData(i+1))), JPaint);
+                }
+            }
+        } else if (type == VolumeTypeConstance.MACD) {
+            PrintLogD("绘制MACD");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                float MacdOnY = (float) (AveHeight * (Max - klineMACD.getMACD(i)));
+                float MacdOnZero = (float) (AveHeight * Max);
+                float right = left+AveWidth;
+                if (klineMACD.getMACD(i) > 0) {
+                    canvas.drawRect(left, MacdOnY, right, MacdOnZero, UpPaint);
+                } else if (klineMACD.getMACD(i) < 0) {
+                    canvas.drawRect(left, MacdOnZero, right, MacdOnY, DownPaint);
+                } else {
+                    canvas.drawRect(left, MacdOnY, right, MacdOnZero, EqualPaint);
+                }
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i))), 1, DPaint);
+                } else {
+                    float nextLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i))),
+                            nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i+1))), KPaint);
+                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i))),
+                            nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i+1))), DPaint);
+                }
+            }
+        }
+    }
+
 
     /*
      * 绘制指示线

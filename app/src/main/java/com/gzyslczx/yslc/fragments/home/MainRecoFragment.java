@@ -30,7 +30,7 @@ import com.gzyslczx.yslc.TeacherArtActivity;
 import com.gzyslczx.yslc.TeacherSelfActivity;
 import com.gzyslczx.yslc.adapters.main.MainRecoAdapter;
 import com.gzyslczx.yslc.adapters.main.bean.MainRecoData;
-import com.gzyslczx.yslc.databinding.JustRecyclerviewBinding;
+import com.gzyslczx.yslc.databinding.OnlyjustRecyclerviewBinding;
 import com.gzyslczx.yslc.events.GuBbChangeFocusEvent;
 import com.gzyslczx.yslc.events.GuBbChangeLoginEvent;
 import com.gzyslczx.yslc.events.GuBbChangePraiseEvent;
@@ -51,7 +51,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-public class MainRecoFragment extends BaseFragment<JustRecyclerviewBinding> implements OnItemChildClickListener, OnLoadMoreListener,
+public class MainRecoFragment extends BaseFragment<OnlyjustRecyclerviewBinding> implements OnItemChildClickListener, OnLoadMoreListener,
         SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
 
     private final String TAG = "MainRecoFrag";
@@ -63,7 +63,7 @@ public class MainRecoFragment extends BaseFragment<JustRecyclerviewBinding> impl
 
     @Override
     protected void InitParentLayout(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewBinding = JustRecyclerviewBinding.inflate(inflater, container, false);
+        mViewBinding = OnlyjustRecyclerviewBinding.inflate(inflater, container, false);
         InitView();
     }
 

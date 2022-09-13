@@ -1,10 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.huawei.android.hms:security-base:1.1.5.306@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3473ef818006a4333dbe27ffabf9918d/transformed/security-base-1.1.5.306/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/488a282586416923097becd44e6c51ea/transformed/security-base-1.1.5.306/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/488a282586416923097becd44e6c51ea/transformed/security-base-1.1.5.306/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/488a282586416923097becd44e6c51ea/transformed/security-base-1.1.5.306/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/488a282586416923097becd44e6c51ea/transformed/security-base-1.1.5.306/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.huawei.android.hms/security-base/1.1.5.306/da39a3ee5e6b4b0d3255bfef95601890afd80709/security-base-1.1.5.306-javadoc.jar!/" />

@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: com.trello.rxlifecycle4:rxlifecycle-android:4.0.2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/106364ced59d1cb2820332ed65107a94/transformed/rxlifecycle-android-4.0.2/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8436928a932febadb8f1b2cd359b2a28/transformed/rxlifecycle-android-4.0.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8436928a932febadb8f1b2cd359b2a28/transformed/rxlifecycle-android-4.0.2/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8436928a932febadb8f1b2cd359b2a28/transformed/rxlifecycle-android-4.0.2/AndroidManifest.xml" />

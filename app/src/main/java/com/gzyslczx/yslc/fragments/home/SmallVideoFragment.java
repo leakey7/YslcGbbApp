@@ -23,7 +23,7 @@ import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.SmallVideoActivity;
 import com.gzyslczx.yslc.TeacherSelfActivity;
 import com.gzyslczx.yslc.adapters.main.SmallVideoFragAdapter;
-import com.gzyslczx.yslc.databinding.JustRecyclerviewBinding;
+import com.gzyslczx.yslc.databinding.OnlyjustRecyclerviewBinding;
 import com.gzyslczx.yslc.events.GuBbChangeFocusEvent;
 import com.gzyslczx.yslc.events.GuBbChangePraiseEvent;
 import com.gzyslczx.yslc.events.GuBbMainRecoAndVideoListEvent;
@@ -39,7 +39,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class SmallVideoFragment extends BaseFragment<JustRecyclerviewBinding> implements OnItemChildClickListener, OnLoadMoreListener,
+public class SmallVideoFragment extends BaseFragment<OnlyjustRecyclerviewBinding> implements OnItemChildClickListener, OnLoadMoreListener,
         SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
 
     private final String TAG = "SmallVideoFrag";
@@ -49,7 +49,7 @@ public class SmallVideoFragment extends BaseFragment<JustRecyclerviewBinding> im
 
     @Override
     protected void InitParentLayout(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewBinding = JustRecyclerviewBinding.inflate(inflater, container, false);
+        mViewBinding = OnlyjustRecyclerviewBinding.inflate(inflater, container, false);
         InitView();
     }
 

@@ -27,6 +27,7 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
 
     private DecimalFormat decimalFormat;
     private FiveDayStockFragment fiveDayStockFragment;
+    private MinuteDealDetailFragment minuteDealDetailFragment;
 
 
     @Override
@@ -156,6 +157,17 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
             }
             fragmentTransaction.commit();
             return;
+        }else if (index==1){
+            Log.d(getClass().getSimpleName(), "显示明细Fragment");
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            if (minuteDealDetailFragment==null){
+                minuteDealDetailFragment = new MinuteDealDetailFragment();
+                fragmentTransaction.add(mViewBinding.MinuteStockSub.getId(), minuteDealDetailFragment);
+            }else {
+                fragmentTransaction.show(minuteDealDetailFragment);
+            }
+            fragmentTransaction.commit();
+            return;
         }
     }
 
@@ -168,6 +180,14 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
                 Log.d(getClass().getSimpleName(), "隐藏五档Fragment");
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.hide(fiveDayStockFragment);
+                fragmentTransaction.commit();
+            }
+            return;
+        }else if (index==1){
+            if (minuteDealDetailFragment!=null){
+                Log.d(getClass().getSimpleName(), "隐藏明细Fragment");
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.hide(minuteDealDetailFragment);
                 fragmentTransaction.commit();
             }
             return;

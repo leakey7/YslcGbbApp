@@ -17,9 +17,8 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gzyslczx.yslc.WebActivity;
 import com.gzyslczx.yslc.adapters.main.MainLivingListAdapter;
 import com.gzyslczx.yslc.adapters.main.bean.MainTeacherLivingData;
-import com.gzyslczx.yslc.databinding.JustRecyclerviewBinding;
+import com.gzyslczx.yslc.databinding.OnlyjustRecyclerviewBinding;
 import com.gzyslczx.yslc.events.GuBbMainTeacherLivingEvent;
-import com.gzyslczx.yslc.events.NoticeFocusPageRefreshEvent;
 import com.gzyslczx.yslc.events.NoticeMainRefreshEvent;
 import com.gzyslczx.yslc.fragments.BaseFragment;
 import com.gzyslczx.yslc.presenter.MainFragmentPresenter;
@@ -30,7 +29,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-public class MainLivingFragment extends BaseFragment<JustRecyclerviewBinding> implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainLivingFragment extends BaseFragment<OnlyjustRecyclerviewBinding> implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private MainLivingListAdapter mListAdapter;
     private final String TAG = "MainLivingFragment";
@@ -40,7 +39,7 @@ public class MainLivingFragment extends BaseFragment<JustRecyclerviewBinding> im
 
     @Override
     protected void InitParentLayout(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewBinding = JustRecyclerviewBinding.inflate(inflater, container, false);
+        mViewBinding = OnlyjustRecyclerviewBinding.inflate(inflater, container, false);
         InitView();
     }
 
