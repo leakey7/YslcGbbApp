@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.jiguang.sdk.plugin:vivo:4.8.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f03379241f7dfc6c7cab9ceff6c8601c/transformed/vivo-4.8.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f03379241f7dfc6c7cab9ceff6c8601c/transformed/vivo-4.8.1/jars/libs/jpush-android-plugin-vivo-v4.8.1.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f03379241f7dfc6c7cab9ceff6c8601c/transformed/vivo-4.8.1/jars/libs/push_sdk_v3.0.0.4_484.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f03379241f7dfc6c7cab9ceff6c8601c/transformed/vivo-4.8.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f03379241f7dfc6c7cab9ceff6c8601c/transformed/vivo-4.8.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.jiguang.sdk.plugin/vivo/4.8.1/6e05b38170ef9846ff3a148e7e96270a500ac0b7/vivo-4.8.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

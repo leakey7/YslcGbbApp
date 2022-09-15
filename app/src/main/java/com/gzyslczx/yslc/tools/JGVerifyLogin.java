@@ -47,8 +47,8 @@ public class JGVerifyLogin {
         navBtnParam.setMargins(0, DisplayTool.dp2px(context,270), 0, 0);
         textView.setLayoutParams(navBtnParam);
         List<PrivacyBean> privacyBeans = new ArrayList<PrivacyBean>();
-        privacyBeans.add(new PrivacyBean("《用户协议》", ConnPath.UserXY, "、"));
-        privacyBeans.add(new PrivacyBean("《隐私政策》", ConnPath.PrivateXY, "和"));
+        privacyBeans.add(new PrivacyBean("用户协议", ConnPath.UserXY, "、"));
+        privacyBeans.add(new PrivacyBean("隐私政策", ConnPath.PrivateXY, "和"));
         JVerifyUIConfig config = new JVerifyUIConfig.Builder()
                 .setPrivacyNameAndUrlBeanList(privacyBeans)
                 .setPrivacyCheckboxSize(18)

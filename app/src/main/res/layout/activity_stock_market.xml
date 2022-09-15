@@ -173,8 +173,18 @@
                     android:id="@+id/MoreValue"
                     app:layout_constraintRight_toRightOf="@id/StockMarketValueCons"
                     app:layout_constraintTop_toBottomOf="@id/ValueGrid"
-                    android:layout_marginRight="@dimen/d2"
+                    android:layout_marginRight="@dimen/d4"
                     android:src="@color/gray_e6"/>
+
+                <GridView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/d170"
+                    android:id="@+id/MoreValueGrid"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/MoreValue"
+                    android:numColumns="3"
+                    android:visibility="visible" />
 
                 <View
                     android:layout_width="0dp"
@@ -182,7 +192,7 @@
                     android:id="@+id/ValueSegLine"
                     app:layout_constraintLeft_toLeftOf="@id/StockMarketValueCons"
                     app:layout_constraintRight_toRightOf="@id/StockMarketValueCons"
-                    app:layout_constraintTop_toBottomOf="@id/MoreValue"
+                    app:layout_constraintTop_toBottomOf="@id/MoreValueGrid"
                     android:background="@color/gray_eee"
                     android:layout_marginTop="@dimen/d2"/>
 

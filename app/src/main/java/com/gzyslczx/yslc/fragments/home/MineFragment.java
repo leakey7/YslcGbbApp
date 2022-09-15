@@ -1,7 +1,5 @@
 package com.gzyslczx.yslc.fragments.home;
 
-import static com.sdk.base.framework.utils.app.AppUtils.getPackageName;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -45,7 +43,6 @@ import com.gzyslczx.yslc.AboutUsActivity;
 import com.gzyslczx.yslc.BaseActivity;
 import com.gzyslczx.yslc.MsgBoxActivity;
 import com.gzyslczx.yslc.R;
-import com.gzyslczx.yslc.StockMarketActivity;
 import com.gzyslczx.yslc.SuggestActivity;
 import com.gzyslczx.yslc.UserConfigActivity;
 import com.gzyslczx.yslc.WebActivity;
@@ -306,20 +303,19 @@ public class MineFragment extends BaseFragment<MineFragmentBinding> implements V
             case R.id.MineSuggestText:
             case R.id.MineSuggestRightImg:
                 //产品建议点击
-                startActivity(new Intent(getContext(), StockMarketActivity.class));
-//                if (SpTool.Instance(getContext()).IsGuBbLogin()) {
-//                    Intent suggestIntent = new Intent(getContext(), SuggestActivity.class);
-//                    startActivity(suggestIntent);
-//                } else {
-//                    Toast.makeText(getContext(), "请先前往完成登录/注册", Toast.LENGTH_SHORT).show();
-//                }
+                if (SpTool.Instance(getContext()).IsGuBbLogin()) {
+                    Intent suggestIntent = new Intent(getContext(), SuggestActivity.class);
+                    startActivity(suggestIntent);
+                } else {
+                    Toast.makeText(getContext(), "请先前往完成登录/注册", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.MineLockImg:
             case R.id.MineLockText:
             case R.id.MineLockRightImg:
                 Intent intent = new Intent();
                 intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                intent.setData(Uri.fromParts("package", getPackageName(), null));
+                intent.setData(Uri.fromParts("package", getActivity().getPackageName(), null));
                 AppSetting.launch(intent);
                 break;
             case R.id.MineRiskImg:

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.jiguang.sdk.plugin:meizu:4.8.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f1c7e4e486f951c8c611e2c4e8c28bf8/transformed/meizu-4.8.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f1c7e4e486f951c8c611e2c4e8c28bf8/transformed/meizu-4.8.1/jars/libs/jpush-android-plugin-meizu-v4.8.1.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f1c7e4e486f951c8c611e2c4e8c28bf8/transformed/meizu-4.8.1/jars/libs/meizu-push-4.1.4.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f1c7e4e486f951c8c611e2c4e8c28bf8/transformed/meizu-4.8.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f1c7e4e486f951c8c611e2c4e8c28bf8/transformed/meizu-4.8.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.jiguang.sdk.plugin/meizu/4.8.1/5a7ec4d304a9ba3b30d9a7b9d4865b4e98be0b1f/meizu-4.8.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

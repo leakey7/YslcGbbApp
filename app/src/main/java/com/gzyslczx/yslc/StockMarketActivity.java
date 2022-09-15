@@ -8,7 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
+import com.gzyslczx.yslc.adapters.stockmarket.MoreRealTimeGridAdapter;
 import com.gzyslczx.yslc.adapters.stockmarket.StockMarketValueGridAdapter;
 import com.gzyslczx.yslc.databinding.ActivityStockMarketBinding;
 import com.gzyslczx.yslc.events.yourui.FiveRangeEvent;
@@ -22,7 +22,6 @@ import com.gzyslczx.yslc.fragments.yourui.WeekStockFragment;
 import com.gzyslczx.yslc.presenter.StockMarketPresenter;
 import com.gzyslczx.yslc.tools.TransStatusTool;
 import com.gzyslczx.yslc.tools.yourui.CodeTypeTool;
-import com.gzyslczx.yslc.tools.yourui.RequestApi;
 import com.yourui.sdk.message.use.Realtime;
 import com.yourui.sdk.message.use.Stock;
 
@@ -37,6 +36,7 @@ import java.util.List;
 public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding> implements View.OnClickListener {
 
     private StockMarketValueGridAdapter mValueGridAdapter;
+    private MoreRealTimeGridAdapter moreRealTimeAdapter;
     private StockMarketPresenter mPresenter;
     private DecimalFormat decimalFormat;
     private String StockCode = "688339";
@@ -60,7 +60,10 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     void InitView() {
         mValueGridAdapter = new StockMarketValueGridAdapter(this);
         mViewBinding.ValueGrid.setAdapter(mValueGridAdapter);
+        moreRealTimeAdapter = new MoreRealTimeGridAdapter(MoreRealTimeGridAdapter.NormalStyle, this);
+        mViewBinding.MoreValueGrid.setAdapter(moreRealTimeAdapter);
         mViewBinding.Back.setOnClickListener(this::onClick);
+        mViewBinding.MoreValue.setOnClickListener(this::onClick);
         decimalFormat = new DecimalFormat("#0.00");
         mViewBinding.StyleTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -289,6 +292,15 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         switch (v.getId()){
             case R.id.Back:
                 finish();
+                break;
+            case R.id.MoreValue:
+                if (mViewBinding.MoreValueGrid.getVisibility()==View.VISIBLE){
+                    mViewBinding.MoreValueGrid.setVisibility(View.GONE);
+                    Log.d(getClass().getSimpleName(), "隐藏实时报价副窗");
+                }else {
+                    mViewBinding.MoreValueGrid.setVisibility(View.VISIBLE);
+                    Log.d(getClass().getSimpleName(), "显示实时报价副窗");
+                }
                 break;
         }
     }

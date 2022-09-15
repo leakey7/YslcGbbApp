@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.jiguang.sdk.plugin:huawei:4.8.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/855e1136a2c93c9918c21b5f6502c1f5/transformed/huawei-4.8.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/855e1136a2c93c9918c21b5f6502c1f5/transformed/huawei-4.8.1/jars/libs/jpush-android-plugin-huawei-v4.8.1.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/855e1136a2c93c9918c21b5f6502c1f5/transformed/huawei-4.8.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/855e1136a2c93c9918c21b5f6502c1f5/transformed/huawei-4.8.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.jiguang.sdk.plugin/huawei/4.8.1/82c1d997465d33cc053bf63d24f9c96d09fc7c65/huawei-4.8.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

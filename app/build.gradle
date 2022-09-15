@@ -120,22 +120,24 @@ dependencies {
     //TXY
     implementation 'com.tencent.liteav:LiteAVSDK_Professional:latest.release'
     //极光
-    implementation 'cn.jiguang.sdk:jverification:2.7.8'
-    implementation 'cn.jiguang.sdk:jpush:4.7.2'
-    implementation 'cn.jiguang.sdk:jcore:3.3.0'
+    implementation 'cn.jiguang.sdk:jverification:2.9.3'
+    implementation 'cn.jiguang.sdk:jpush:4.8.1'
+    implementation 'cn.jiguang.sdk:jcore:3.3.2'
     //华为HMS SDK版本为:6.3.0.304
-    implementation 'com.huawei.hms:push:6.1.0.300'
-    implementation 'com.huawei.hms:base:6.2.0.300'
+    implementation 'com.huawei.hms:push:6.5.0.300'
+    implementation 'cn.jiguang.sdk.plugin:huawei:4.8.1'
     //厂商版本和 JPush SDK 版本保持一致
-    implementation 'cn.jiguang.sdk.plugin:huawei:4.6.3'
-    implementation 'cn.jiguang.sdk.plugin:xiaomi:4.6.3'
-    implementation 'cn.jiguang.sdk.plugin:meizu:4.6.3'
-    implementation 'cn.jiguang.sdk.plugin:vivo:4.6.3'
-    implementation 'cn.jiguang.sdk.plugin:oppo:4.6.3'
+    // 接入魅族厂商
+    implementation 'cn.jiguang.sdk.plugin:meizu:4.8.1'
+    // 接入 VIVO 厂商
+    implementation 'cn.jiguang.sdk.plugin:vivo:4.8.1'
+    // 接入小米厂商
+    implementation 'cn.jiguang.sdk.plugin:xiaomi:4.8.1'
+    // 接入 OPPO 厂商
+    implementation 'cn.jiguang.sdk.plugin:oppo:4.8.1'
     // oppo 厂商 aar 需要单独引入com.heytap.msp-push-x.x.x.aar
-    implementation files('libs/com.heytap.msp-push-3.0.0.aar')
-
-    //以下为 OPPO 3.0.0 aar需要依赖
+    implementation files('libs/com.heytap.msp-push-3.1.0.aar')
+    //以下为 OPPO 3.1.0 aar需要依赖
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'commons-codec:commons-codec:1.6'
     implementation 'androidx.annotation:annotation:1.1.0'

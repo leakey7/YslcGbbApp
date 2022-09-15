@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.jiguang.sdk.plugin:xiaomi:4.8.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/83b87ea76ae3ebb2178152aa3eebac9e/transformed/xiaomi-4.8.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/83b87ea76ae3ebb2178152aa3eebac9e/transformed/xiaomi-4.8.1/jars/libs/MiPush_SDK_Client_5_0_8-C.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/83b87ea76ae3ebb2178152aa3eebac9e/transformed/xiaomi-4.8.1/jars/libs/jpush-android-plugin-xiaomi-v4.8.1.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/83b87ea76ae3ebb2178152aa3eebac9e/transformed/xiaomi-4.8.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/83b87ea76ae3ebb2178152aa3eebac9e/transformed/xiaomi-4.8.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.jiguang.sdk.plugin/xiaomi/4.8.1/44c37cf65be883001813595c866ccb01ba713685/xiaomi-4.8.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
