@@ -243,7 +243,7 @@ public class KLineVideoActivity extends BaseActivity<ActivityKlineVideoBinding> 
                 //点击重连
                 if (ReConnect){
                     ReConnect=false;
-                    mPlayer.startPlay(PlayUrl.toString());
+                    mPlayer.startVodPlay(PlayUrl.toString());
                 }
                 if (Request){
                     Request = false;
@@ -274,7 +274,7 @@ public class KLineVideoActivity extends BaseActivity<ActivityKlineVideoBinding> 
 
     @Override
     public void OnReStart() {
-        mPlayer.startPlay(PlayUrl.toString());
+        mPlayer.startVodPlay(PlayUrl.toString());
     }
 
     @Override
@@ -386,7 +386,7 @@ public class KLineVideoActivity extends BaseActivity<ActivityKlineVideoBinding> 
             }
             if (!TextUtils.isEmpty(PlayUrl)){
                 mViewBinding.KLVideoTip.setVisibility(View.GONE);
-                mPlayer.startPlay(PlayUrl.toString());
+                mPlayer.startVodPlay(PlayUrl.toString());
                 mViewBinding.KLVideoBar.NoticeChangeState(false);
             }
             Log.d(TAG, "视频："+event.getDetailsObj().getVideoDetail().getCategoryId());

@@ -54,6 +54,7 @@ import com.gzyslczx.yslc.tools.SpTool;
 import com.gzyslczx.yslc.tools.TransStatusTool;
 import com.gzyslczx.yslc.tools.WebTool;
 import com.gzyslczx.yslc.tools.customviews.SharePopup;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -153,6 +154,17 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Vie
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.d(TAG, String.format("Web加载中：%s", url));
+                if (url!=null){
+                    try{
+                        if(!url.startsWith("http://") && !url.startsWith("https://")){
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                            startActivity(intent);
+                            return true;
+                        }
+                    }catch (Exception e) {//防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
+                        return true;//没有安装该app时，返回true，表示拦截自定义链接，但不跳转，避免弹出上面的错误页面
+                    }
+                }
                 return super.shouldOverrideUrlLoading(view, url);
             }
 
@@ -188,6 +200,16 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Vie
         }
         Log.d(TAG, "无获取手机号");
         return null;
+    }
+
+    @JavascriptInterface
+    public void ToWXProgram(String uid, String url){
+        Log.d(TAG, "跳转微信小程序");
+        WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+        req.userName = uid;
+        req.path = url;
+        req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;
+        MyApp.mIwxapi.sendReq(req);
     }
 
     @JavascriptInterface

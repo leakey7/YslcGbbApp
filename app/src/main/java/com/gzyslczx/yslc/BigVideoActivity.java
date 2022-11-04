@@ -259,7 +259,7 @@ public class BigVideoActivity extends BaseActivity<ActivityBigVideoBinding> impl
      * */
     @Override
     public void OnReStart() {
-        mPlayer.startPlay(PlayUrl.toString());
+        mPlayer.startVodPlay(PlayUrl.toString());
     }
 
     /*
@@ -386,7 +386,7 @@ public class BigVideoActivity extends BaseActivity<ActivityBigVideoBinding> impl
                     //请求成功但获取视频失败重连
                     Log.d(TAG, "获取视频失败重连");
                     ReConnect = false;
-                    mPlayer.startPlay(PlayUrl.toString());
+                    mPlayer.startVodPlay(PlayUrl.toString());
                 }
                 mViewBinding.FVideoViewTip.setText("正在重试...");
                 mViewBinding.FVideoViewTip.setClickable(false);
@@ -495,7 +495,7 @@ public class BigVideoActivity extends BaseActivity<ActivityBigVideoBinding> impl
             } else {
                 mViewBinding.FVideoViewTip.setVisibility(View.GONE);
                 PlayUrl.replace(0, PlayUrl.length(), event.getData().getFileUrl());
-                mPlayer.startPlay(PlayUrl.toString());
+                mPlayer.startVodPlay(PlayUrl.toString());
                 mViewBinding.FVideoViewBar.NoticeChangeState(false);
                 Glide.with(this).load(event.getData().getAuthorImg())
                         .placeholder(ActivityCompat.getDrawable(this, R.drawable.head_img))

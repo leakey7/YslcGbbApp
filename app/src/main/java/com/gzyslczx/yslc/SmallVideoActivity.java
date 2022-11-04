@@ -201,7 +201,7 @@ public class SmallVideoActivity extends BaseActivity<ActivitySmallVideoBinding> 
     private void PlayVideo(int position, TXCloudVideoView videoView){
         mPlayer.setPlayerView(videoView);
         mPlayer.setAutoPlay(true);
-        mPlayer.startPlay(mAdapter.getData().get(position).getFileUrl());
+        mPlayer.startVodPlay(mAdapter.getData().get(position).getFileUrl());
     }
 
     /*
@@ -263,13 +263,13 @@ public class SmallVideoActivity extends BaseActivity<ActivitySmallVideoBinding> 
                     mPresenter.RequestScrollVideoList(this, this, No1Video.getNewsId());
                 }else {
                     mPlayer.setAutoPlay(true);
-                    mPlayer.startPlay(mAdapter.getData().get(lastVideoPos).getFileUrl());
+                    mPlayer.startVodPlay(mAdapter.getData().get(lastVideoPos).getFileUrl());
                 }
                 mViewBinding.SVideoTip.setVisibility(View.GONE);
                 break;
             case R.id.SVideoRestart:
                 mPlayer.setAutoPlay(true);
-                mPlayer.startPlay(mAdapter.getData().get(lastVideoPos).getFileUrl());
+                mPlayer.startVodPlay(mAdapter.getData().get(lastVideoPos).getFileUrl());
                 mViewBinding.SVideoRestart.setVisibility(View.GONE);
                 break;
         }

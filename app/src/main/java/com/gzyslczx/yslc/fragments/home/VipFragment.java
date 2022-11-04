@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -34,6 +35,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.gzyslczx.yslc.BaseActivity;
+import com.gzyslczx.yslc.MyApp;
 import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.SearchActivity;
 import com.gzyslczx.yslc.databinding.PhotoPopupLayoutBinding;
@@ -50,6 +52,7 @@ import com.gzyslczx.yslc.tools.SpTool;
 import com.gzyslczx.yslc.tools.TransStatusTool;
 import com.gzyslczx.yslc.tools.WebTool;
 import com.gzyslczx.yslc.tools.customviews.SharePopup;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -109,6 +112,17 @@ public class VipFragment extends BaseFragment<VipFragmentBinding> implements Vie
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.d(TAG, String.format("VIP加载中：%s", url));
+                if (url!=null){
+                    try{
+                        if(!url.startsWith("http://") && !url.startsWith("https://")){
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                            startActivity(intent);
+                            return true;
+                        }
+                    }catch (Exception e) {//防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
+                        return true;//没有安装该app时，返回true，表示拦截自定义链接，但不跳转，避免弹出上面的错误页面
+                    }
+                }
                 return super.shouldOverrideUrlLoading(view, url);
             }
 
@@ -213,6 +227,16 @@ public class VipFragment extends BaseFragment<VipFragmentBinding> implements Vie
         NoticeBtmBarHidden noticeBtmBarHidden = new NoticeBtmBarHidden(hidden);
         EventBus.getDefault().post(noticeBtmBarHidden);
 
+    }
+
+    @JavascriptInterface
+    public void ToWXProgram(String uid, String url){
+        Log.d(TAG, "跳转微信小程序");
+        WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+        req.userName = uid;
+        req.path = url;
+        req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;
+        MyApp.mIwxapi.sendReq(req);
     }
 
     @JavascriptInterface
