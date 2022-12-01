@@ -41,8 +41,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.gzyslczx.yslc.AboutUsActivity;
 import com.gzyslczx.yslc.BaseActivity;
+import com.gzyslczx.yslc.KLineActivity;
 import com.gzyslczx.yslc.MsgBoxActivity;
 import com.gzyslczx.yslc.R;
+import com.gzyslczx.yslc.StockMarketActivity;
 import com.gzyslczx.yslc.SuggestActivity;
 import com.gzyslczx.yslc.UserConfigActivity;
 import com.gzyslczx.yslc.WebActivity;
@@ -265,7 +267,8 @@ public class MineFragment extends BaseFragment<MineFragmentBinding> implements V
             case R.id.MineAboutText:
             case R.id.MineAboutRightImg:
                 //关于我们点击
-                startActivity(new Intent(getContext(), AboutUsActivity.class));
+//                startActivity(new Intent(getContext(), AboutUsActivity.class));
+                startActivity(new Intent(getContext(), StockMarketActivity.class));
                 break;
             case R.id.MineUpdateImg:
             case R.id.MineUpdateText:

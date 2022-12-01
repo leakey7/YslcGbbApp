@@ -44,8 +44,8 @@ public class MyApp extends Application {
         //冷启动极光推送
         JCollectionAuth.setAuth(this, false);
         RegToWx();
-//        YRMarket.getInstance().init(this);//初始化友睿行情sdk
-//        RequestApi.getInstance().initServer(this);//启动行情服务
+        YRMarket.getInstance().init(this);//初始化友睿行情sdk
+        RequestApi.getInstance().initServer(this);//启动行情服务
     }
 
     @Override

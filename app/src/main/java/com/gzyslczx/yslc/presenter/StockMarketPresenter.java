@@ -22,6 +22,7 @@ public class StockMarketPresenter {
     * 请求分时数据
     * */
     public void RequestMinuteChart(BaseActivity baseActivity, Stock stock){
+        Log.d(TAG, "请求分时数据");
         if (stock.getCodeType()!=-1) {
             ArrayList<Stock> stockArrayList = new ArrayList<Stock>();
             stockArrayList.add(stock);
