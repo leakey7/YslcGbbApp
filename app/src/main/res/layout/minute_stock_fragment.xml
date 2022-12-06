@@ -112,7 +112,9 @@
         app:layout_constraintRight_toRightOf="@id/VolumeSetBg"
         app:layout_constraintTop_toTopOf="@id/VolumeSetBg"
         app:layout_constraintBottom_toBottomOf="@id/VolumeSetBg"
-        android:src="@color/white" />
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/moredown"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -191,7 +193,9 @@
         app:layout_constraintTop_toTopOf="@id/KdjSetBg"
         app:layout_constraintBottom_toBottomOf="@id/KdjSetBg"
         app:layout_constraintRight_toRightOf="@id/KdjSetBg"
-        android:src="@color/white" />
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/moredown" />
 
     <TextView
         android:layout_width="wrap_content"

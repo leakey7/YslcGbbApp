@@ -163,7 +163,6 @@ public class MainFragmentPresenter {
             @Override
             public void accept(ResMainTeacherLiving res) throws Throwable {
                 if (res.isSuccess()){
-                    Log.d(TAG, new Gson().toJson(res));
                     GuBbMainTeacherLivingEvent event = new GuBbMainTeacherLivingEvent(res.getResultObj(), true);
                     EventBus.getDefault().post(event);
                 }else {

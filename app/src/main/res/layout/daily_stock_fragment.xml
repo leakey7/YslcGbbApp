@@ -43,7 +43,9 @@
         app:layout_constraintRight_toRightOf="@id/MDSetBg"
         app:layout_constraintTop_toTopOf="@id/MDSetBg"
         app:layout_constraintBottom_toBottomOf="@id/MDSetBg"
-        android:src="@color/white" />
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/moredown"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -156,7 +158,9 @@
         app:layout_constraintRight_toRightOf="@id/TopSubSetBg"
         app:layout_constraintTop_toTopOf="@id/TopSubSetBg"
         app:layout_constraintBottom_toBottomOf="@id/TopSubSetBg"
-        android:src="@color/white" />
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/moredown" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -246,7 +250,9 @@
         app:layout_constraintRight_toRightOf="@id/BtmSubSetBg"
         app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
         app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
-        android:src="@color/white" />
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/moredown" />
 
     <TextView
         android:layout_width="wrap_content"

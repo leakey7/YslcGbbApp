@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 14,
-      "versionName": "v3.3",
-      "outputFile": "gubaba_v3.3.apk"
+      "versionCode": 15,
+      "versionName": "v3.4",
+      "outputFile": "gubaba_v3.4.apk"
     }
   ],
   "elementType": "File"

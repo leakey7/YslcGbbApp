@@ -153,7 +153,7 @@ public class YRBasePresenter {
     }
 
     /*
-     * K线KDJ
+     * K线MACD
      * */
     public KlineMACD GetKLineMACD(List<StockKLine> stockKLineList){
         return new KlineMACD(stockKLineList);

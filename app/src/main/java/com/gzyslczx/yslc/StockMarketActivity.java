@@ -1,16 +1,24 @@
 package com.gzyslczx.yslc;
 
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.gzyslczx.yslc.adapters.stockmarket.MoreRealTimeGridAdapter;
 import com.gzyslczx.yslc.adapters.stockmarket.StockMarketValueGridAdapter;
 import com.gzyslczx.yslc.databinding.ActivityStockMarketBinding;
+import com.gzyslczx.yslc.databinding.RealPriceExPopBinding;
 import com.gzyslczx.yslc.events.yourui.FiveRangeEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDailyKLineLoadMoreEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDealEvent;
@@ -20,6 +28,7 @@ import com.gzyslczx.yslc.fragments.yourui.MinuteStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.MonthStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.WeekStockFragment;
 import com.gzyslczx.yslc.presenter.StockMarketPresenter;
+import com.gzyslczx.yslc.tools.DisplayTool;
 import com.gzyslczx.yslc.tools.TransStatusTool;
 import com.gzyslczx.yslc.tools.yourui.CodeTypeTool;
 import com.yourui.sdk.message.use.Realtime;
@@ -46,6 +55,8 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     private MonthStockFragment monthStockFragment;
     private Stock stock;
     public static double PrePrice;
+    private RealPriceExPopBinding realPriceExPopBinding;
+    private PopupWindow realPriceExPop;
 
     @Override
     void InitParentLayout() {
@@ -61,9 +72,20 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         mValueGridAdapter = new StockMarketValueGridAdapter(this);
         mViewBinding.ValueGrid.setAdapter(mValueGridAdapter);
         moreRealTimeAdapter = new MoreRealTimeGridAdapter(MoreRealTimeGridAdapter.NormalStyle, this);
-        mViewBinding.MoreValueGrid.setAdapter(moreRealTimeAdapter);
         mViewBinding.Back.setOnClickListener(this::onClick);
+        mViewBinding.Search.setOnClickListener(this::onClick);
         mViewBinding.MoreValue.setOnClickListener(this::onClick);
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mViewBinding.StockMarketAppBar.getLayoutParams();
+        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
+            @Override
+            public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                if (realPriceExPop!=null && realPriceExPop.isShowing()){
+                    return false;
+                }
+                return true;
+            }
+        });
         decimalFormat = new DecimalFormat("#0.00");
         mViewBinding.StyleTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -97,6 +119,9 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
 
     @Override
     protected void onDestroy() {
+        if (realPriceExPop!=null && realPriceExPop.isShowing()) {
+            realPriceExPop.dismiss();
+        }
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
@@ -204,6 +229,25 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         }
     }
 
+    private void UpdateRealPriceEX(Realtime realtime){
+        List<String> list = new ArrayList<String>();
+        list.add(String.valueOf(realtime.getHighLimitPrice()));//涨停
+        list.add(String.valueOf(realtime.getPreClosePrice()));//昨收
+        list.add(realtime.getPriceChange());//涨跌
+
+        list.add(String.valueOf(realtime.getLowLimitPrice()));//跌停
+        list.add(String.valueOf(realtime.getHand()));//每手股
+        list.add(String.valueOf(realtime.getFiveSpeedUp()));//五分涨速
+
+        list.add(String.valueOf(realtime.getInside()));//内盘
+        list.add(String.valueOf(realtime.getBuyCount()));//委买
+        list.add(decimalFormat.format(realtime.getFinancialZEntity().getPERate()));//市盈
+
+        list.add(String.valueOf(realtime.getOutside()));//外盘
+        list.add(String.valueOf(realtime.getSellCount()));//委卖
+        list.add(decimalFormat.format(realtime.getFinancialZEntity().getPBRate()));//市净
+        moreRealTimeAdapter.setValueList(list);
+    }
 
     /*
     * 更新基础报价
@@ -225,20 +269,19 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         mViewBinding.DiffPrice.setText(realtime.getPriceChange()); //差价
         mViewBinding.DiffGain.setText(decimalFormat.format(difGain)+"%"); //幅度
         List<String> list = new ArrayList<String>();
-        list.add(String.valueOf(realtime.getHighPrice())); //高价
+        list.add(String.valueOf(realtime.getHighPrice())); //最高
+        list.add(String.valueOf(realtime.getTotalVolume()));//总量
+        list.add(ShiftUnit(realtime.getTotalMoney())); //总额
+
+        list.add(String.valueOf(realtime.getLowPrice())); //最低
+        list.add(String.valueOf(realtime.getCurrent()));//现手
+        list.add(String.format("%s%%", decimalFormat.format(realtime.getTurnoverRatio()))); //换手
+
+        list.add(String.valueOf(realtime.getOpenPrice())); //今开
+        list.add(String.format("%s%%", decimalFormat.format(realtime.getAmplitude()))); //振幅
         list.add(String.valueOf(realtime.getVolumeRatio())); //量比
-        list.add(ShiftUnit(realtime.getTotalMoney())); //金额
-        list.add(String.valueOf(realtime.getLowPrice())); //低价
-        list.add(realtime.getTurnoverRatio()+"%"); //换手
-        list.add("--"); //流通
-        list.add(String.valueOf(realtime.getOpenPrice())); //开盘
-        list.add(decimalFormat.format(realtime.getAmplitude())); //振幅
-        if (realtime.getFinancialZEntity()==null){
-            list.add("亏损");
-        }else {
-            list.add(decimalFormat.format(realtime.getFinancialZEntity().getPERate())); //市盈
-        }
         mValueGridAdapter.setValues(list);
+        UpdateRealPriceEX(realtime);
     }
 
     /*
@@ -253,6 +296,24 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         }else {
             return decimalFormat.format(millionsUnit)+"万"; //金额 - 单位万
         }
+    }
+
+    /*
+    * 行情拓展弹窗
+    * */
+    private void ShowRealEx(){
+        if (realPriceExPopBinding==null){
+            realPriceExPopBinding = RealPriceExPopBinding.bind(LayoutInflater.from(this).inflate(R.layout.real_price_ex_pop, null));
+            realPriceExPopBinding.MoreValueGrid.setAdapter(moreRealTimeAdapter);
+            ViewGroup.LayoutParams layoutParams = realPriceExPopBinding.MoreValueGrid.getLayoutParams();
+            layoutParams.height = DisplayTool.dp2px(this,28)*4;
+            realPriceExPopBinding.MoreValueGrid.setLayoutParams(layoutParams);
+            realPriceExPop = new PopupWindow(realPriceExPopBinding.getRoot(),
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT-mViewBinding.MoreValue.getTop());
+            realPriceExPop.setOutsideTouchable(false);
+        }
+        realPriceExPop.showAsDropDown(mViewBinding.ValueSegLine);
+        Glide.with(this).load(ActivityCompat.getDrawable(this,R.drawable.leftup)).into(mViewBinding.MoreValue);
     }
 
     /*
@@ -294,13 +355,15 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                 finish();
                 break;
             case R.id.MoreValue:
-                if (mViewBinding.MoreValueGrid.getVisibility()==View.VISIBLE){
-                    mViewBinding.MoreValueGrid.setVisibility(View.GONE);
-                    Log.d(getClass().getSimpleName(), "隐藏实时报价副窗");
+                if (realPriceExPop==null || !realPriceExPop.isShowing()){
+                    ShowRealEx();
                 }else {
-                    mViewBinding.MoreValueGrid.setVisibility(View.VISIBLE);
-                    Log.d(getClass().getSimpleName(), "显示实时报价副窗");
+                    realPriceExPop.dismiss();
+                    Glide.with(this).load(ActivityCompat.getDrawable(this,R.drawable.rightdown)).into(mViewBinding.MoreValue);
                 }
+                break;
+            case R.id.Search:
+                //查询股票
                 break;
         }
     }
@@ -309,7 +372,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
      * 接受到通知请求交易明细
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnNoticeMinuteDeal(NoticeDealEvent event){
+     public void OnNoticeMinuteDeal(NoticeDealEvent event){
         if (stock!=null) {
             Log.d(event.getTAG(), "请求交易明细数:"+event.getCount());
             mPresenter.RequestMinuteDeal(event.getTAG(), event.getBaseActivity(), event.getBaseFragment(),

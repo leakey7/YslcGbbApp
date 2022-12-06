@@ -15,7 +15,12 @@ public class StockMarketValueGridAdapter extends BaseAdapter {
 
     private List<String> values;
     private Context context;
-    private String[] DefValues = new String[]{"--", "--", "--", "--", "--", "--", "--", "--", "--"};
+    private int DefSize = 9;
+    private String DefValues = "--";
+    private final String[] DefKey = new String[]{
+            "最高", "总量", "总额",
+            "最低", "现手", "换手",
+            "今开", "振幅", "量比", };
 
     public StockMarketValueGridAdapter(Context context) {
         this.context = context;
@@ -26,7 +31,7 @@ public class StockMarketValueGridAdapter extends BaseAdapter {
         if (values!=null){
             return values.size();
         }
-        return DefValues.length;
+        return DefSize;
     }
 
     @Override
@@ -34,7 +39,7 @@ public class StockMarketValueGridAdapter extends BaseAdapter {
         if (values!=null){
             return values.get(position);
         }
-        return DefValues[position];
+        return DefValues;
     }
 
     @Override
@@ -52,40 +57,11 @@ public class StockMarketValueGridAdapter extends BaseAdapter {
         } else {
             binding = (StockMarketValueItemBinding) convertView.getTag();
         }
-        switch (position){
-            case 0:
-                binding.TagText.setText("高");
-                break;
-            case 1:
-                binding.TagText.setText("量比");
-                break;
-            case 2:
-                binding.TagText.setText("金额");
-                break;
-            case 3:
-                binding.TagText.setText("低");
-                break;
-            case 4:
-                binding.TagText.setText("换手");
-                break;
-            case 5:
-                binding.TagText.setText("流通");
-                break;
-            case 6:
-                binding.TagText.setText("开");
-                break;
-            case 7:
-                binding.TagText.setText("振幅");
-                break;
-            case 8:
-                binding.TagText.setText("市盈");
-                break;
-        }
-
+        binding.TagText.setText(DefKey[position]);
         if (values != null && values.size()>0) {
             binding.ValueText.setText(values.get(position));
         }else {
-            binding.ValueText.setText(DefValues[position]);
+            binding.ValueText.setText(DefValues);
         }
         return convertView;
     }

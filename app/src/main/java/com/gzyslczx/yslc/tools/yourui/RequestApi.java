@@ -539,7 +539,8 @@ public class RequestApi implements IDataApi {
                     }
                 }
 //                Logger.d(realtimeList);
-                sendMessage(realtimeList, handler, ansRealTime.getDataHead().getType());
+//                sendMessage(realtimeList, handler, ansRealTime.getDataHead().getType());
+                EventBus.getDefault().post(new RealTimeEvent(realtimeList));
             } catch (Exception e) {
                 e.printStackTrace();
             }

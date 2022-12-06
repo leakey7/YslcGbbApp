@@ -22,7 +22,6 @@ public class StockMarketPresenter {
     * 请求分时数据
     * */
     public void RequestMinuteChart(BaseActivity baseActivity, Stock stock){
-        Log.d(TAG, "请求分时数据");
         if (stock.getCodeType()!=-1) {
             ArrayList<Stock> stockArrayList = new ArrayList<Stock>();
             stockArrayList.add(stock);
@@ -32,7 +31,7 @@ public class StockMarketPresenter {
                 @Override
                 public void accept(Long aLong) throws Throwable {
                     RequestApi.getInstance().loadTrend(stock, null);
-                    RequestApi.getInstance().loadRealTime(stockArrayList, null);
+                    RequestApi.getInstance().loadRealTimeExt(stockArrayList, null);
                 }
             });
         }else {
