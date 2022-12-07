@@ -12,11 +12,13 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.google.gson.Gson;
 import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.presenter.yourui.YRBasePresenter;
 import com.gzyslczx.yslc.tools.DisplayTool;
 import com.yourui.sdk.message.kline.KlineKDJ;
 import com.yourui.sdk.message.kline.KlineMACD;
+import com.yourui.sdk.message.kline.KlineVOL;
 import com.yourui.sdk.message.use.StockKLine;
 import com.yourui.sdk.message.use.TrendDataModel;
 
@@ -32,6 +34,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     private List<StockKLine> kLineList;
     private KlineKDJ klineKDJ;
     private KlineMACD klineMACD;
+    private KlineVOL klineVOL;
     private float DefItemSize = 241; //默认数据量
     private long MaxValue = 0;
     private float YesterdayPrice = -1;
@@ -109,7 +112,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
         canvas.drawLine(halfWidthOnX, topOnYAxis, halfWidthOnX, btmOnYAxis, GrayPaint); //二竖线
         canvas.drawLine(threeQuarterWidthOnX, topOnYAxis, threeQuarterWidthOnX, btmOnYAxis, GrayPaint); //三竖线
         canvas.drawLine(rightOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis, GrayPaint); //右竖线
-        //绘制柱状图
+        //绘制分时柱状图
         if (YesterdayPrice != -1) {
             if (type == VolumeTypeConstance.Volume) {
                 float MaxVolumeOnYAxis = topOnYAxis + DisplayTool.dp2px(getContext(), 10);
@@ -119,7 +122,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
             }
             DrawIndicateLine(canvas, leftOnXAxis, rightOnXAxis, IndicateLineX, topOnYAxis, btmOnYAxis); //长按指示线
         }
-        //绘制副图
+        //绘制K线副图
         if (kLineList != null && kLineList.size() > 0) {
             PrintLogD(String.format("数据总量：%d", kLineList.size()));
             float ItemInterval = DisplayTool.dp2px(getContext(), 2); //间隔距离
@@ -270,6 +273,9 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     maxValue = Math.max(klineMACD.getDIFF(q), maxValue);
                     minValue = Math.min(klineMACD.getMACD(q), klineMACD.getDea(q));
                     minValue = Math.min(klineMACD.getDIFF(q), minValue);
+                } else if (type == VolumeTypeConstance.Volume){
+                    maxValue = kLineList.get(q).getVolume();
+                    minValue = 0;
                 }
             } else {
                 if (type == VolumeTypeConstance.KDJ) {
@@ -288,6 +294,8 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     minValue = Math.min(minValue, klineMACD.getMACD(q));
                     minValue = Math.min(minValue, klineMACD.getDea(q));
                     minValue = Math.min(minValue, klineMACD.getDIFF(q));
+                }else if (type == VolumeTypeConstance.Volume) {
+                    maxValue = Math.max(maxValue, kLineList.get(q).getVolume());
                 }
             }
         }
@@ -351,7 +359,24 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                             LineOnX, (float) (AveHeight * (Max - klineMACD.getDea(q))), DPaint);
                 }
             }
+        }else if (type == VolumeTypeConstance.Volume){
+            PrintLogD("绘制VOL");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                int q = Math.abs(size - i);
+                float right = RightAxis - AveWidthWithInterval * i;
+                float left = right-AveWidth;
+                float top = (float) (AveHeight * (Max - kLineList.get(q).getVolume()));
+                if (q==0){
+                    JudgeColumnColor(kLineList.get(q).getVolume(), kLineList.get(q).getVolume(), canvas, left, right, top, getMeasuredHeight());
+                }else {
+                    JudgeColumnColor(kLineList.get(q-1).getVolume(), kLineList.get(q).getVolume(), canvas, left, right, top, getMeasuredHeight());
+                }
+            }
         }
+
     }
 
     private void DrawSubOnDailyLess(Canvas canvas, float AveWidth, float AveHeight, float LeftAxis, double Max, float ItemInterval, int starIndex, int endIndex){
@@ -404,6 +429,20 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                             nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i+1))), KPaint);
                     canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i))),
                             nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i+1))), DPaint);
+                }
+            }
+        }else if (type == VolumeTypeConstance.Volume){
+            PrintLogD("绘制VOL");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float right = left+AveWidth;
+                float top = (float) (AveHeight * (Max - kLineList.get(i).getVolume()));
+                if (i==0){
+                    JudgeColumnColor(kLineList.get(i).getVolume(), kLineList.get(i).getVolume(), canvas, left, right, top, getMeasuredHeight());
+                }else {
+                    JudgeColumnColor(kLineList.get(i-1).getVolume(), kLineList.get(i).getVolume(), canvas, left, right, top, getMeasuredHeight());
                 }
             }
         }
@@ -582,6 +621,11 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                 klineMACD = YRBasePresenter.Create().GetKLineMACD(this.kLineList);
                 return;
             }
+            if (type == VolumeTypeConstance.Volume) {
+                PrintLogD("更新成交量数据");
+
+                return;
+            }
         }
     }
 
@@ -599,5 +643,31 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
 
     public int getEqualColor() {
         return EqualColor;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+        if (type == VolumeTypeConstance.KDJ) {
+            PrintLogD("更新KDJ数据");
+            klineKDJ = YRBasePresenter.Create().GetKLineKDJ(this.kLineList);
+            invalidate();
+            return;
+        }
+        if (type == VolumeTypeConstance.MACD) {
+            PrintLogD("更新MACD数据");
+            klineMACD = YRBasePresenter.Create().GetKLineMACD(this.kLineList);
+            invalidate();
+            return;
+        }
+        if (type == VolumeTypeConstance.Volume) {
+            PrintLogD("更新成交量数据");
+
+            invalidate();
+            return;
+        }
     }
 }

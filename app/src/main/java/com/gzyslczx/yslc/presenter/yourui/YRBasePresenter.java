@@ -140,9 +140,8 @@ public class YRBasePresenter {
     /*
     * K线成交量
     * */
-    public void GetKLineVol(List<StockKLine> stockKLineList){
-        KlineVOL klineVOL = new KlineVOL(stockKLineList);
-
+    public KlineVOL GetKLineVol(List<StockKLine> stockKLineList){
+        return new KlineVOL(stockKLineList);
     }
 
     /*

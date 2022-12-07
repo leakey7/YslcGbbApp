@@ -40,6 +40,7 @@
     <dimen name="d168">168dp</dimen>
     <dimen name="d170">170dp</dimen>
     <dimen name="d180">180dp</dimen>
+    <dimen name="d200">200dp</dimen>
     <dimen name="d210">210dp</dimen>
     <dimen name="d240">240dp</dimen>
     <dimen name="d260">260dp</dimen>

@@ -308,6 +308,13 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
             ViewGroup.LayoutParams layoutParams = realPriceExPopBinding.MoreValueGrid.getLayoutParams();
             layoutParams.height = DisplayTool.dp2px(this,28)*4;
             realPriceExPopBinding.MoreValueGrid.setLayoutParams(layoutParams);
+            realPriceExPopBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    realPriceExPop.dismiss();
+                    Glide.with(StockMarketActivity.this).load(ActivityCompat.getDrawable(StockMarketActivity.this,R.drawable.rightdown)).into(mViewBinding.MoreValue);
+                }
+            });
             realPriceExPop = new PopupWindow(realPriceExPopBinding.getRoot(),
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT-mViewBinding.MoreValue.getTop());
             realPriceExPop.setOutsideTouchable(false);

@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
 import com.gzyslczx.yslc.databinding.DailyStockFragmentBinding;
 import com.gzyslczx.yslc.events.yourui.DailyKLineEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDailyKLineLoadMoreEvent;
 import com.gzyslczx.yslc.fragments.BaseFragment;
 import com.gzyslczx.yslc.tools.yourui.DailyMAEntity;
-import com.gzyslczx.yslc.tools.yourui.myviews.DailyTypeConstance;
 import com.gzyslczx.yslc.tools.yourui.myviews.OnDailyLongPressListener;
 import com.gzyslczx.yslc.tools.yourui.myviews.OnDailyStockLoadMoreListener;
 import com.yourui.sdk.message.api.protocol.QuoteConstants;
