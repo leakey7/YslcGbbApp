@@ -19,9 +19,15 @@ import com.gzyslczx.yslc.tools.yourui.YRTokenRes;
 import com.yourui.sdk.message.api.protocol.QuoteConstants;
 import com.yourui.sdk.message.entity.CodeInfo;
 import com.yourui.sdk.message.entity.ReqLimitTick;
+import com.yourui.sdk.message.kline.KlineASI;
+import com.yourui.sdk.message.kline.KlineBIAS;
+import com.yourui.sdk.message.kline.KlineBOLL;
 import com.yourui.sdk.message.kline.KlineKDJ;
 import com.yourui.sdk.message.kline.KlineMACD;
+import com.yourui.sdk.message.kline.KlineRSI;
 import com.yourui.sdk.message.kline.KlineVOL;
+import com.yourui.sdk.message.kline.KlineVR;
+import com.yourui.sdk.message.kline.KlineWR;
 import com.yourui.sdk.message.use.Stock;
 import com.yourui.sdk.message.use.StockKLine;
 
@@ -156,6 +162,48 @@ public class YRBasePresenter {
      * */
     public KlineMACD GetKLineMACD(List<StockKLine> stockKLineList){
         return new KlineMACD(stockKLineList);
+    }
+
+    /*
+     * K线BOLL
+     * */
+    public KlineBOLL GetKLineBOLL(List<StockKLine> stockKLineList){
+        return new KlineBOLL(stockKLineList);
+    }
+
+    /*
+     * K线ASI
+     * */
+    public KlineASI GetKLineASI(List<StockKLine> stockKLineList){
+        return new KlineASI(stockKLineList);
+    }
+
+    /*
+     * K线WR
+     * */
+    public KlineWR GetKLineWR(List<StockKLine> stockKLineList){
+        return new KlineWR(stockKLineList);
+    }
+
+    /*
+     * K线BIAS
+     * */
+    public KlineBIAS GetKLineBIAS(List<StockKLine> stockKLineList){
+        return new KlineBIAS(stockKLineList);
+    }
+
+    /*
+     * K线RSI
+     * */
+    public KlineRSI GetKLineRSI(List<StockKLine> stockKLineList){
+        return new KlineRSI(stockKLineList);
+    }
+
+    /*
+     * K线VR
+     * */
+    public KlineVR GetKLineVR(List<StockKLine> stockKLineList){
+        return new KlineVR(stockKLineList);
     }
 
 }

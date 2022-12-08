@@ -3,4 +3,10 @@
     <integer name="default_volume">1</integer>
     <integer name="default_kdj">11</integer>
     <integer name="default_macd">12</integer>
+    <integer name="default_boll">13</integer>
+    <integer name="default_asi">14</integer>
+    <integer name="default_wr">15</integer>
+    <integer name="default_bias">16</integer>
+    <integer name="default_rsi">17</integer>
+    <integer name="default_vr">17</integer>
 </resources>

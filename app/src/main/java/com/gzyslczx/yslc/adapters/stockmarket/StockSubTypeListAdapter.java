@@ -22,6 +22,12 @@ public class StockSubTypeListAdapter extends BaseQuickAdapter<String, BaseViewHo
         Types.add("成交量");
         Types.add("KDJ");
         Types.add("MACD");
+        Types.add("BOLL");
+        Types.add("ASI");
+        Types.add("WR");
+        Types.add("BIAS");
+        Types.add("RSI");
+        Types.add("VR");
         setList(Types);
     }
 
@@ -51,6 +57,18 @@ public class StockSubTypeListAdapter extends BaseQuickAdapter<String, BaseViewHo
                 return VolumeTypeConstance.KDJ;
             case 2:
                 return VolumeTypeConstance.MACD;
+            case 3:
+                return VolumeTypeConstance.BOLL;
+            case 4:
+                return VolumeTypeConstance.ASI;
+            case 5:
+                return VolumeTypeConstance.WR;
+            case 6:
+                return VolumeTypeConstance.BIAS;
+            case 7:
+                return VolumeTypeConstance.RSI;
+            case 8:
+                return VolumeTypeConstance.VR;
             default:
                 return VolumeTypeConstance.Volume;
         }

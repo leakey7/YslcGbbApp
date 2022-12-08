@@ -16,9 +16,15 @@ import com.google.gson.Gson;
 import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.presenter.yourui.YRBasePresenter;
 import com.gzyslczx.yslc.tools.DisplayTool;
+import com.yourui.sdk.message.kline.KlineASI;
+import com.yourui.sdk.message.kline.KlineBIAS;
+import com.yourui.sdk.message.kline.KlineBOLL;
 import com.yourui.sdk.message.kline.KlineKDJ;
 import com.yourui.sdk.message.kline.KlineMACD;
+import com.yourui.sdk.message.kline.KlineRSI;
 import com.yourui.sdk.message.kline.KlineVOL;
+import com.yourui.sdk.message.kline.KlineVR;
+import com.yourui.sdk.message.kline.KlineWR;
 import com.yourui.sdk.message.use.StockKLine;
 import com.yourui.sdk.message.use.TrendDataModel;
 
@@ -35,6 +41,12 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     private KlineKDJ klineKDJ;
     private KlineMACD klineMACD;
     private KlineVOL klineVOL;
+    private KlineBOLL klineBOLL;
+    private KlineASI klineASI;
+    private KlineWR klineWR;
+    private KlineBIAS klineBIAS;
+    private KlineRSI klineRSI;
+    private KlineVR klineVR;
     private float DefItemSize = 241; //默认数据量
     private long MaxValue = 0;
     private float YesterdayPrice = -1;
@@ -192,6 +204,23 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
 //            }
             }else {
                 DrawSubOnDailyLess(canvas, AveWidthOfItem, AveHeightOfItem, leftOnXAxis, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex );
+                if (isLongPress){
+                    float right = (AveWidthOfItem+ItemInterval)*kLineList.size()-ItemInterval;
+                    if (IndicateLineX > right){
+                        IndicateLineX = right;
+                    }
+                    if (IndicateLineX < leftOnXAxis){
+                        IndicateLineX = 0;
+                    }
+                    if (IndicateLineY < topOnYAxis) {
+                        IndicateLineY = topOnYAxis;
+                    }
+                    if (IndicateLineY > btmOnYAxis) {
+                        IndicateLineY = btmOnYAxis;
+                    }
+                    DrawIndicateLineOnDaily(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, right, btmOnYAxis,
+                            AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
+                }
             }
         }
 
@@ -223,7 +252,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     /*
      * 区分成交量柱状图颜色
      * */
-    private void JudgeColumnColor(float oldPrice, float newPrice, Canvas canvas, float left, float right, float top, float btm) {
+    private void JudgeColumnColor(double oldPrice, double newPrice, Canvas canvas, float left, float right, float top, float btm) {
         if (oldPrice == newPrice) {
             canvas.drawRect(left, top, right, btm, EqualPaint); //平等柱状图
             return;
@@ -276,6 +305,11 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                 } else if (type == VolumeTypeConstance.Volume){
                     maxValue = kLineList.get(q).getVolume();
                     minValue = 0;
+                }else if (type == VolumeTypeConstance.BOLL){
+                    maxValue = Math.max(klineBOLL.getMPData(q), klineBOLL.getUPData(q));
+                    maxValue = Math.max(maxValue, klineBOLL.getDOWNData(q));
+                    minValue = Math.min(klineBOLL.getMPData(q), klineBOLL.getUPData(q));
+                    minValue = Math.min(minValue, klineBOLL.getDOWNData(q));
                 }
             } else {
                 if (type == VolumeTypeConstance.KDJ) {
@@ -296,6 +330,20 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     minValue = Math.min(minValue, klineMACD.getDIFF(q));
                 }else if (type == VolumeTypeConstance.Volume) {
                     maxValue = Math.max(maxValue, kLineList.get(q).getVolume());
+                }else if (type == VolumeTypeConstance.BOLL) {
+                    maxValue = Math.max(maxValue, klineBOLL.getMPData(q));
+                    maxValue = Math.max(maxValue, klineBOLL.getUPData(q));
+                    maxValue = Math.max(maxValue, klineBOLL.getDOWNData(q));
+
+                    minValue = Math.min(minValue, klineBOLL.getMPData(q));
+                    minValue = Math.min(minValue, klineBOLL.getUPData(q));
+                    minValue = Math.min(minValue, klineBOLL.getDOWNData(q));
+                }else if (type == VolumeTypeConstance.ASI) {
+                    maxValue = Math.max(maxValue, klineASI.getASIData(q));
+                    maxValue = Math.max(maxValue, klineASI.getASIMAData(q));
+
+                    minValue = Math.min(minValue, klineASI.getASIData(q));
+                    minValue = Math.min(minValue, klineASI.getASIData(q));
                 }
             }
         }
@@ -361,7 +409,6 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
             }
         }else if (type == VolumeTypeConstance.Volume){
             PrintLogD("绘制VOL");
-            float HalfAveWidth = AveWidth * 0.5f;
             float AveWidthWithInterval = (AveWidth + ItemInterval);
             int size = this.kLineList.size() - 1;
             for (int i = starIndex; i <= endIndex; i++) {
@@ -370,9 +417,52 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                 float left = right-AveWidth;
                 float top = (float) (AveHeight * (Max - kLineList.get(q).getVolume()));
                 if (q==0){
-                    JudgeColumnColor(kLineList.get(q).getVolume(), kLineList.get(q).getVolume(), canvas, left, right, top, getMeasuredHeight());
+                    JudgeColumnColor(kLineList.get(q).getClosePrice(), kLineList.get(q).getOpenPrice(), canvas, left, right, top, getMeasuredHeight());
                 }else {
-                    JudgeColumnColor(kLineList.get(q-1).getVolume(), kLineList.get(q).getVolume(), canvas, left, right, top, getMeasuredHeight());
+                    JudgeColumnColor(kLineList.get(q-1).getClosePrice(), kLineList.get(q).getOpenPrice(), canvas, left, right, top, getMeasuredHeight());
+                }
+            }
+        }else if (type == VolumeTypeConstance.BOLL){
+            PrintLogD("绘制BOLL");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                int q = Math.abs(size - i);
+                float right = RightAxis - AveWidthWithInterval * i;
+                float LineOnX = right - HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBOLL.getMPData(q))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBOLL.getUPData(q))), 1, DPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBOLL.getDOWNData(q))), 1, JPaint);
+                } else {
+                    float lastLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineBOLL.getMPData(q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineBOLL.getMPData(q))), KPaint);
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineBOLL.getUPData(q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineBOLL.getUPData(q))), DPaint);
+                    canvas.drawLine(lastLineOnX, AveHeight * (float) (Max - klineBOLL.getDOWNData(q + 1)),
+                            LineOnX, (float) (AveHeight * (Max - klineBOLL.getDOWNData(q))), JPaint);
+                }
+            }
+        }else if (type == VolumeTypeConstance.ASI){
+            PrintLogD("绘制ASI");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                int q = Math.abs(size - i);
+                float right = RightAxis - AveWidthWithInterval * i;
+                float LineOnX = right - HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineASI.getASIData(q))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(q))), 1, DPaint);
+                } else {
+                    float lastLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineASI.getASIData(q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineASI.getASIData(q))), KPaint);
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(q))), DPaint);
                 }
             }
         }
@@ -393,13 +483,15 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i))), 1, DPaint);
                     canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineKDJ.getJData(i))), 1, JPaint);
                 } else {
-                    float nextLineOnX = LineOnX + AveWidthWithInterval;
-                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineKDJ.getKData(i))),
-                            nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getKData(i+1))), KPaint);
-                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i))),
-                            nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i+1))), DPaint);
-                    canvas.drawLine(LineOnX, AveHeight * (float) (Max - klineKDJ.getJData(i)),
-                            nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getJData(i+1))), JPaint);
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineKDJ.getKData(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getKData(i + 1))), KPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getDData(i + 1))), DPaint);
+                        canvas.drawLine(LineOnX, AveHeight * (float) (Max - klineKDJ.getJData(i)),
+                                nextLineOnX, (float) (AveHeight * (Max - klineKDJ.getJData(i + 1))), JPaint);
+                    }
                 }
             }
         } else if (type == VolumeTypeConstance.MACD) {
@@ -424,11 +516,13 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i))), 1, KPaint);
                     canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i))), 1, DPaint);
                 } else {
-                    float nextLineOnX = LineOnX + AveWidthWithInterval;
-                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i))),
-                            nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i+1))), KPaint);
-                    canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i))),
-                            nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i+1))), DPaint);
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDIFF(i + 1))), KPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineMACD.getDea(i + 1))), DPaint);
+                    }
                 }
             }
         }else if (type == VolumeTypeConstance.Volume){
@@ -440,12 +534,59 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                 float right = left+AveWidth;
                 float top = (float) (AveHeight * (Max - kLineList.get(i).getVolume()));
                 if (i==0){
-                    JudgeColumnColor(kLineList.get(i).getVolume(), kLineList.get(i).getVolume(), canvas, left, right, top, getMeasuredHeight());
+                    JudgeColumnColor(kLineList.get(i).getClosePrice(), kLineList.get(i).getOpenPrice(), canvas, left, right, top, getMeasuredHeight());
                 }else {
-                    JudgeColumnColor(kLineList.get(i-1).getVolume(), kLineList.get(i).getVolume(), canvas, left, right, top, getMeasuredHeight());
+                    JudgeColumnColor(kLineList.get(i-1).getClosePrice(), kLineList.get(i).getOpenPrice(), canvas, left, right, top, getMeasuredHeight());
+                }
+            }
+        }else if (type == VolumeTypeConstance.BOLL) {
+            PrintLogD("绘制BOLL");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBOLL.getMPData(i))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBOLL.getUPData(i))), 1, DPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBOLL.getDOWNData(i))), 1, JPaint);
+                } else {
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineBOLL.getMPData(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineBOLL.getMPData(i + 1))), KPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineBOLL.getUPData(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineBOLL.getUPData(i + 1))), DPaint);
+                        canvas.drawLine(LineOnX, AveHeight * (float) (Max - klineBOLL.getDOWNData(i)),
+                                nextLineOnX, (float) (AveHeight * (Max - klineBOLL.getDOWNData(i + 1))), JPaint);
+                    }
+                }
+            }
+        }else if (type == VolumeTypeConstance.ASI) {
+            PrintLogD("绘制ASI");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineASI.getASIData(i))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(i))), 1, DPaint);
+                } else {
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineASI.getASIData(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineASI.getASIData(i + 1))), KPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(i + 1))), DPaint);
+                    }
                 }
             }
         }
+
+
     }
 
 
@@ -588,9 +729,32 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                 if (klineKDJ != null && type == VolumeTypeConstance.KDJ) {
                     int i = Math.abs(kLineList.size() - 1 - targetIndex);
                     dailyLongPressListener.onKDJLongPress(klineKDJ.getKData(i), klineKDJ.getDData(i), klineKDJ.getJData(i));
-                } else if (klineMACD != null && type == VolumeTypeConstance.MACD) {
+                }
+                else if (klineMACD != null && type == VolumeTypeConstance.MACD) {
                     int i = Math.abs(kLineList.size() - 1 - targetIndex);
                     dailyLongPressListener.onMACDLongPress(klineMACD.getMACD(i), klineMACD.getDIFF(i), klineMACD.getDea(i));
+                }
+                else if (kLineList!=null && type==VolumeTypeConstance.Volume){
+                    int i = Math.abs(kLineList.size() - 1 - targetIndex);
+                    if (i==0){
+                        dailyLongPressListener.onVOLLongPress(kLineList.get(i).getVolume(), kLineList.get(i).getMoney(), 0);
+                    }else if (i>0){
+                        if (kLineList.get(i).getClosePrice() > kLineList.get(i-1).getClosePrice()){
+                            dailyLongPressListener.onVOLLongPress(kLineList.get(i).getVolume(), kLineList.get(i).getMoney(), 1);
+                        }else if (kLineList.get(i).getClosePrice() < kLineList.get(i-1).getClosePrice()){
+                            dailyLongPressListener.onVOLLongPress(kLineList.get(i).getVolume(), kLineList.get(i).getMoney(), 2);
+                        }else {
+                            dailyLongPressListener.onVOLLongPress(kLineList.get(i).getVolume(), kLineList.get(i).getMoney(), 0);
+                        }
+                    }
+                }
+                else if (klineBOLL != null && type == VolumeTypeConstance.BOLL) {
+                    int i = Math.abs(kLineList.size() - 1 - targetIndex);
+                    dailyLongPressListener.onBOLLLongPress(klineBOLL.getMPData(i), klineBOLL.getUPData(i), klineBOLL.getDOWNData(i));
+                }
+                else if (klineASI!=null && type == VolumeTypeConstance.ASI){
+                    int i = Math.abs(kLineList.size() - 1 - targetIndex);
+                    dailyLongPressListener.onASILongPress(klineASI.getASIData(i), klineASI.getASIMAData(i));
                 }
             }
         }
@@ -623,7 +787,36 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
             }
             if (type == VolumeTypeConstance.Volume) {
                 PrintLogD("更新成交量数据");
-
+                return;
+            }
+            if (type==VolumeTypeConstance.BOLL){
+                PrintLogD("更新BOLL数据");
+                klineBOLL = YRBasePresenter.Create().GetKLineBOLL(kLineList);
+                return;
+            }
+            if (type==VolumeTypeConstance.ASI){
+                PrintLogD("更新ASI数据");
+                klineASI = YRBasePresenter.Create().GetKLineASI(kLineList);
+                return;
+            }
+            if (type==VolumeTypeConstance.WR){
+                PrintLogD("更新WR数据");
+                klineWR = YRBasePresenter.Create().GetKLineWR(kLineList);
+                return;
+            }
+            if (type==VolumeTypeConstance.BIAS){
+                PrintLogD("更新BIAS数据");
+                klineBIAS = YRBasePresenter.Create().GetKLineBIAS(kLineList);
+                return;
+            }
+            if (type==VolumeTypeConstance.RSI){
+                PrintLogD("更新RSI数据");
+                klineRSI= YRBasePresenter.Create().GetKLineRSI(kLineList);
+                return;
+            }
+            if (type==VolumeTypeConstance.VR){
+                PrintLogD("更新VR数据");
+                klineVR= YRBasePresenter.Create().GetKLineVR(kLineList);
                 return;
             }
         }
@@ -665,7 +858,42 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
         }
         if (type == VolumeTypeConstance.Volume) {
             PrintLogD("更新成交量数据");
-
+            invalidate();
+            return;
+        }
+        if (type==VolumeTypeConstance.BOLL){
+            PrintLogD("更新BOLL数据");
+            klineBOLL = YRBasePresenter.Create().GetKLineBOLL(this.kLineList);
+            invalidate();
+            return;
+        }
+        if (type==VolumeTypeConstance.ASI){
+            PrintLogD("更新ASI数据");
+            klineASI= YRBasePresenter.Create().GetKLineASI(this.kLineList);
+            invalidate();
+            return;
+        }
+        if (type==VolumeTypeConstance.WR){
+            PrintLogD("更新WR数据");
+            klineWR = YRBasePresenter.Create().GetKLineWR(this.kLineList);
+            invalidate();
+            return;
+        }
+        if (type==VolumeTypeConstance.BIAS){
+            PrintLogD("更新BIAS数据");
+            klineBIAS = YRBasePresenter.Create().GetKLineBIAS(this.kLineList);
+            invalidate();
+            return;
+        }
+        if (type==VolumeTypeConstance.RSI){
+            PrintLogD("更新RSI数据");
+            klineRSI = YRBasePresenter.Create().GetKLineRSI(this.kLineList);
+            invalidate();
+            return;
+        }
+        if (type==VolumeTypeConstance.VR){
+            PrintLogD("更新VR数据");
+            klineVR= YRBasePresenter.Create().GetKLineVR(this.kLineList);
             invalidate();
             return;
         }

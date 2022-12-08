@@ -2,15 +2,14 @@ package com.gzyslczx.yslc.fragments.yourui;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -22,11 +21,9 @@ import com.gzyslczx.yslc.databinding.StockSubTypeListBinding;
 import com.gzyslczx.yslc.events.yourui.DailyKLineEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDailyKLineLoadMoreEvent;
 import com.gzyslczx.yslc.fragments.BaseFragment;
-import com.gzyslczx.yslc.tools.DisplayTool;
 import com.gzyslczx.yslc.tools.yourui.DailyMAEntity;
 import com.gzyslczx.yslc.tools.yourui.myviews.OnDailyLongPressListener;
 import com.gzyslczx.yslc.tools.yourui.myviews.OnDailyStockLoadMoreListener;
-import com.gzyslczx.yslc.tools.yourui.myviews.VolumeTypeConstance;
 import com.yourui.sdk.message.api.protocol.QuoteConstants;
 import com.yourui.sdk.message.use.StockKLine;
 
@@ -137,23 +134,137 @@ public class DailyStockFragment extends BaseFragment<DailyStockFragmentBinding> 
 
     @Override
     public void onKDJLongPress(double K, double D, double J) {
-        mViewBinding.KSign.setText(String.format("K:%s", decimalFormat.format(K)));
-        mViewBinding.DSign.setText(String.format("D:%s", decimalFormat.format(D)));
-        mViewBinding.JSign.setText(String.format("J:%s", decimalFormat.format(J)));
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("KDJ")) {
+            mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.KSign.setText(String.format("K:%s", decimalFormat.format(K)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DSign.setText(String.format("D:%s", decimalFormat.format(D)));
+            mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.JSign.setText(String.format("J:%s", decimalFormat.format(J)));
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("KDJ")){
+            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.MACDSign.setText(String.format("K:%s", decimalFormat.format(K)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DIFFSign.setText(String.format("D:%s", decimalFormat.format(D)));
+            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.DEASign.setText(String.format("J:%s", decimalFormat.format(J)));
+        }
     }
 
     @Override
     public void onMACDLongPress(double MACD, double DIFF, double DEA) {
-        if (MACD > 0) {
-            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
-        } else if (MACD < 0) {
-            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
-        } else {
-            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("MACD")) {
+            if (MACD > 0) {
+                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
+            } else if (MACD < 0) {
+                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
+            } else {
+                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+            }
+            mViewBinding.MACDSign.setText(String.format("MACD:%s", decimalFormat.format(MACD)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.DIFFSign.setText(String.format("DIFF:%s", decimalFormat.format(DIFF)));
+            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DEASign.setText(String.format("DEA:%s", decimalFormat.format(DEA)));
         }
-        mViewBinding.MACDSign.setText(String.format("MACD:%s", decimalFormat.format(MACD)));
-        mViewBinding.DIFFSign.setText(String.format("DIFF:%s", decimalFormat.format(DIFF)));
-        mViewBinding.DEASign.setText(String.format("DEA:%s", decimalFormat.format(DEA)));
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("MACD")){
+            if (MACD > 0) {
+                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
+            } else if (MACD < 0) {
+                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
+            } else {
+                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+            }
+            mViewBinding.KSign.setText(String.format("MACD:%s", decimalFormat.format(MACD)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.DSign.setText(String.format("DIFF:%s", decimalFormat.format(DIFF)));
+            mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.JSign.setText(String.format("DEA:%s", decimalFormat.format(DEA)));
+        }
+    }
+
+    @Override
+    public void onVOLLongPress(long volume, long money, int color) {
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("成交量")){
+            if (color==0){
+                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+            }else if (color==1) {
+                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
+            }else {
+                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
+            }
+            mViewBinding.KSign.setText(String.format("成交量:%s手", CountUnit(volume)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.DSign.setText(String.format("成交额:%s", CountUnit(money)));
+            mViewBinding.JSign.setText("");
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("成交量")){
+            if (color==0){
+                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+            }else if (color==1) {
+                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
+            }else {
+                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
+            }
+            mViewBinding.MACDSign.setText(String.format("成交量:%s手", CountUnit(volume)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.DIFFSign.setText(String.format("成交额:%s", CountUnit(money)));
+            mViewBinding.DEASign.setText("");
+        }
+
+    }
+
+    @Override
+    public void onBOLLLongPress(double M, double U, double D) {
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("BOLL")) {
+            mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.KSign.setText(String.format("MB:%s", decimalFormat.format(M)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DSign.setText(String.format("UP:%s", decimalFormat.format(U)));
+            mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.JSign.setText(String.format("DN:%s", decimalFormat.format(D)));
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("BOLL")){
+            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.MACDSign.setText(String.format("MB:%s", decimalFormat.format(M)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DIFFSign.setText(String.format("UP:%s", decimalFormat.format(U)));
+            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.DEASign.setText(String.format("DN:%s", decimalFormat.format(D)));
+        }
+    }
+
+    @Override
+    public void onASILongPress(double asi, double asit) {
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("ASI")) {
+            mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.KSign.setText(String.format("ASI:%s", decimalFormat.format(asi)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DSign.setText(String.format("ASIT:%s", decimalFormat.format(asit)));
+            mViewBinding.JSign.setText("");
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("ASI")){
+            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.MACDSign.setText(String.format("ASI:%s", decimalFormat.format(asi)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DIFFSign.setText(String.format("ASIT:%s", decimalFormat.format(asit)));
+            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.DEASign.setText("");
+        }
+    }
+
+    private String CountUnit(long value){
+        if (value>=10000){
+            double W = value/10000d;
+            if (W>=10000){
+                double Y = W/10000;
+                return String.format("%s亿", decimalFormat.format(Y));
+            }
+            return String.format("%s万", decimalFormat.format(W));
+        }else {
+            return String.valueOf(value);
+        }
     }
 
     @Override

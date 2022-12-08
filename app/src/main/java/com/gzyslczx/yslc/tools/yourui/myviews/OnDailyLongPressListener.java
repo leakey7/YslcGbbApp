@@ -11,4 +11,10 @@ public interface OnDailyLongPressListener {
 
     void onMACDLongPress(double MACD, double DIFF, double DEA);
 
+    void onVOLLongPress(long volume, long money, int color);
+
+    void onBOLLLongPress(double M, double U, double D);
+
+    void onASILongPress(double asi, double asit);
+
 }

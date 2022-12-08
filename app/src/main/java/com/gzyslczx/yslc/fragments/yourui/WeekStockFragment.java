@@ -122,6 +122,21 @@ public class WeekStockFragment extends BaseFragment<DailyStockFragmentBinding> i
     }
 
     @Override
+    public void onVOLLongPress(long volume, long money, int color) {
+
+    }
+
+    @Override
+    public void onBOLLLongPress(double M, double U, double D) {
+
+    }
+
+    @Override
+    public void onASILongPress(double asi, double asit) {
+
+    }
+
+    @Override
     public void onLoadMoreDailyStock() {
         if (mViewBinding.dailyStockLoadMore.getVisibility()== View.GONE) {
             Log.d(getClass().getSimpleName(), "周K加载更多");
