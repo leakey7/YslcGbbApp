@@ -241,15 +241,88 @@ public class DailyStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
             mViewBinding.KSign.setText(String.format("ASI:%s", decimalFormat.format(asi)));
             mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
-            mViewBinding.DSign.setText(String.format("ASIT:%s", decimalFormat.format(asit)));
+            mViewBinding.DSign.setText(String.format("ASIMA:%s", decimalFormat.format(asit)));
             mViewBinding.JSign.setText("");
         }
         if (mViewBinding.BtmSubSetSign.getText().toString().equals("ASI")){
             mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
             mViewBinding.MACDSign.setText(String.format("ASI:%s", decimalFormat.format(asi)));
             mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
-            mViewBinding.DIFFSign.setText(String.format("ASIT:%s", decimalFormat.format(asit)));
+            mViewBinding.DIFFSign.setText(String.format("ASIMA:%s", decimalFormat.format(asit)));
+            mViewBinding.DEASign.setText("");
+        }
+    }
+
+    @Override
+    public void onWRLongPress(double wr14, double wr28) {
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("WR")) {
+            mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.KSign.setText(String.format("WR14:%s", decimalFormat.format(wr14)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DSign.setText(String.format("WR28:%s", decimalFormat.format(wr28)));
+            mViewBinding.JSign.setText("");
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("WR")){
+            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.MACDSign.setText(String.format("WR14:%s", decimalFormat.format(wr14)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DIFFSign.setText(String.format("WR28:%s", decimalFormat.format(wr28)));
+            mViewBinding.DEASign.setText("");
+        }
+    }
+
+    @Override
+    public void onBIASLongPress(double bias6, double bias12, double bias24) {
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("BIAS")) {
+            mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.KSign.setText(String.format("BIAS6:%s", decimalFormat.format(bias6)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DSign.setText(String.format("BIAS12:%s", decimalFormat.format(bias12)));
+            mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.JSign.setText(String.format("BIAS24:%s", decimalFormat.format(bias24)));
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("BIAS")){
+            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.MACDSign.setText(String.format("BIAS6:%s", decimalFormat.format(bias6)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DIFFSign.setText(String.format("BIAS12:%s", decimalFormat.format(bias12)));
             mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.DEASign.setText(String.format("BIAS24:%s", decimalFormat.format(bias24)));
+        }
+    }
+
+    @Override
+    public void onRSILongPress(double rsi6, double rsi12, double rsi24) {
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("RSI")) {
+            mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.KSign.setText(String.format("RSI6:%s", decimalFormat.format(rsi6)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DSign.setText(String.format("RSI12:%s", decimalFormat.format(rsi12)));
+            mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.JSign.setText(String.format("RSI24:%s", decimalFormat.format(rsi24)));
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("RSI")){
+            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.MACDSign.setText(String.format("RSI6:%s", decimalFormat.format(rsi6)));
+            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.DIFFSign.setText(String.format("RSI12:%s", decimalFormat.format(rsi12)));
+            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+            mViewBinding.DEASign.setText(String.format("RSI24:%s", decimalFormat.format(rsi24)));
+        }
+    }
+
+    @Override
+    public void onVRLongPress(double vr) {
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("VR")) {
+            mViewBinding.KSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.KSign.setText(String.format("VR:%s", decimalFormat.format(vr)));
+            mViewBinding.DSign.setText("");
+            mViewBinding.JSign.setText("");
+        }
+        if (mViewBinding.BtmSubSetSign.getText().toString().equals("VR")){
+            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.MACDSign.setText(String.format("VR:%s", decimalFormat.format(vr)));
+            mViewBinding.DIFFSign.setText("");
             mViewBinding.DEASign.setText("");
         }
     }

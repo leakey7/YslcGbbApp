@@ -304,12 +304,33 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     minValue = Math.min(klineMACD.getDIFF(q), minValue);
                 } else if (type == VolumeTypeConstance.Volume){
                     maxValue = kLineList.get(q).getVolume();
-                    minValue = 0;
+                    minValue = kLineList.get(q).getVolume();
                 }else if (type == VolumeTypeConstance.BOLL){
                     maxValue = Math.max(klineBOLL.getMPData(q), klineBOLL.getUPData(q));
                     maxValue = Math.max(maxValue, klineBOLL.getDOWNData(q));
                     minValue = Math.min(klineBOLL.getMPData(q), klineBOLL.getUPData(q));
                     minValue = Math.min(minValue, klineBOLL.getDOWNData(q));
+                }else if (type == VolumeTypeConstance.ASI){
+                    maxValue = Math.max(klineASI.getASIData(q), klineASI.getASIMAData(q));
+                    minValue = Math.min(klineASI.getASIData(q), klineASI.getASIMAData(q));
+                }else if (type == VolumeTypeConstance.WR){
+                    maxValue = Math.max(klineWR.getWR(KlineWR.PARAM_VALUE[0], q), klineWR.getWR(KlineWR.PARAM_VALUE[1], q));
+                    minValue = Math.min(klineWR.getWR(KlineWR.PARAM_VALUE[0], q), klineWR.getWR(KlineWR.PARAM_VALUE[1], q));
+                }else if (type == VolumeTypeConstance.BIAS){
+                    maxValue = Math.max(klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], q), klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], q));
+                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], q));
+
+                    minValue = Math.min(klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], q), klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], q));
+                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], q));
+                }else if (type == VolumeTypeConstance.RSI){
+                    maxValue = Math.max(klineRSI.getRSI(6, q), klineRSI.getRSI(12, q));
+                    maxValue = Math.max(maxValue, klineRSI.getRSI(24, q));
+
+                    minValue = Math.min(klineRSI.getRSI(6, q), klineRSI.getRSI(12, q));
+                    minValue = Math.min(minValue, klineRSI.getRSI(24, q));
+                }else if (type == VolumeTypeConstance.VR){
+                    maxValue = klineVR.getVRData(i);
+                    minValue = klineVR.getVRData(i);
                 }
             } else {
                 if (type == VolumeTypeConstance.KDJ) {
@@ -343,7 +364,32 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     maxValue = Math.max(maxValue, klineASI.getASIMAData(q));
 
                     minValue = Math.min(minValue, klineASI.getASIData(q));
-                    minValue = Math.min(minValue, klineASI.getASIData(q));
+                    minValue = Math.min(minValue, klineASI.getASIMAData(q));
+                }else if (type == VolumeTypeConstance.WR) {
+                    maxValue = Math.max(maxValue, klineWR.getWR(KlineWR.PARAM_VALUE[0], i));
+                    maxValue = Math.max(maxValue, klineWR.getWR(KlineWR.PARAM_VALUE[1], i));
+
+                    minValue = Math.min(minValue, klineWR.getWR(KlineWR.PARAM_VALUE[0], i));
+                    minValue = Math.min(minValue, klineWR.getWR(KlineWR.PARAM_VALUE[1], i));
+                }else if (type == VolumeTypeConstance.BIAS){
+                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i));
+                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], i));
+                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], i));
+
+                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i));
+                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], i));
+                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], i));
+                }else if (type == VolumeTypeConstance.RSI){
+                    maxValue = Math.max(maxValue, klineRSI.getRSI(6, i));
+                    maxValue = Math.max(maxValue, klineRSI.getRSI(12, i));
+                    maxValue = Math.max(maxValue, klineRSI.getRSI(24, i));
+
+                    minValue = Math.min(minValue, klineRSI.getRSI(6, i));
+                    minValue = Math.min(minValue, klineRSI.getRSI(12, i));
+                    minValue = Math.min(minValue, klineRSI.getRSI(24, i));
+                }else if (type == VolumeTypeConstance.VR){
+                    maxValue = Math.max(maxValue, klineVR.getVRData(i));
+                    minValue = Math.min(minValue, klineVR.getVRData(i));
                 }
             }
         }
@@ -465,6 +511,69 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                             LineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(q))), DPaint);
                 }
             }
+        }else if (type == VolumeTypeConstance.BIAS){
+            PrintLogD("绘制BIAS");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                int q = Math.abs(size - i);
+                float right = RightAxis - AveWidthWithInterval * i;
+                float LineOnX = right - HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], q))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], q))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], q))), 1, KPaint);
+                } else {
+                    float lastLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], q))), KPaint);
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], q))), DPaint);
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], q))), JPaint);
+                }
+            }
+        }else if (type == VolumeTypeConstance.RSI){
+            PrintLogD("绘制RSI");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                int q = Math.abs(size - i);
+                float right = RightAxis - AveWidthWithInterval * i;
+                float LineOnX = right - HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(6, q))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(12, q))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(24, q))), 1, KPaint);
+                } else {
+                    float lastLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(6, q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(6, q))), KPaint);
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(12, q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(12, q))), DPaint);
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(24, q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(24, q))), JPaint);
+                }
+            }
+        }else if (type == VolumeTypeConstance.VR){
+            PrintLogD("绘制VR");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                int q = Math.abs(size - i);
+                float right = RightAxis - AveWidthWithInterval * i;
+                float LineOnX = right - HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineVR.getVRData(q))), 1, KPaint);
+                } else {
+                    float lastLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineVR.getVRData(q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineVR.getVRData(q))), KPaint);
+                }
+            }
         }
 
     }
@@ -581,6 +690,93 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                                 nextLineOnX, (float) (AveHeight * (Max - klineASI.getASIData(i + 1))), KPaint);
                         canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(i))),
                                 nextLineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(i + 1))), DPaint);
+                    }
+                }
+            }
+        }else if (type == VolumeTypeConstance.WR){
+            PrintLogD("绘制WR");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[0], i))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[1], i))), 1, DPaint);
+                } else {
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[0], i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[0], i+1))), KPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[1], i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[1], i + 1))), DPaint);
+                    }
+                }
+            }
+        }else if (type == VolumeTypeConstance.BIAS){
+            PrintLogD("绘制BIAS");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], i))), 1, DPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], i))), 1, JPaint);
+                } else {
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i+1))), KPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], i + 1))), DPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], i + 1))), JPaint);
+                    }
+                }
+            }
+        }else if (type == VolumeTypeConstance.RSI){
+            PrintLogD("绘制RSI");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(6, i))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(12, i))), 1, DPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(24, i))), 1, JPaint);
+                } else {
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(6, i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(6, i+1))), KPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(12, i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(12, i + 1))), DPaint);
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(24, i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineRSI.getRSI(24, i + 1))), JPaint);
+                    }
+                }
+            }
+        }else if (type == VolumeTypeConstance.VR){
+            PrintLogD("绘制VR");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+//            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                float left = LeftAxis + AveWidthWithInterval * i;
+                float LineOnX = left + HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineVR.getVRData(i))), 1, KPaint);
+                } else {
+                    if (i<endIndex) {
+                        float nextLineOnX = LineOnX + AveWidthWithInterval;
+                        canvas.drawLine(LineOnX, (float) (AveHeight * (Max - klineVR.getVRData(i))),
+                                nextLineOnX, (float) (AveHeight * (Max - klineVR.getVRData(i+1))), KPaint);
                     }
                 }
             }
@@ -755,6 +951,23 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                 else if (klineASI!=null && type == VolumeTypeConstance.ASI){
                     int i = Math.abs(kLineList.size() - 1 - targetIndex);
                     dailyLongPressListener.onASILongPress(klineASI.getASIData(i), klineASI.getASIMAData(i));
+                }
+                else if (klineWR!=null && type == VolumeTypeConstance.WR){
+                    int i = Math.abs(kLineList.size() - 1 - targetIndex);
+                    dailyLongPressListener.onWRLongPress(klineWR.getWR(KlineWR.PARAM_VALUE[0], i), klineWR.getWR(KlineWR.PARAM_VALUE[1], i));
+                }
+                else if (klineBIAS!=null && type == VolumeTypeConstance.BIAS){
+                    int i = Math.abs(kLineList.size() - 1 - targetIndex);
+                    dailyLongPressListener.onBIASLongPress(klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i),
+                            klineBIAS.getBIAS(klineBIAS.PARAM_VALUE[1], i), klineBIAS.getBIAS(klineBIAS.PARAM_VALUE[2], i));
+                }
+                else if (klineRSI!=null && type == VolumeTypeConstance.RSI){
+                    int i = Math.abs(kLineList.size() - 1 - targetIndex);
+                    dailyLongPressListener.onRSILongPress(klineRSI.getRSI(6, i), klineRSI.getRSI(12, i), klineRSI.getRSI(24, i));
+                }
+                else if (klineVR!=null && type == VolumeTypeConstance.VR){
+                    int i = Math.abs(kLineList.size() - 1 - targetIndex);
+                    dailyLongPressListener.onVRLongPress(klineVR.getVRData(i));
                 }
             }
         }

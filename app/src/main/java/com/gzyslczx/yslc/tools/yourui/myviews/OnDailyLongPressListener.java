@@ -17,4 +17,12 @@ public interface OnDailyLongPressListener {
 
     void onASILongPress(double asi, double asit);
 
+    void onWRLongPress(double wr14, double wr28);
+
+    void onBIASLongPress(double bias6, double bias12, double bias24);
+
+    void onRSILongPress(double rsi6, double rsi12, double rsi24);
+
+    void onVRLongPress(double vr);
+
 }
