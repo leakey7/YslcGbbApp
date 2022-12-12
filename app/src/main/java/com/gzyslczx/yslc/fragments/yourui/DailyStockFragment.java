@@ -36,7 +36,7 @@ import java.text.DecimalFormat;
 public class DailyStockFragment extends BaseFragment<DailyStockFragmentBinding> implements OnDailyLongPressListener, OnDailyStockLoadMoreListener,
         View.OnClickListener, OnItemClickListener {
 
-    private final String TAG = "StockFrag";
+    private final String TAG = "DStockFrag";
 
     private int OFFSET = -1;
     private int COUNT;
@@ -212,7 +212,6 @@ public class DailyStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.DIFFSign.setText(String.format("成交额:%s", CountUnit(money)));
             mViewBinding.DEASign.setText("");
         }
-
     }
 
     @Override

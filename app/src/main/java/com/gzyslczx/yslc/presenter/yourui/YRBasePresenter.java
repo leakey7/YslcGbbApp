@@ -116,9 +116,17 @@ public class YRBasePresenter {
     }
 
     /*
+    * 请求历史分时数据
+    * */
+    public void RequestHistoryTrad(Stock stock, int requestTime){
+        RequestApi.getInstance().loadHistoryTrend(stock, requestTime, null);
+    }
+
+
+    /*
     * 请求Token
     * */
-    public void RequestToke(BaseActivity baseActivity){
+    public void RequestToken(BaseActivity baseActivity){
         ReqToken req = new ReqToken();
         Observable<YRTokenRes> observable = mReqBase.RequestToken(YRConnUnit.ORIGINVALUE, req);
         observable = AddRetryReq(observable, getClass().getSimpleName());

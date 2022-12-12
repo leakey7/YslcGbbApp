@@ -22,12 +22,15 @@ import com.gzyslczx.yslc.databinding.RealPriceExPopBinding;
 import com.gzyslczx.yslc.events.yourui.FiveRangeEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDailyKLineLoadMoreEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDealEvent;
+import com.gzyslczx.yslc.events.yourui.NoticeFiveDayMinuteEvent;
 import com.gzyslczx.yslc.events.yourui.RealTimeEvent;
 import com.gzyslczx.yslc.fragments.yourui.DailyStockFragment;
+import com.gzyslczx.yslc.fragments.yourui.FiveDayMinuteStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.MinuteStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.MonthStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.WeekStockFragment;
 import com.gzyslczx.yslc.presenter.StockMarketPresenter;
+import com.gzyslczx.yslc.tools.DateTool;
 import com.gzyslczx.yslc.tools.DisplayTool;
 import com.gzyslczx.yslc.tools.TransStatusTool;
 import com.gzyslczx.yslc.tools.yourui.CodeTypeTool;
@@ -39,7 +42,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding> implements View.OnClickListener {
@@ -50,6 +56,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     private DecimalFormat decimalFormat;
     private String StockCode = "688339";
     private MinuteStockFragment minuteStockFragment;
+    private FiveDayMinuteStockFragment fiveDayMinuteStockFragment;
     private DailyStockFragment dailyStockFragment;
     private WeekStockFragment weekStockFragment;
     private MonthStockFragment monthStockFragment;
@@ -146,7 +153,21 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                 return;
             }
         }
-
+        if (index==1){
+            //五日分时Fragment
+            FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
+            if (fiveDayMinuteStockFragment==null){
+                fiveDayMinuteStockFragment = new FiveDayMinuteStockFragment();
+                transaction.add(mViewBinding.StockMarketFrame.getId(), fiveDayMinuteStockFragment);
+                transaction.commit();
+                return;
+            }
+            if (fiveDayMinuteStockFragment.isHidden()){
+                transaction.show(fiveDayMinuteStockFragment);
+                transaction.commit();
+                return;
+            }
+        }
         if (index==2){
             //日KFragment
             FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
@@ -204,6 +225,13 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                 if (minuteStockFragment!=null) {
                     minuteTransaction.hide(minuteStockFragment);
                     minuteTransaction.commit();
+                }
+                break;
+            case 1:
+                FragmentTransaction fiveDayMinuteTransaction =  getSupportFragmentManager().beginTransaction();
+                if (fiveDayMinuteStockFragment!=null) {
+                    fiveDayMinuteTransaction.hide(fiveDayMinuteStockFragment);
+                    fiveDayMinuteTransaction.commit();
                 }
                 break;
             case 2:
@@ -353,6 +381,15 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     public void OnNoticeDailyLoadMoreEvent(NoticeDailyKLineLoadMoreEvent event){
         Log.d(getClass().getSimpleName(), "请求更多K线");
         mPresenter.RequestDailyChart(stock, event.getPeriod(), event.getRemitMode(), event.getOffset());
+    }
+
+    /*
+    * 接受到通知五日分时数据
+    * */
+    @Subscribe(threadMode = ThreadMode.ASYNC)
+    public void OnNoticeFiveDayMinuteEvent(NoticeFiveDayMinuteEvent event){
+        Log.d(getClass().getSimpleName(), "请求五日分时数据");
+        mPresenter.RequestHistoryTrend(stock, event.getDate());
     }
 
     @Override

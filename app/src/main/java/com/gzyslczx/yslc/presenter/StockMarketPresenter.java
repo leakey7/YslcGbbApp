@@ -54,4 +54,11 @@ public class StockMarketPresenter {
         YRBasePresenter.Create().RequestTick(TAG, baseActivity, baseFragment, StockName_Code, count, isLoop, second);
     }
 
+    /*
+    * 请求历史分时线
+    * */
+    public void RequestHistoryTrend(Stock stock, int time){
+        YRBasePresenter.Create().RequestHistoryTrad(stock, time);
+    }
+
 }

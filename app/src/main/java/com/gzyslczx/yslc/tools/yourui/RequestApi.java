@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.gzyslczx.yslc.events.yourui.DailyKLineEvent;
+import com.gzyslczx.yslc.events.yourui.FiveDayMinuteEvent;
 import com.gzyslczx.yslc.events.yourui.MinuteDealDetailEvent;
 import com.gzyslczx.yslc.events.yourui.MinuteTrendEvent;
 import com.gzyslczx.yslc.events.yourui.RealTimeEvent;
@@ -906,7 +907,8 @@ public class RequestApi implements IDataApi {
                             }
                         }
                         mTrendExtEntity.setTrendDataModelList(trendDataModelList);
-                        sendMessage(mTrendExtEntity, handler, mAnsLeadData.getDataHead().getType());
+                        EventBus.getDefault().post(new FiveDayMinuteEvent(mTrendExtEntity, mTrendExtEntity.getHistoryTime()));
+//                        sendMessage(mTrendExtEntity, handler, mAnsLeadData.getDataHead().getType());
                     }
 
                 } catch (Exception e) {

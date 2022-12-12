@@ -304,10 +304,11 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     minValue = Math.min(klineMACD.getDIFF(q), minValue);
                 } else if (type == VolumeTypeConstance.Volume){
                     maxValue = kLineList.get(q).getVolume();
-                    minValue = kLineList.get(q).getVolume();
+                    minValue = 0;
                 }else if (type == VolumeTypeConstance.BOLL){
                     maxValue = Math.max(klineBOLL.getMPData(q), klineBOLL.getUPData(q));
                     maxValue = Math.max(maxValue, klineBOLL.getDOWNData(q));
+
                     minValue = Math.min(klineBOLL.getMPData(q), klineBOLL.getUPData(q));
                     minValue = Math.min(minValue, klineBOLL.getDOWNData(q));
                 }else if (type == VolumeTypeConstance.ASI){
@@ -329,8 +330,8 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     minValue = Math.min(klineRSI.getRSI(6, q), klineRSI.getRSI(12, q));
                     minValue = Math.min(minValue, klineRSI.getRSI(24, q));
                 }else if (type == VolumeTypeConstance.VR){
-                    maxValue = klineVR.getVRData(i);
-                    minValue = klineVR.getVRData(i);
+                    maxValue = klineVR.getVRData(q);
+                    minValue = klineVR.getVRData(q);
                 }
             } else {
                 if (type == VolumeTypeConstance.KDJ) {
@@ -366,30 +367,30 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                     minValue = Math.min(minValue, klineASI.getASIData(q));
                     minValue = Math.min(minValue, klineASI.getASIMAData(q));
                 }else if (type == VolumeTypeConstance.WR) {
-                    maxValue = Math.max(maxValue, klineWR.getWR(KlineWR.PARAM_VALUE[0], i));
-                    maxValue = Math.max(maxValue, klineWR.getWR(KlineWR.PARAM_VALUE[1], i));
+                    maxValue = Math.max(maxValue, klineWR.getWR(KlineWR.PARAM_VALUE[0], q));
+                    maxValue = Math.max(maxValue, klineWR.getWR(KlineWR.PARAM_VALUE[1], q));
 
-                    minValue = Math.min(minValue, klineWR.getWR(KlineWR.PARAM_VALUE[0], i));
-                    minValue = Math.min(minValue, klineWR.getWR(KlineWR.PARAM_VALUE[1], i));
+                    minValue = Math.min(minValue, klineWR.getWR(KlineWR.PARAM_VALUE[0], q));
+                    minValue = Math.min(minValue, klineWR.getWR(KlineWR.PARAM_VALUE[1], q));
                 }else if (type == VolumeTypeConstance.BIAS){
-                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i));
-                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], i));
-                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], i));
+                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], q));
+                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], q));
+                    maxValue = Math.max(maxValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], q));
 
-                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], i));
-                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], i));
-                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], i));
+                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[0], q));
+                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[1], q));
+                    minValue = Math.min(minValue, klineBIAS.getBIAS(KlineBIAS.PARAM_VALUE[2], q));
                 }else if (type == VolumeTypeConstance.RSI){
-                    maxValue = Math.max(maxValue, klineRSI.getRSI(6, i));
-                    maxValue = Math.max(maxValue, klineRSI.getRSI(12, i));
-                    maxValue = Math.max(maxValue, klineRSI.getRSI(24, i));
+                    maxValue = Math.max(maxValue, klineRSI.getRSI(6, q));
+                    maxValue = Math.max(maxValue, klineRSI.getRSI(12, q));
+                    maxValue = Math.max(maxValue, klineRSI.getRSI(24, q));
 
-                    minValue = Math.min(minValue, klineRSI.getRSI(6, i));
-                    minValue = Math.min(minValue, klineRSI.getRSI(12, i));
-                    minValue = Math.min(minValue, klineRSI.getRSI(24, i));
+                    minValue = Math.min(minValue, klineRSI.getRSI(6, q));
+                    minValue = Math.min(minValue, klineRSI.getRSI(12, q));
+                    minValue = Math.min(minValue, klineRSI.getRSI(24, q));
                 }else if (type == VolumeTypeConstance.VR){
-                    maxValue = Math.max(maxValue, klineVR.getVRData(i));
-                    minValue = Math.min(minValue, klineVR.getVRData(i));
+                    maxValue = Math.max(maxValue, klineVR.getVRData(q));
+                    minValue = Math.min(minValue, klineVR.getVRData(q));
                 }
             }
         }
