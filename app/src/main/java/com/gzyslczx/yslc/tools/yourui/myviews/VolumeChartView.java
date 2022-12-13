@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.presenter.yourui.YRBasePresenter;
 import com.gzyslczx.yslc.tools.DisplayTool;
+import com.gzyslczx.yslc.tools.yourui.HisTrendExtEntity;
 import com.yourui.sdk.message.kline.KlineASI;
 import com.yourui.sdk.message.kline.KlineBIAS;
 import com.yourui.sdk.message.kline.KlineBOLL;
@@ -38,6 +39,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     private Paint UpPaint, DownPaint, GrayPaint, BlackPaint, DottedPaint, EqualPaint, KPaint, DPaint, JPaint;
     private List<TrendDataModel> dataList;
     private List<StockKLine> kLineList;
+    private HisTrendExtEntity hisData1, hisData2, hisData3, hisData4, hisData5;
     private KlineKDJ klineKDJ;
     private KlineMACD klineMACD;
     private KlineVOL klineVOL;
@@ -50,6 +52,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     private float DefItemSize = 241; //默认数据量
     private long MaxValue = 0;
     private float YesterdayPrice = -1;
+    private boolean IsFiveDayMinute = false; //五日分时类型
     private int type; //图类型
     private float IndicateLineX, IndicateLineY; //指示线（X,Y）
     private boolean isLongPress = false;
@@ -105,125 +108,167 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
         float leftOnXAxis = 0; //左端坐标X点
         float rightOnXAxis = leftOnXAxis + getMeasuredWidth(); //右端坐标X点
         float btmOnYAxis = topOnYAxis + getMeasuredHeight(); //底部坐标Y点
-        //计算相关宽度和X轴坐标
-        float quarterWidth = getMeasuredWidth() / 4f; //View宽度的四分一
-        float quarterWidthOnX = leftOnXAxis + quarterWidth; //四分之一宽度X坐标点
-        float halfWidthOnX = leftOnXAxis + quarterWidth * 2f; //二分之一宽度X坐标点
-        float threeQuarterWidthOnX = leftOnXAxis + quarterWidth * 3f; //四分之三宽度X坐标点
-        //计算相关高度和Y轴坐标
-        float quarterHeight = (btmOnYAxis - topOnYAxis) / 4f; //View高度的四分一
-        float halfHeightOnY = topOnYAxis + quarterHeight * 2f; //二分之一高度Y坐标点
-        //绘制宫格线
-        canvas.drawLine(leftOnXAxis, topOnYAxis, rightOnXAxis, topOnYAxis, GrayPaint); //顶横线
-        if (type != VolumeTypeConstance.MACD) {
-            canvas.drawLine(leftOnXAxis, halfHeightOnY, rightOnXAxis, halfHeightOnY, DottedPaint); //中横线
-        }
-        canvas.drawLine(leftOnXAxis, btmOnYAxis, rightOnXAxis, btmOnYAxis, GrayPaint); //底横线
-        canvas.drawLine(leftOnXAxis, topOnYAxis, leftOnXAxis, btmOnYAxis, GrayPaint); //左竖线
-        canvas.drawLine(quarterWidthOnX, topOnYAxis, quarterWidthOnX, btmOnYAxis, GrayPaint); //一竖线
-        canvas.drawLine(halfWidthOnX, topOnYAxis, halfWidthOnX, btmOnYAxis, GrayPaint); //二竖线
-        canvas.drawLine(threeQuarterWidthOnX, topOnYAxis, threeQuarterWidthOnX, btmOnYAxis, GrayPaint); //三竖线
-        canvas.drawLine(rightOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis, GrayPaint); //右竖线
-        //绘制分时柱状图
-        if (YesterdayPrice != -1) {
-            if (type == VolumeTypeConstance.Volume) {
-                float MaxVolumeOnYAxis = topOnYAxis + DisplayTool.dp2px(getContext(), 10);
-                BlackPaint.setTextAlign(Paint.Align.RIGHT);
-                canvas.drawText(String.format("%s手", MaxValue), rightOnXAxis, MaxVolumeOnYAxis, BlackPaint); //最大价
-                DrawColumnChart(canvas, topOnYAxis, btmOnYAxis, leftOnXAxis); //绘制成交量
-            }
-            DrawIndicateLine(canvas, leftOnXAxis, rightOnXAxis, IndicateLineX, topOnYAxis, btmOnYAxis); //长按指示线
-        }
-        //绘制K线副图
-        if (kLineList != null && kLineList.size() > 0) {
-            PrintLogD(String.format("数据总量：%d", kLineList.size()));
-            float ItemInterval = DisplayTool.dp2px(getContext(), 2); //间隔距离
-            float AveWidthOfItem = (getMeasuredWidth() - ItemInterval * (DefItemSize - 1)) / DefItemSize; //每项平均宽度
-            int scrollIndex;
-            if (isDoublePress) {
-                //缩放时，适配平移距离
-                scrollIndex = markStartIndexOfScale;
-                ScrollSumDis = (AveWidthOfItem + ItemInterval) * scrollIndex;
-                isDoublePress = false;
-            }
-            if (ScrollSumDis < 0) {
-                //阻止右端越界
-                ScrollSumDis = 0;
-            } else {
-                //阻止左端越界
-                float dis;
-                if (kLineList.size() >= DefItemSize) {
-                    dis = (AveWidthOfItem + ItemInterval) * (kLineList.size() - DefItemSize); //可发生的最大滑动距离
-                } else {
-                    dis = (AveWidthOfItem + ItemInterval) * kLineList.size() - ((float) getMeasuredWidth() - AveWidthOfItem); //可发生的最大滑动距离
+        //五日分时
+        if (IsFiveDayMinute){
+            //五天分时
+            //计算相关宽度和X轴坐标
+            float OneInFiveOfWidth = getMeasuredWidth() / 5f; //View宽度的五分一
+            float TwoInFiveOnX = leftOnXAxis + OneInFiveOfWidth * 2f; //二分之一宽度X坐标点
+            float ThreeInFiveOnX = leftOnXAxis + OneInFiveOfWidth * 3f; //三分之五宽度X坐标点
+            float FourInFiveOnX = leftOnXAxis + OneInFiveOfWidth * 4f; //四分之五宽度X坐标点
+            //绘制宫格线
+            canvas.drawLine(leftOnXAxis, topOnYAxis, rightOnXAxis, topOnYAxis, GrayPaint); //顶横线
+            canvas.drawLine(leftOnXAxis, btmOnYAxis, rightOnXAxis, btmOnYAxis, GrayPaint); //底横线
+            canvas.drawLine(leftOnXAxis, topOnYAxis, leftOnXAxis, btmOnYAxis, GrayPaint); //左竖线
+            canvas.drawLine(OneInFiveOfWidth, topOnYAxis, OneInFiveOfWidth, btmOnYAxis, GrayPaint); //一竖线
+            canvas.drawLine(TwoInFiveOnX, topOnYAxis, TwoInFiveOnX, btmOnYAxis, GrayPaint); //二竖线
+            canvas.drawLine(ThreeInFiveOnX, topOnYAxis, ThreeInFiveOnX, btmOnYAxis, GrayPaint); //三竖线
+            canvas.drawLine(FourInFiveOnX, topOnYAxis, FourInFiveOnX, btmOnYAxis, GrayPaint); //四竖线
+            canvas.drawLine(rightOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis, GrayPaint); //右竖线
+            //绘制五日分时柱状图
+            float AveWidthOfItem = OneInFiveOfWidth / DefItemSize; //单位宽度
+            float height = btmOnYAxis - topOnYAxis; //可绘高度
+            float AveHeightOfItem = height / MaxValue; //单位高度
+            float LineStartX = 0; //起始点
+            for (int i=0; i<5; i++) {
+                switch (i){
+                    case 0:
+                        LineStartX = DrawFiveDayVol(canvas, AveWidthOfItem, AveHeightOfItem, btmOnYAxis,  LineStartX, hisData5);
+                        break;
+                    case 1:
+                        LineStartX = DrawFiveDayVol(canvas, AveWidthOfItem, AveHeightOfItem, btmOnYAxis, LineStartX, hisData4);
+                        break;
+                    case 2:
+                        LineStartX = DrawFiveDayVol(canvas, AveWidthOfItem, AveHeightOfItem, btmOnYAxis, LineStartX, hisData3);
+                        break;
+                    case 3:
+                        LineStartX = DrawFiveDayVol(canvas, AveWidthOfItem, AveHeightOfItem, btmOnYAxis, LineStartX, hisData2);
+                        break;
+                    case 4:
+                        LineStartX = DrawFiveDayVol(canvas, AveWidthOfItem, AveHeightOfItem, btmOnYAxis, LineStartX, hisData1);
+                        break;
                 }
-                if (dis > 0 && ScrollSumDis > dis) {
-                    ScrollSumDis = dis;
+            }
+        }else {
+            //计算相关宽度和X轴坐标
+            float quarterWidth = getMeasuredWidth() / 4f; //View宽度的四分一
+            float quarterWidthOnX = leftOnXAxis + quarterWidth; //四分之一宽度X坐标点
+            float halfWidthOnX = leftOnXAxis + quarterWidth * 2f; //二分之一宽度X坐标点
+            float threeQuarterWidthOnX = leftOnXAxis + quarterWidth * 3f; //四分之三宽度X坐标点
+            //计算相关高度和Y轴坐标
+            float quarterHeight = (btmOnYAxis - topOnYAxis) / 4f; //View高度的四分一
+            float halfHeightOnY = topOnYAxis + quarterHeight * 2f; //二分之一高度Y坐标点
+            //绘制宫格线
+            canvas.drawLine(leftOnXAxis, topOnYAxis, rightOnXAxis, topOnYAxis, GrayPaint); //顶横线
+            if (type != VolumeTypeConstance.MACD) {
+                canvas.drawLine(leftOnXAxis, halfHeightOnY, rightOnXAxis, halfHeightOnY, DottedPaint); //中横线
+            }
+            canvas.drawLine(leftOnXAxis, btmOnYAxis, rightOnXAxis, btmOnYAxis, GrayPaint); //底横线
+            canvas.drawLine(leftOnXAxis, topOnYAxis, leftOnXAxis, btmOnYAxis, GrayPaint); //左竖线
+            canvas.drawLine(quarterWidthOnX, topOnYAxis, quarterWidthOnX, btmOnYAxis, GrayPaint); //一竖线
+            canvas.drawLine(halfWidthOnX, topOnYAxis, halfWidthOnX, btmOnYAxis, GrayPaint); //二竖线
+            canvas.drawLine(threeQuarterWidthOnX, topOnYAxis, threeQuarterWidthOnX, btmOnYAxis, GrayPaint); //三竖线
+            canvas.drawLine(rightOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis, GrayPaint); //右竖线
+            //绘制分时柱状图
+            if (YesterdayPrice != -1) {
+                if (type == VolumeTypeConstance.Volume) {
+                    float MaxVolumeOnYAxis = topOnYAxis + DisplayTool.dp2px(getContext(), 10);
+                    BlackPaint.setTextAlign(Paint.Align.RIGHT);
+                    canvas.drawText(String.format("%s手", MaxValue), rightOnXAxis, MaxVolumeOnYAxis, BlackPaint); //最大价
+                    DrawColumnChart(canvas, topOnYAxis, btmOnYAxis, leftOnXAxis); //绘制成交量
+                }
+                DrawIndicateLine(canvas, leftOnXAxis, rightOnXAxis, IndicateLineX, topOnYAxis, btmOnYAxis); //长按指示线
+            }
+            //绘制K线副图
+            if (kLineList != null && kLineList.size() > 0) {
+                PrintLogD(String.format("数据总量：%d", kLineList.size()));
+                float ItemInterval = DisplayTool.dp2px(getContext(), 2); //间隔距离
+                float AveWidthOfItem = (getMeasuredWidth() - ItemInterval * (DefItemSize - 1)) / DefItemSize; //每项平均宽度
+                int scrollIndex;
+                if (isDoublePress) {
+                    //缩放时，适配平移距离
+                    scrollIndex = markStartIndexOfScale;
+                    ScrollSumDis = (AveWidthOfItem + ItemInterval) * scrollIndex;
+                    isDoublePress = false;
+                }
+                if (ScrollSumDis < 0) {
+                    //阻止右端越界
+                    ScrollSumDis = 0;
+                } else {
+                    //阻止左端越界
+                    float dis;
+                    if (kLineList.size() >= DefItemSize) {
+                        dis = (AveWidthOfItem + ItemInterval) * (kLineList.size() - DefItemSize); //可发生的最大滑动距离
+                    } else {
+                        dis = (AveWidthOfItem + ItemInterval) * kLineList.size() - ((float) getMeasuredWidth() - AveWidthOfItem); //可发生的最大滑动距离
+                    }
+                    if (dis > 0 && ScrollSumDis > dis) {
+                        ScrollSumDis = dis;
 //                        if (loadMoreListener!=null && !isLoadMore && !isLoadMoreEnd){
 //                            isLoadMore = true;
 //                            loadMoreListener.onLoadMoreDailyStock(); //通知加载更多
 //                        }
-                } else if (dis < 0) {
-                    ScrollSumDis = 0;
+                    } else if (dis < 0) {
+                        ScrollSumDis = 0;
+                    }
                 }
-            }
-            float Right = rightOnXAxis + ScrollSumDis; //适配平移距离最右侧坐标
-            scrollIndex = Math.round((ScrollSumDis / (AveWidthOfItem + ItemInterval))); //适配平移距离后右侧Index
-            markStartIndexOfScale = scrollIndex; //记录右侧Index，适配缩放
-            int size = kLineList.size() - 1;
-            int endIndex = (int) (scrollIndex + (DefItemSize - 1)); //适配平移距离后左侧Index
-            if (endIndex > size) {
-                endIndex = size; //限制Index越界
-            }
-            double[] Max_Min_Dif = CountMaxValueOnDaily(scrollIndex, endIndex); //计算最值
-            float AveHeightOfItem = (float) (getMeasuredHeight() / Max_Min_Dif[2]); //每单位平均高度
+                float Right = rightOnXAxis + ScrollSumDis; //适配平移距离最右侧坐标
+                scrollIndex = Math.round((ScrollSumDis / (AveWidthOfItem + ItemInterval))); //适配平移距离后右侧Index
+                markStartIndexOfScale = scrollIndex; //记录右侧Index，适配缩放
+                int size = kLineList.size() - 1;
+                int endIndex = (int) (scrollIndex + (DefItemSize - 1)); //适配平移距离后左侧Index
+                if (endIndex > size) {
+                    endIndex = size; //限制Index越界
+                }
+                double[] Max_Min_Dif = CountMaxValueOnDaily(scrollIndex, endIndex); //计算最值
+                float AveHeightOfItem = (float) (getMeasuredHeight() / Max_Min_Dif[2]); //每单位平均高度
 //                DrawTime(canvas, endIndex, scrollIndex, leftOnXAxis, rightOnXAxis, btmOnYAxis); //绘制时间
-            if (kLineList.size() >= DefItemSize) {
-                DrawSubOnDaily(canvas, AveWidthOfItem, AveHeightOfItem, Right, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex); //绘制副图
-                if (isLongPress) {
-                    if (IndicateLineX > rightOnXAxis) {
-                        IndicateLineX = rightOnXAxis;
+                if (kLineList.size() >= DefItemSize) {
+                    DrawSubOnDaily(canvas, AveWidthOfItem, AveHeightOfItem, Right, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex); //绘制副图
+                    if (isLongPress) {
+                        if (IndicateLineX > rightOnXAxis) {
+                            IndicateLineX = rightOnXAxis;
+                        }
+                        float limitLeft = rightOnXAxis - AveWidthOfItem - (AveWidthOfItem + ItemInterval) * (endIndex - scrollIndex);
+                        if (IndicateLineX < limitLeft) {
+                            IndicateLineX = limitLeft;
+                        }
+                        if (IndicateLineY < topOnYAxis) {
+                            IndicateLineY = topOnYAxis;
+                        }
+                        if (IndicateLineY > btmOnYAxis) {
+                            IndicateLineY = btmOnYAxis;
+                        }
+                        DrawIndicateLineOnDaily(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis,
+                                AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
                     }
-                    float limitLeft = rightOnXAxis - AveWidthOfItem - (AveWidthOfItem + ItemInterval) * (endIndex - scrollIndex);
-                    if (IndicateLineX < limitLeft) {
-                        IndicateLineX = limitLeft;
-                    }
-                    if (IndicateLineY < topOnYAxis) {
-                        IndicateLineY = topOnYAxis;
-                    }
-                    if (IndicateLineY > btmOnYAxis) {
-                        IndicateLineY = btmOnYAxis;
-                    }
-                    DrawIndicateLineOnDaily(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmOnYAxis,
-                            AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
-                }
 //            else {
 //                    if (longPressListener!=null){
 //                        longPressListener.onDailyLongPress(false, DataList.get(scrollIndex), maEntityList.get(scrollIndex));
 //                    }
 //            }
-            }else {
-                DrawSubOnDailyLess(canvas, AveWidthOfItem, AveHeightOfItem, leftOnXAxis, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex );
-                if (isLongPress){
-                    float right = (AveWidthOfItem+ItemInterval)*kLineList.size()-ItemInterval;
-                    if (IndicateLineX > right){
-                        IndicateLineX = right;
+                } else {
+                    DrawSubOnDailyLess(canvas, AveWidthOfItem, AveHeightOfItem, leftOnXAxis, Max_Min_Dif[0], ItemInterval, scrollIndex, endIndex);
+                    if (isLongPress) {
+                        float right = (AveWidthOfItem + ItemInterval) * kLineList.size() - ItemInterval;
+                        if (IndicateLineX > right) {
+                            IndicateLineX = right;
+                        }
+                        if (IndicateLineX < leftOnXAxis) {
+                            IndicateLineX = 0;
+                        }
+                        if (IndicateLineY < topOnYAxis) {
+                            IndicateLineY = topOnYAxis;
+                        }
+                        if (IndicateLineY > btmOnYAxis) {
+                            IndicateLineY = btmOnYAxis;
+                        }
+                        DrawIndicateLineOnDaily(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, right, btmOnYAxis,
+                                AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
                     }
-                    if (IndicateLineX < leftOnXAxis){
-                        IndicateLineX = 0;
-                    }
-                    if (IndicateLineY < topOnYAxis) {
-                        IndicateLineY = topOnYAxis;
-                    }
-                    if (IndicateLineY > btmOnYAxis) {
-                        IndicateLineY = btmOnYAxis;
-                    }
-                    DrawIndicateLineOnDaily(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, right, btmOnYAxis,
-                            AveWidthOfItem, AveHeightOfItem, ItemInterval, endIndex, btmOnYAxis, Max_Min_Dif[0]); //绘制指示线
                 }
             }
         }
-
     }
 
     /*
@@ -246,7 +291,28 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                 }
             }
         }
-
+    }
+    /*
+     * 绘制五日柱状图
+     * */
+    private float DrawFiveDayVol(Canvas canvas, float aveWidth, float aveHeight, float btmOnAxis, float startX, HisTrendExtEntity entity){
+        float nextStart = startX;
+        if (entity!=null){
+            int sum = entity.getTrendDataModelList().size()-1;
+            for (int i=0; i<=sum; i++){
+                nextStart = startX+aveWidth;
+                if (i==0){
+                    JudgeColumnColor(entity.getPreClosePrice(), entity.getTrendDataModelList().get(i).getPrice(), canvas,
+                            startX, nextStart, btmOnAxis - aveHeight * entity.getTrendDataModelList().get(i).getTradeAmount(), btmOnAxis);
+                }else {
+                    float preX = nextStart;
+                    nextStart = preX+aveWidth;
+                    JudgeColumnColor(entity.getTrendDataModelList().get(i - 1).getPrice(), entity.getTrendDataModelList().get(i).getPrice(), canvas,
+                            preX, nextStart, btmOnAxis - aveHeight * entity.getTrendDataModelList().get(i).getTradeAmount(), btmOnAxis);
+                }
+            }
+        }
+        return nextStart;
     }
 
     /*
@@ -898,6 +964,36 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
         IndicateLineX = moveX;
         IndicateLineY = moveY;
         invalidate();
+    }
+
+    @Override
+    public void FiveDataLink(HisTrendExtEntity... his) {
+        if (hisData1==null) {
+            hisData1 = his[0];
+            CountFiveDayMax(hisData1);
+        }else {
+            if (hisData2==null) {
+                hisData2 = his[1];
+                CountFiveDayMax(hisData2);
+            }else if (hisData3==null){
+                hisData3 = his[2];
+                CountFiveDayMax(hisData3);
+            }else if (hisData4==null){
+                hisData4 = his[3];
+                CountFiveDayMax(hisData4);
+            }else if (hisData5==null){
+                hisData5 = his[4];
+                CountFiveDayMax(hisData5);
+            }
+        }
+        IsFiveDayMinute = true;
+    }
+    private void CountFiveDayMax(HisTrendExtEntity entity){
+        if (entity!=null) {
+            for (int i = 0; i < entity.getTrendDataModelList().size(); i++) {
+                MaxValue = Math.max(MaxValue, entity.getTrendDataModelList().get(i).getTradeAmount());
+            }
+        }
     }
 
     @Override

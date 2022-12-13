@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
+    <com.gzyslczx.yslc.tools.yourui.myviews.MinuteChartView
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:id="@+id/chart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="12dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
