@@ -97,24 +97,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/VolumeSetSign"
         app:layout_constraintLeft_toLeftOf="@id/VolumeSetBg"
-        app:layout_constraintRight_toLeftOf="@id/VolumeSetImg"
+        app:layout_constraintRight_toRightOf="@id/VolumeSetBg"
         app:layout_constraintTop_toTopOf="@id/VolumeSetBg"
         app:layout_constraintBottom_toBottomOf="@id/VolumeSetBg"
         android:textSize="@dimen/s10"
         android:textColor="@color/black_333"
         android:text="成交量"
         android:textStyle="bold"/>
-    <ImageView
-        android:layout_width="@dimen/d8"
-        android:layout_height="@dimen/d8"
-        android:id="@+id/VolumeSetImg"
-        app:layout_constraintLeft_toRightOf="@id/VolumeSetSign"
-        app:layout_constraintRight_toRightOf="@id/VolumeSetBg"
-        app:layout_constraintTop_toTopOf="@id/VolumeSetBg"
-        app:layout_constraintBottom_toBottomOf="@id/VolumeSetBg"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:src="@drawable/moredown"/>
 
     <TextView
         android:layout_width="wrap_content"

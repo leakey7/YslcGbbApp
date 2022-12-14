@@ -149,6 +149,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                         break;
                 }
             }
+            DrawIndicateLine(canvas, leftOnXAxis, rightOnXAxis, IndicateLineX, topOnYAxis, btmOnYAxis); //长按指示线
         }else {
             //计算相关宽度和X轴坐标
             float quarterWidth = getMeasuredWidth() / 4f; //View宽度的四分一
@@ -300,8 +301,8 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
         if (entity!=null){
             int sum = entity.getTrendDataModelList().size()-1;
             for (int i=0; i<=sum; i++){
-                nextStart = startX+aveWidth;
                 if (i==0){
+                    nextStart = startX+aveWidth;
                     JudgeColumnColor(entity.getPreClosePrice(), entity.getTrendDataModelList().get(i).getPrice(), canvas,
                             startX, nextStart, btmOnAxis - aveHeight * entity.getTrendDataModelList().get(i).getTradeAmount(), btmOnAxis);
                 }else {

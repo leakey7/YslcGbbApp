@@ -96,10 +96,19 @@ public class MinuteChartView extends View {
                             minuteVolumeLink.LongPressLink(isLongPress, 0, 0);
                         }
                         if (longPressListener != null) {
-                            int lastIndex = dataList.size() - 1;
-                            double gain = (dataList.get(lastIndex).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
-                            longPressListener.onMinuteLongPress(dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
-                                    gain, false, null, dataList.get(lastIndex).getTradeAmount(), dataList.get(lastIndex - 1).getPrice());
+                            if (!isFiveDay) {
+                                int lastIndex = dataList.size() - 1;
+                                double gain = (dataList.get(lastIndex).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
+                                longPressListener.onMinuteLongPress(dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
+                                        gain, false, null, dataList.get(lastIndex).getTradeAmount(), dataList.get(lastIndex - 1).getPrice());
+                            } else {
+                                int lastIndex = hisData1.getTrendDataModelList().size() - 1;
+                                double gain = (hisData1.getTrendDataModelList().get(lastIndex).getPrice() - hisData1.getPreClosePrice())
+                                        / hisData1.getPreClosePrice() * 100f;
+                                longPressListener.onMinuteLongPress(hisData1.getTrendDataModelList().get(lastIndex).getPrice(),
+                                        hisData1.getTrendDataModelList().get(lastIndex).getAvgPrice(), gain, true, null,
+                                        hisData1.getTrendDataModelList().get(lastIndex).getTradeAmount(), hisData1.getTrendDataModelList().get(lastIndex - 1).getPrice());
+                            }
                         }
                         invalidate();
                         break;
@@ -183,7 +192,7 @@ public class MinuteChartView extends View {
                 canvas.drawText(DownGain.toString(), rightOnXAxis, btmWithoutTimeOnYAxis, DownPaint); //跌幅
                 float AveWidthOfItem = getMeasuredWidth() / DefItemSize;
                 DrawPriceLine(canvas, topOnYAxis, btmWithoutTimeOnYAxis, AveWidthOfItem); //绘制折线
-                DrawIndicateLine(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmWithoutTimeOnYAxis, AveWidthOfItem); //长按指示线
+                DrawIndicateLine(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmWithoutTimeOnYAxis, AveWidthOfItem, 0, 0, 0, 0); //长按指示线
             }
         } else {
             //五天分时
@@ -227,8 +236,8 @@ public class MinuteChartView extends View {
             float height = btmWithoutTimeOnYAxis - topOnYAxis; //可绘高度
             float AveHeightOfItem = height / (MaxValue - MinValue); //单位高度
             float LineStartX = AveWidthOfItem / 2f; //起始点
-            for (int i=0; i<5; i++) {
-                switch (i){
+            for (int i = 0; i < 5; i++) {
+                switch (i) {
                     case 0:
                         LineStartX = DrawFiveDayPriceLine(canvas, AveWidthOfItem, AveHeightOfItem, LineStartX, hisData5);
                         break;
@@ -246,6 +255,8 @@ public class MinuteChartView extends View {
                         break;
                 }
             }
+            DrawIndicateLine(canvas, IndicateLineX, IndicateLineY, leftOnXAxis, topOnYAxis, rightOnXAxis, btmWithoutTimeOnYAxis, AveWidthOfItem,
+                    OneInFiveOfWidth, TwoInFiveOnX, ThreeInFiveOnX, FourInFiveOnX); //长按指示线
         }
     }
 
@@ -283,23 +294,23 @@ public class MinuteChartView extends View {
     }
 
     /*
-    * 绘制五日实价-均价线
-    * */
-    private float DrawFiveDayPriceLine(Canvas canvas, float aveWidth, float aveHeight, float startX, HisTrendExtEntity entity){
+     * 绘制五日实价-均价线
+     * */
+    private float DrawFiveDayPriceLine(Canvas canvas, float aveWidth, float aveHeight, float startX, HisTrendExtEntity entity) {
         float nextStart = startX;
-        if (entity!=null){
-            int sum = entity.getTrendDataModelList().size()-1;
-            for (int i=0; i<=sum; i++){
-                if (i==0){
+        if (entity != null) {
+            int sum = entity.getTrendDataModelList().size() - 1;
+            for (int i = 0; i <= sum; i++) {
+                if (i == 0) {
                     float realDif = MaxValue - entity.getTrendDataModelList().get(i).getPrice();
                     canvas.drawCircle(startX, aveHeight * realDif, 1, RealPricePaint); //实价起始点
                     float aveDif = MaxValue - entity.getTrendDataModelList().get(i).getAvgPrice();
                     canvas.drawCircle(startX, aveHeight * aveDif, 1, AvePricePaint); //均价起始点
-                }else {
+                } else {
                     float realDifPre = MaxValue - entity.getTrendDataModelList().get(i - 1).getPrice();
                     float realDif = MaxValue - entity.getTrendDataModelList().get(i).getPrice();
-                    float preX= nextStart;
-                    nextStart = preX+aveWidth;
+                    float preX = nextStart;
+                    nextStart = preX + aveWidth;
                     canvas.drawLine(preX, aveHeight * realDifPre, nextStart, aveHeight * realDif, RealPricePaint); //实价折线
                     float aveDifPre = MaxValue - entity.getTrendDataModelList().get(i - 1).getAvgPrice();
                     float aveDif = MaxValue - entity.getTrendDataModelList().get(i).getAvgPrice();
@@ -313,36 +324,101 @@ public class MinuteChartView extends View {
     /*
      * 绘制指示线
      * */
-    private void DrawIndicateLine(Canvas canvas, float indicateLineX, float indicateLineY, float left, float top, float right, float btm, float aveW) {
+    private void DrawIndicateLine(Canvas canvas, float indicateLineX, float indicateLineY, float left, float top, float right, float btm, float aveW,
+                                  float oneInFive, float twoInFive, float threeInFive, float fourInFive) {
         if (enableLongPress && isLongPress) {
-            if (indicateLineX <= left) {
-                canvas.drawLine(left, top, left, btm, BlackPaint); //限制越左边界指示竖线
-                if (longPressListener != null) {
-                    double gain = (dataList.get(0).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
-                    longPressListener.onMinuteLongPress(dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
-                            gain, true, dataList.get(0).getTime(), dataList.get(0).getTradeAmount(), YesterdayPrice);
+            if (isFiveDay){
+                if (indicateLineX <= left){
+                    canvas.drawLine(left, top, left, btm, BlackPaint); //限制越左边界指示竖线
+                    if (longPressListener!=null){
+                        double gain = (hisData5.getTrendDataModelList().get(0).getPrice() - hisData5.getPreClosePrice()) / hisData5.getPreClosePrice() * 100f;
+                        longPressListener.onMinuteLongPress(hisData5.getTrendDataModelList().get(0).getPrice(), hisData5.getTrendDataModelList().get(0).getAvgPrice(),
+                                gain, true, hisData5.getTrendDataModelList().get(0).getTime(), hisData5.getTrendDataModelList().get(0).getTradeAmount(), YesterdayPrice);
+                    }
+                }else if (indicateLineX >= right){
+                    canvas.drawLine(right, top, right, btm, BlackPaint); //限制越右边界指示竖线
+                    if (longPressListener != null) {
+                        int lastIndex = hisData1.getTrendDataModelList().size() - 1;
+                        double gain = (hisData1.getTrendDataModelList().get(lastIndex).getPrice() - hisData1.getPreClosePrice()) / hisData1.getPreClosePrice() * 100f;
+                        longPressListener.onMinuteLongPress(hisData1.getTrendDataModelList().get(lastIndex).getPrice(), hisData1.getTrendDataModelList().get(lastIndex).getAvgPrice(),
+                                gain, true, hisData1.getTrendDataModelList().get(lastIndex).getTime(), hisData1.getTrendDataModelList().get(lastIndex).getTradeAmount(),
+                                hisData1.getTrendDataModelList().get(lastIndex - 1).getPrice());
+                    }
+                }else {
+                    HisTrendExtEntity hisTrendExtEntity = null;
+                    int sum = (hisData5==null?0:hisData5.getTrendDataModelList().size()) + (hisData4==null?0:hisData4.getTrendDataModelList().size())
+                            + (hisData3==null?0:hisData3.getTrendDataModelList().size()) + (hisData2==null?0:hisData2.getTrendDataModelList().size())
+                            + (hisData1==null?0:hisData1.getTrendDataModelList().size());
+                    int index = 0;
+                    if (indicateLineX <= oneInFive){
+                        hisTrendExtEntity = hisData5;
+                        index = (int) (indicateLineX / aveW);
+                    }
+                    else if (indicateLineX <= twoInFive){
+                        hisTrendExtEntity = hisData4;
+                        index = (int) ((indicateLineX-oneInFive) / aveW);
+                    }
+                    else if (indicateLineX <= threeInFive){
+                        hisTrendExtEntity = hisData3;
+                        index = (int) ((indicateLineX-twoInFive) / aveW);
+                    }
+                    else if (indicateLineX <= fourInFive){
+                        hisTrendExtEntity = hisData4;
+                        index = (int) ((indicateLineX-threeInFive) / aveW);
+                    }
+                    else if (indicateLineX <= right){
+                        hisTrendExtEntity = hisData5;
+                        index = (int) ((indicateLineX-fourInFive) / aveW);
+                    }
+                    canvas.drawLine(indicateLineX, top, indicateLineX, btm, BlackPaint); //指示竖线
+                    if (index >= sum) {
+                        return;
+                    }
+                    if (hisTrendExtEntity!=null) {
+                        double gain = (hisTrendExtEntity.getTrendDataModelList().get(index).getPrice() - hisTrendExtEntity.getPreClosePrice()) / hisTrendExtEntity.getPreClosePrice() * 100f;
+                        if (index <= 0) {
+                            longPressListener.onMinuteLongPress(hisTrendExtEntity.getTrendDataModelList().get(0).getPrice(),
+                                    hisTrendExtEntity.getTrendDataModelList().get(0).getAvgPrice(), gain, true,
+                                    hisTrendExtEntity.getTrendDataModelList().get(0).getTime(), hisTrendExtEntity.getTrendDataModelList().get(0).getTradeAmount(), YesterdayPrice);
+                        } else {
+                            longPressListener.onMinuteLongPress(hisTrendExtEntity.getTrendDataModelList().get(index).getPrice(),
+                                    hisTrendExtEntity.getTrendDataModelList().get(index).getAvgPrice(), gain, true,
+                                    hisTrendExtEntity.getTrendDataModelList().get(index).getTime(),
+                                    hisTrendExtEntity.getTrendDataModelList().get(index).getTradeAmount(),
+                                    hisTrendExtEntity.getTrendDataModelList().get(index - 1).getPrice());
+                        }
+                    }
                 }
-            } else if (indicateLineX >= right) {
-                canvas.drawLine(right, top, right, btm, BlackPaint); //限制越右边界指示竖线
-                if (longPressListener != null) {
-                    int lastIndex = dataList.size() - 1;
-                    double gain = (dataList.get(lastIndex).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
-                    longPressListener.onMinuteLongPress(dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
-                            gain, true, dataList.get(lastIndex).getTime(), dataList.get(lastIndex).getTradeAmount(), dataList.get(lastIndex - 1).getPrice());
-                }
-            } else {
-                int index = (int) (indicateLineX / aveW);
-                canvas.drawLine(indicateLineX, top, indicateLineX, btm, BlackPaint); //指示竖线
-                if (index >= dataList.size()) {
-                    return;
-                }
-                double gain = (dataList.get(index).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
-                if (index <= 0) {
-                    longPressListener.onMinuteLongPress(dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
-                            gain, true, dataList.get(0).getTime(), dataList.get(0).getTradeAmount(), YesterdayPrice);
+            }else {
+                if (indicateLineX <= left) {
+                    canvas.drawLine(left, top, left, btm, BlackPaint); //限制越左边界指示竖线
+                    if (longPressListener != null) {
+                        double gain = (dataList.get(0).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
+                        longPressListener.onMinuteLongPress(dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
+                                gain, true, dataList.get(0).getTime(), dataList.get(0).getTradeAmount(), YesterdayPrice);
+                    }
+                } else if (indicateLineX >= right) {
+                    canvas.drawLine(right, top, right, btm, BlackPaint); //限制越右边界指示竖线
+                    if (longPressListener != null) {
+                        int lastIndex = dataList.size() - 1;
+                        double gain = (dataList.get(lastIndex).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
+                        longPressListener.onMinuteLongPress(dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
+                                gain, true, dataList.get(lastIndex).getTime(), dataList.get(lastIndex).getTradeAmount(), dataList.get(lastIndex - 1).getPrice());
+                    }
                 } else {
-                    longPressListener.onMinuteLongPress(dataList.get(index).getPrice(), dataList.get(index).getAvgPrice(),
-                            gain, true, dataList.get(index).getTime(), dataList.get(index).getTradeAmount(), dataList.get(index - 1).getPrice());
+                    int index = (int) (indicateLineX / aveW);
+                    canvas.drawLine(indicateLineX, top, indicateLineX, btm, BlackPaint); //指示竖线
+                    if (index >= dataList.size()) {
+                        return;
+                    }
+                    double gain = (dataList.get(index).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
+                    if (index <= 0) {
+                        longPressListener.onMinuteLongPress(dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
+                                gain, true, dataList.get(0).getTime(), dataList.get(0).getTradeAmount(), YesterdayPrice);
+                    } else {
+                        longPressListener.onMinuteLongPress(dataList.get(index).getPrice(), dataList.get(index).getAvgPrice(),
+                                gain, true, dataList.get(index).getTime(), dataList.get(index).getTradeAmount(), dataList.get(index - 1).getPrice());
+                    }
                 }
             }
             if (indicateLineY <= top) {

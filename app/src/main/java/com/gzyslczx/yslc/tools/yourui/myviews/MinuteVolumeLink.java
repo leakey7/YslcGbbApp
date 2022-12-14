@@ -13,7 +13,7 @@ public interface MinuteVolumeLink {
     //手势长按-滑动联动
     void LongPressLink(boolean isMove, float moveX, float moveY);
 
-    //五日分时数据
+    //五日分时数据联动
     void FiveDataLink(HisTrendExtEntity...his);
 
 }
