@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseChartView">
+        <attr name="VerticalDivideLineNum" format="integer" /> //竖分割线数
+        <attr name="HorizontalDivideLineNum" format="integer" />  //横分割线数
+        <attr name="VerticalCenterDotted" format="boolean" />  //中竖线为虚线
+        <attr name="HorizontalCenterDotted" format="boolean" /> //中横线为虚线
+        <attr name="DottedLineColor" format="color" /> //虚线颜色
+        <attr name="XAxisItemHeight" format="dimension" /> //横坐标轴标识高度
+        <attr name="XAxisItemTextSize" format="dimension" /> //横坐标轴标识字体大小
+    </declare-styleable>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DefaultStockChart">
+        <item name="VerticalDivideLineNum">0</item>
+        <item name="HorizontalDivideLineNum">0</item>
+        <item name="VerticalCenterDotted">false</item>
+        <item name="HorizontalCenterDotted">false</item>
+        <attr name="DottedLineColor">#e2e2e2</attr>
+        <attr name="XAxisItemHeight">20dp</attr>
+        <attr name="XAxisItemTextSize">14sp</attr>
+    </style>
+</resources>

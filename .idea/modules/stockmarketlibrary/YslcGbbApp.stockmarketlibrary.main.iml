@@ -36,6 +36,7 @@
     <content url="file://$MODULE_DIR$/../../../stockmarketlibrary/src/debug" />
     <content url="file://$MODULE_DIR$/../../../stockmarketlibrary/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../stockmarketlibrary/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../stockmarketlibrary/src/main/res" type="java-resource" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 32 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
