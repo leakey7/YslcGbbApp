@@ -3,6 +3,7 @@
     <declare-styleable name="BaseChartView">
         <attr name="VerticalDivideLineNum" format="integer" /> //竖分割线数
         <attr name="HorizontalDivideLineNum" format="integer" />  //横分割线数
+        <attr name="DivideLineColor" format="color" /> //分割实线颜色
         <attr name="VerticalCenterDotted" format="boolean" />  //中竖线为虚线
         <attr name="HorizontalCenterDotted" format="boolean" /> //中横线为虚线
         <attr name="DottedLineColor" format="color" /> //虚线颜色
