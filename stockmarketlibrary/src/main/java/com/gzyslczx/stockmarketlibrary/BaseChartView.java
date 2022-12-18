@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 
 public abstract class BaseChartView extends View {
 
-    private int HorDivLineNum = 0;//横分割实线数
-    private int VerDivLineNum = 0;//竖分割实线数
+    private int HorDivLineNum;//横分割实线数
+    private int VerDivLineNum;//竖分割实线数
     private boolean HorCenterDotted = false;//横中线虚线
     private boolean VerCenterDotted = false;//竖中线虚线
     private int DivideLineColor;//分割实线颜色
@@ -22,7 +22,11 @@ public abstract class BaseChartView extends View {
     private float XAxisItemHeight;//X轴标识区高度
     private float XAxisItemTextSize;//X轴标识字体大小
     private String[] XAxisItemText;
-    private float BtmLineOnX;
+    private float BtmLineOnX;//底轴X坐标
+    private float AveWidthOfArea;//分割区域平均宽度
+    private float AveHeightOfArea;//分割区域平均高度
+    private float CenterOnX;//中轴线X坐标
+    private float CenterOnY;//中轴线Y坐标
     private Paint DividePaint, DottedPaint;
 
     public BaseChartView(Context context) {
@@ -40,9 +44,9 @@ public abstract class BaseChartView extends View {
         DottedColor = typedArray.getColor(R.styleable.BaseChartView_DottedLineColor, Color.GRAY);
         XAxisItemHeight = typedArray.getDimension(R.styleable.BaseChartView_XAxisItemHeight, dp2px(context, 20));
         XAxisItemTextSize = typedArray.getDimension(R.styleable.BaseChartView_XAxisItemTextSize, sp2px(context, 14));
+        InitViewAttr(typedArray);
         InitDividePaint();
         InitDottedPaint();
-        InitViewAttr(typedArray);
         typedArray.recycle();
     }
 
@@ -61,14 +65,20 @@ public abstract class BaseChartView extends View {
         DrawChart(canvas);
     }
 
-    private void InitDividePaint(){
+    /*
+     * 初始化实线分割线笔
+     * */
+    private void InitDividePaint() {
         DividePaint = new Paint();
         DividePaint.setColor(DivideLineColor);
         DividePaint.setStyle(Paint.Style.FILL);
         DividePaint.setStrokeWidth(2);
     }
 
-    private void InitDottedPaint(){
+    /*
+     * 初始化虚线分割线笔
+     * */
+    private void InitDottedPaint() {
         DottedPaint = new Paint();
         DottedPaint.setPathEffect(new DashPathEffect(new float[]{8, 8}, 0));
         DottedPaint.setStyle(Paint.Style.STROKE);
@@ -76,39 +86,101 @@ public abstract class BaseChartView extends View {
     }
 
     /*
-    * 初始绘图
-    * */
-    private void InitDraw(Canvas canvas){
-        if (XAxisItemHeight>0){
-            BtmLineOnX = getMeasuredHeight()-XAxisItemHeight;
-        }
+     * 初始绘图
+     * */
+    private void InitDraw(Canvas canvas) {
+        BtmLineOnX = getMeasuredHeight() - XAxisItemHeight;
         canvas.drawRect(0, 0, 0, BtmLineOnX, DividePaint); //边框
-        if (VerDivLineNum>0){
-            float aveDivideWidth = getMeasuredWidth() / (float)VerDivLineNum;
-            if (VerDivLineNum%2==0){
-                if (VerCenterDotted){
-                    float center = getMeasuredWidth()/2f;
-                    canvas.drawLine(center, 0, center, BtmLineOnX, DottedPaint);
-                }
-            }else{
-                if (VerCenterDotted){
-
+        AveWidthOfArea = getMeasuredWidth() / (VerDivLineNum + 1f); //实线分割区域平均宽度
+        CenterOnX = getMeasuredWidth() / 2f; //竖中轴线X坐标
+        if (VerCenterDotted) {
+            //中轴竖虚线分割线
+            canvas.drawLine(CenterOnX, 0, CenterOnX, BtmLineOnX, DottedPaint);
+        }
+        //竖分割实线条数大于0
+        if (VerDivLineNum > 0) {
+            if (VerDivLineNum == 1 && !VerCenterDotted) {
+                //中间竖实线分割线
+                canvas.drawLine(CenterOnX, 0, CenterOnX, BtmLineOnX, DividePaint);
+            } else {
+                //分割线数大于1
+                if (VerDivLineNum % 2 == 0) {
+                    //偶数分割线
+                    for (int i = 1; i <= VerDivLineNum; i++) {
+                        //实线分割线
+                        canvas.drawLine(AveWidthOfArea * i, 0, AveWidthOfArea * i, BtmLineOnX, DividePaint);
+                    }
+                } else {
+                    //奇数分割线
+                    if (VerCenterDotted) {
+                        //中轴线分割线为虚线
+                        int centerIndex = (VerDivLineNum + 1) / 2;
+                        for (int i = 1; i <= VerDivLineNum; i++) {
+                            //实线分割线
+                            if (i != centerIndex) {
+                                canvas.drawLine(AveWidthOfArea * i, 0, AveWidthOfArea * i, BtmLineOnX, DividePaint);
+                            }
+                        }
+                    } else {
+                        //中轴线分割线为实线
+                        for (int i = 1; i <= VerDivLineNum; i++) {
+                            //实线分割线
+                            canvas.drawLine(AveWidthOfArea * i, 0, AveWidthOfArea * i, BtmLineOnX, DividePaint);
+                        }
+                    }
                 }
             }
+        } //竖分割实线
+        AveHeightOfArea = getMeasuredHeight() / (HorDivLineNum + 1f); //实线分割区域平均高度
+        CenterOnY = getMeasuredHeight() / 2f; //横中轴线Y坐标
+        if (HorCenterDotted) {
+            //中轴横虚线分割线
+            canvas.drawLine(0, CenterOnY, getMeasuredWidth(), CenterOnY, DottedPaint);
         }
-        if (HorDivLineNum>0){
-
-        }
+        //横分割实线条数大于0
+        if (HorDivLineNum > 0) {
+            if (HorDivLineNum == 1 && !HorCenterDotted) {
+                //中间横实线分割线
+                canvas.drawLine(0, CenterOnY, getMeasuredWidth(), CenterOnY, DividePaint);
+            } else {
+                //分割线数大于1
+                if (HorDivLineNum % 2 == 0) {
+                    //偶数分割线
+                    for (int i = 1; i <= HorDivLineNum; i++) {
+                        //实线分割线
+                        canvas.drawLine(0, AveHeightOfArea * i, getMeasuredWidth(), AveHeightOfArea * i, DividePaint);
+                    }
+                } else {
+                    //奇数分割线
+                    if (HorCenterDotted) {
+                        //中轴线分割线为虚线
+                        int centerIndex = (HorDivLineNum + 1) / 2;
+                        for (int i = 1; i <= HorDivLineNum; i++) {
+                            //实线分割线
+                            if (i != centerIndex) {
+                                canvas.drawLine(0, AveHeightOfArea * i, getMeasuredWidth(), AveHeightOfArea * i, DividePaint);
+                            }
+                        }
+                    } else {
+                        //中轴线分割线为实线
+                        for (int i = 1; i <= HorDivLineNum; i++) {
+                            //实线分割线
+                            canvas.drawLine(0, AveHeightOfArea * i, getMeasuredWidth(), AveHeightOfArea * i, DividePaint);
+                        }
+                    }
+                }
+            }
+        } //横分割实线
     }
 
     /*
-    * 绘图函数
-    * */
+     * 绘图函数
+     * */
     abstract void DrawChart(Canvas canvas);
 
     /*
-    * 初始化
-    * */
+     * 初始化
+     * */
     abstract void InitViewAttr(TypedArray typedArray);
 
     private float getDensity(Context context) {
@@ -205,5 +277,21 @@ public abstract class BaseChartView extends View {
 
     public void setBtmLineOnX(float btmLineOnX) {
         BtmLineOnX = btmLineOnX;
+    }
+
+    public float getAveWidthOfArea() {
+        return AveWidthOfArea;
+    }
+
+    public float getAveHeightOfArea() {
+        return AveHeightOfArea;
+    }
+
+    public float getCenterOnX() {
+        return CenterOnX;
+    }
+
+    public float getCenterOnY() {
+        return CenterOnY;
     }
 }

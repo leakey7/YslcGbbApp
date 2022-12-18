@@ -4,6 +4,7 @@ public class Line <T>{
 
     private float XPoint;
     private float YPoint;
+    private float YValue;
     private T Data;
     private int Color;
 
@@ -42,5 +43,13 @@ public class Line <T>{
 
     public void setColor(int color) {
         Color = color;
+    }
+
+    public float getYValue() {
+        return YValue;
+    }
+
+    public void setYValue(float YValue) {
+        this.YValue = YValue;
     }
 }

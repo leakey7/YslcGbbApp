@@ -7,12 +7,17 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MinuteChartView extends BaseChartView{
 
     private List<Line> mLines; //折线数据
     private float DefItemSize = 241; //默认数据量
+
+    private float AveWidth; //子项平均宽度
+    private float AveHeight; //子项平均高度
+    private float MaxValue=Float.MIN_VALUE, MinValue=Float.MAX_VALUE; //子项最大值和最小值
 
     public MinuteChartView(Context context) {
         super(context);
@@ -33,6 +38,8 @@ public class MinuteChartView extends BaseChartView{
 
     @Override
     void DrawChart(Canvas canvas) {
+        AveWidth = getMeasuredWidth() / DefItemSize;
+        AveHeight = getBtmLineOnX() / (MaxValue - MinValue);
         if (mLines!=null && mLines.size()>0){
 
         }
@@ -51,4 +58,25 @@ public class MinuteChartView extends BaseChartView{
     public void setItemSize(float ItemSize) {
         DefItemSize = ItemSize;
     }
+
+    public void AddLineData(Line line){
+        if (mLines==null){
+            mLines = new ArrayList<Line>();
+        }
+        MaxValue = Math.max(MaxValue, line.getYValue());
+        MinValue = Math.min(MinValue, line.getYValue());
+        mLines.add(line);
+    }
+
+    public void AddLineData(List<Line> lineList){
+        if (mLines==null){
+            mLines = new ArrayList<Line>();
+        }
+        for (int i=0; i<lineList.size(); i++) {
+            MaxValue = Math.max(MaxValue, lineList.get(i).getYValue());
+            MinValue = Math.min(MinValue, lineList.get(i).getYValue());
+            mLines.add(lineList.get(i));
+        }
+    }
+
 }
