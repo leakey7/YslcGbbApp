@@ -1,11 +1,17 @@
 package com.gzyslczx.stockmarketlibrary;
 
-public class IPoint<T> {
+import androidx.annotation.NonNull;
+
+public class IPoint<T> extends IPoint<Object> {
 
     private float XValue;
     private float YValue;
     private T ExtraData;
 
+
+    public IPoint(@NonNull T extraData) {
+        ExtraData = extraData;
+    }
 
     public float getXValue() {
         return XValue;
@@ -27,7 +33,4 @@ public class IPoint<T> {
         return ExtraData;
     }
 
-    public void setExtraData(T extraData) {
-        ExtraData = extraData;
-    }
 }

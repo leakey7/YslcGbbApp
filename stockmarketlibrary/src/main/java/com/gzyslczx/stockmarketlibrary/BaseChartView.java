@@ -28,6 +28,7 @@ public abstract class BaseChartView extends View {
     private float CenterOnX;//中轴线X坐标
     private float CenterOnY;//中轴线Y坐标
     private Paint DividePaint, DottedPaint;
+    private LineAdapter lineAdapter;
 
     public BaseChartView(Context context) {
         super(context);
@@ -293,5 +294,13 @@ public abstract class BaseChartView extends View {
 
     public float getCenterOnY() {
         return CenterOnY;
+    }
+
+    public LineAdapter getLineAdapter() {
+        return lineAdapter;
+    }
+
+    public void setLineAdapter(LineAdapter lineAdapter) {
+        this.lineAdapter = lineAdapter;
     }
 }

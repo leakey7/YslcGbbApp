@@ -3,6 +3,7 @@ package com.gzyslczx.stockmarketlibrary;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
@@ -14,7 +15,8 @@ public class MinuteChartView extends BaseChartView{
 
     private float AveWidth; //子项平均宽度
     private float AveHeight; //子项平均高度
-    private float MaxValue=Float.MIN_VALUE, MinValue=Float.MAX_VALUE; //子项最大值和最小值
+
+    private Paint paint;
 
     public MinuteChartView(Context context) {
         super(context);
@@ -35,14 +37,21 @@ public class MinuteChartView extends BaseChartView{
 
     @Override
     void DrawChart(Canvas canvas) {
-        AveWidth = getMeasuredWidth() / DefItemSize;
-        AveHeight = getBtmLineOnX() / (MaxValue - MinValue);
+        AveWidth = getMeasuredWidth() / DefItemSize; //平均宽度度
+        //折线适配器
+        if (getLineAdapter()!=null && getLineAdapter().getPointList().size()>0) {
+            //折线适配器存在点集合
+            AveHeight = getBtmLineOnX() / (getLineAdapter().getMaxValue() - getLineAdapter().getMinValue()); //平均高度
+        }
+
 
     }
 
     @Override
     void InitViewAttr(TypedArray typedArray) {
-
+        paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(2f);
     }
 
 
