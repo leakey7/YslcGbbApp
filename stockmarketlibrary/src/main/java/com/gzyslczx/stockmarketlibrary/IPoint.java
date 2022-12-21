@@ -2,7 +2,7 @@ package com.gzyslczx.stockmarketlibrary;
 
 import androidx.annotation.NonNull;
 
-public class IPoint<T> extends IPoint<Object> {
+public class IPoint<T>  {
 
     private float XValue;
     private float YValue;

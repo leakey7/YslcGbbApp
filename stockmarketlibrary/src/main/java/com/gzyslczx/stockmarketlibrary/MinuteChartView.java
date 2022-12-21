@@ -39,10 +39,7 @@ public class MinuteChartView extends BaseChartView{
     void DrawChart(Canvas canvas) {
         AveWidth = getMeasuredWidth() / DefItemSize; //平均宽度度
         //折线适配器
-        if (getLineAdapter()!=null && getLineAdapter().getPointList().size()>0) {
-            //折线适配器存在点集合
-            AveHeight = getBtmLineOnX() / (getLineAdapter().getMaxValue() - getLineAdapter().getMinValue()); //平均高度
-        }
+
 
 
     }
