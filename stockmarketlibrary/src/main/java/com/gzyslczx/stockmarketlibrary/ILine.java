@@ -1,0 +1,100 @@
+package com.gzyslczx.stockmarketlibrary;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ILine {
+
+    private List<IPoint<?>> line;
+    private float MaxValue=Float.MIN_VALUE, MinValue=Float.MAX_VALUE;
+    private int color;
+    private String tag;
+
+    public ILine(@NonNull String tag, @ColorInt int color) {
+        this.line = new ArrayList<>();
+        this.tag = tag;
+        this.color = color;
+    }
+
+    /*
+    * 重置线段
+    * */
+    public void SetLine(List<IPoint<?>> iPointList){
+        this.line.clear();
+        this.line.addAll(iPointList);
+        CountMaxAndMinValue(0, this.line.size());
+    }
+
+    /*
+    * 加点
+    * */
+    public void AddPoint(IPoint<?> iPoint){
+        this.line.add(iPoint);
+        CountMaxAndMinValue(this.line.size()-1, this.line.size());
+    }
+
+    /*
+    * 加线段
+    * */
+    public void AddLine(List<IPoint<?>> iPointList){
+        int start = this.line.size();
+        this.line.addAll(iPointList);
+        CountMaxAndMinValue(start, this.line.size());
+    }
+
+    /*
+    * 获取点
+    * */
+    public IPoint GetPoint(int i){
+        if (i<0){
+            return null;
+        }
+        return line.size()>i ? line.get(i) : null;
+    }
+
+    /*
+    * 计算最大值和最小值
+    * */
+    public boolean CountMaxAndMinValue(int start, int end){
+        if (start>=0 && start<=end && end<=this.line.size()) {
+            for (int i = start; i < end; i++) {
+                MaxValue = Math.max(MaxValue, line.get(i).getYValue());
+                MinValue = Math.min(MinValue, line.get(i).getYValue());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public List<IPoint<?>> getLine() {
+        return line;
+    }
+
+    public float getMaxValue() {
+        return MaxValue;
+    }
+
+    public float getMinValue() {
+        return MinValue;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(@ColorInt int color) {
+        this.color = color;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+}

@@ -9,8 +9,9 @@ public class IPoint<T>  {
     private T ExtraData;
 
 
-    public IPoint(@NonNull T extraData) {
+    public IPoint(@NonNull T extraData, @NonNull float yValue) {
         ExtraData = extraData;
+        YValue = yValue;
     }
 
     public float getXValue() {

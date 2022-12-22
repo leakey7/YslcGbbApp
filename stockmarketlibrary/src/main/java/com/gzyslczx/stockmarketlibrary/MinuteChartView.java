@@ -15,6 +15,7 @@ public class MinuteChartView extends BaseChartView{
 
     private float AveWidth; //子项平均宽度
     private float AveHeight; //子项平均高度
+    private float MaxValue, MinValue;
 
     private Paint paint;
 
@@ -39,7 +40,8 @@ public class MinuteChartView extends BaseChartView{
     void DrawChart(Canvas canvas) {
         AveWidth = getMeasuredWidth() / DefItemSize; //平均宽度度
         //折线适配器
-
+        if (getLineAdapter()!=null){
+        }
 
 
     }
