@@ -1,7 +1,10 @@
 package com.gzyslczx.stockmarketlibrary;
 
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
+import android.graphics.PathDashPathEffect;
+
 import androidx.annotation.ColorInt;
-import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -13,11 +16,16 @@ public class ILine {
     private float MaxValue=Float.MIN_VALUE, MinValue=Float.MAX_VALUE;
     private int color;
     private String tag;
+    private Paint paint;
 
-    public ILine(@NonNull String tag, @ColorInt int color) {
+    public ILine(@NonNull String tag, @ColorInt int lineColor) {
         this.line = new ArrayList<>();
         this.tag = tag;
-        this.color = color;
+        this.color = lineColor;
+        paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(2f);
+        paint.setColor(this.color);
     }
 
     /*
@@ -96,5 +104,21 @@ public class ILine {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+
+    public void setDotted(boolean dotted) {
+        if (dotted){
+            paint.setPathEffect(new DashPathEffect(new float[]{6, 6}, 0));
+        }
+    }
+
+    private void SetLinePaint(Paint.Style style, float width){
+        paint.setStyle(style);
+        paint.setStrokeWidth(width);
+    }
+
+    public Paint getPaint() {
+        return paint;
     }
 }

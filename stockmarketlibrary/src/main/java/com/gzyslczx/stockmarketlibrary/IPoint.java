@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 public class IPoint<T>  {
 
+    private float XPoint, YPoint;
     private float XValue;
     private float YValue;
     private T ExtraData;
@@ -12,6 +13,22 @@ public class IPoint<T>  {
     public IPoint(@NonNull T extraData, @NonNull float yValue) {
         ExtraData = extraData;
         YValue = yValue;
+    }
+
+    public float getXPoint() {
+        return XPoint;
+    }
+
+    public void setXPoint(float XPoint) {
+        this.XPoint = XPoint;
+    }
+
+    public float getYPoint() {
+        return YPoint;
+    }
+
+    public void setYPoint(float YPoint) {
+        this.YPoint = YPoint;
     }
 
     public float getXValue() {
