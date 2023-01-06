@@ -133,6 +133,9 @@ public class DailyKLineChartView extends View {
                 Y1= event.getY(0); //A指Y点
                 X2= event.getX(1); //B指X点
                 Y2= event.getY(1); //B指Y点
+                if (longPressListener!=null){
+                    longPressListener.onCancelLongPress();
+                }
             }else {
                 float x1 = event.getX(0);
                 float y1 = event.getY(0);
@@ -211,6 +214,9 @@ public class DailyKLineChartView extends View {
                             for (DailyVolumeLink link : SubLinkList) {
                                 link.LongPressLink(false, IndicateLineX, IndicateLineY);
                             }
+                        }
+                        if (longPressListener!=null){
+                            longPressListener.onCancelLongPress();
                         }
                         invalidate();
                         break;

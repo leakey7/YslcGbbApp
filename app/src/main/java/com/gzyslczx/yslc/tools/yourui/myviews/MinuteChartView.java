@@ -99,16 +99,17 @@ public class MinuteChartView extends View {
                             if (!isFiveDay) {
                                 int lastIndex = dataList.size() - 1;
                                 double gain = (dataList.get(lastIndex).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
-                                longPressListener.onMinuteLongPress(dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
+                                longPressListener.onMinuteLongPress(YesterdayPrice, dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
                                         gain, false, null, dataList.get(lastIndex).getTradeAmount(), dataList.get(lastIndex - 1).getPrice());
                             } else {
                                 int lastIndex = hisData1.getTrendDataModelList().size() - 1;
                                 double gain = (hisData1.getTrendDataModelList().get(lastIndex).getPrice() - hisData1.getPreClosePrice())
                                         / hisData1.getPreClosePrice() * 100f;
-                                longPressListener.onMinuteLongPress(hisData1.getTrendDataModelList().get(lastIndex).getPrice(),
+                                longPressListener.onMinuteLongPress(hisData1.getPreClosePrice(), hisData1.getTrendDataModelList().get(lastIndex).getPrice(),
                                         hisData1.getTrendDataModelList().get(lastIndex).getAvgPrice(), gain, true, null,
                                         hisData1.getTrendDataModelList().get(lastIndex).getTradeAmount(), hisData1.getTrendDataModelList().get(lastIndex - 1).getPrice());
                             }
+                            longPressListener.onCancelMinuteLongPress();
                         }
                         invalidate();
                         break;
@@ -332,7 +333,7 @@ public class MinuteChartView extends View {
                     canvas.drawLine(left, top, left, btm, BlackPaint); //限制越左边界指示竖线
                     if (longPressListener!=null){
                         double gain = (hisData5.getTrendDataModelList().get(0).getPrice() - hisData5.getPreClosePrice()) / hisData5.getPreClosePrice() * 100f;
-                        longPressListener.onMinuteLongPress(hisData5.getTrendDataModelList().get(0).getPrice(), hisData5.getTrendDataModelList().get(0).getAvgPrice(),
+                        longPressListener.onMinuteLongPress(hisData5.getPreClosePrice(), hisData5.getTrendDataModelList().get(0).getPrice(), hisData5.getTrendDataModelList().get(0).getAvgPrice(),
                                 gain, true, hisData5.getTrendDataModelList().get(0).getTime(), hisData5.getTrendDataModelList().get(0).getTradeAmount(), YesterdayPrice);
                     }
                 }else if (indicateLineX >= right){
@@ -340,7 +341,7 @@ public class MinuteChartView extends View {
                     if (longPressListener != null) {
                         int lastIndex = hisData1.getTrendDataModelList().size() - 1;
                         double gain = (hisData1.getTrendDataModelList().get(lastIndex).getPrice() - hisData1.getPreClosePrice()) / hisData1.getPreClosePrice() * 100f;
-                        longPressListener.onMinuteLongPress(hisData1.getTrendDataModelList().get(lastIndex).getPrice(), hisData1.getTrendDataModelList().get(lastIndex).getAvgPrice(),
+                        longPressListener.onMinuteLongPress(hisData1.getPreClosePrice(), hisData1.getTrendDataModelList().get(lastIndex).getPrice(), hisData1.getTrendDataModelList().get(lastIndex).getAvgPrice(),
                                 gain, true, hisData1.getTrendDataModelList().get(lastIndex).getTime(), hisData1.getTrendDataModelList().get(lastIndex).getTradeAmount(),
                                 hisData1.getTrendDataModelList().get(lastIndex - 1).getPrice());
                     }
@@ -377,11 +378,11 @@ public class MinuteChartView extends View {
                     if (hisTrendExtEntity!=null) {
                         double gain = (hisTrendExtEntity.getTrendDataModelList().get(index).getPrice() - hisTrendExtEntity.getPreClosePrice()) / hisTrendExtEntity.getPreClosePrice() * 100f;
                         if (index <= 0) {
-                            longPressListener.onMinuteLongPress(hisTrendExtEntity.getTrendDataModelList().get(0).getPrice(),
+                            longPressListener.onMinuteLongPress(hisTrendExtEntity.getPreClosePrice(), hisTrendExtEntity.getTrendDataModelList().get(0).getPrice(),
                                     hisTrendExtEntity.getTrendDataModelList().get(0).getAvgPrice(), gain, true,
                                     hisTrendExtEntity.getTrendDataModelList().get(0).getTime(), hisTrendExtEntity.getTrendDataModelList().get(0).getTradeAmount(), YesterdayPrice);
                         } else {
-                            longPressListener.onMinuteLongPress(hisTrendExtEntity.getTrendDataModelList().get(index).getPrice(),
+                            longPressListener.onMinuteLongPress(hisTrendExtEntity.getPreClosePrice(), hisTrendExtEntity.getTrendDataModelList().get(index).getPrice(),
                                     hisTrendExtEntity.getTrendDataModelList().get(index).getAvgPrice(), gain, true,
                                     hisTrendExtEntity.getTrendDataModelList().get(index).getTime(),
                                     hisTrendExtEntity.getTrendDataModelList().get(index).getTradeAmount(),
@@ -394,7 +395,7 @@ public class MinuteChartView extends View {
                     canvas.drawLine(left, top, left, btm, BlackPaint); //限制越左边界指示竖线
                     if (longPressListener != null) {
                         double gain = (dataList.get(0).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
-                        longPressListener.onMinuteLongPress(dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
+                        longPressListener.onMinuteLongPress(YesterdayPrice, dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
                                 gain, true, dataList.get(0).getTime(), dataList.get(0).getTradeAmount(), YesterdayPrice);
                     }
                 } else if (indicateLineX >= right) {
@@ -402,7 +403,7 @@ public class MinuteChartView extends View {
                     if (longPressListener != null) {
                         int lastIndex = dataList.size() - 1;
                         double gain = (dataList.get(lastIndex).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
-                        longPressListener.onMinuteLongPress(dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
+                        longPressListener.onMinuteLongPress(YesterdayPrice, dataList.get(lastIndex).getPrice(), dataList.get(lastIndex).getAvgPrice(),
                                 gain, true, dataList.get(lastIndex).getTime(), dataList.get(lastIndex).getTradeAmount(), dataList.get(lastIndex - 1).getPrice());
                     }
                 } else {
@@ -413,10 +414,10 @@ public class MinuteChartView extends View {
                     }
                     double gain = (dataList.get(index).getPrice() - YesterdayPrice) / YesterdayPrice * 100f;
                     if (index <= 0) {
-                        longPressListener.onMinuteLongPress(dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
+                        longPressListener.onMinuteLongPress(YesterdayPrice, dataList.get(0).getPrice(), dataList.get(0).getAvgPrice(),
                                 gain, true, dataList.get(0).getTime(), dataList.get(0).getTradeAmount(), YesterdayPrice);
                     } else {
-                        longPressListener.onMinuteLongPress(dataList.get(index).getPrice(), dataList.get(index).getAvgPrice(),
+                        longPressListener.onMinuteLongPress(YesterdayPrice, dataList.get(index).getPrice(), dataList.get(index).getAvgPrice(),
                                 gain, true, dataList.get(index).getTime(), dataList.get(index).getTradeAmount(), dataList.get(index - 1).getPrice());
                     }
                 }
@@ -617,4 +618,32 @@ public class MinuteChartView extends View {
         }
     }
 
+    public void UpdateHisData1(HisTrendExtEntity data){
+        hisData1 = data;
+        MaxValue = Math.max(MaxValue, data.getMaxPrice());
+        MinValue = Math.min(MinValue, data.getMinPrice());
+        if (minuteVolumeLink != null) {
+            minuteVolumeLink.FiveDataLink(hisData1, hisData2, hisData3, hisData4, hisData5);
+        }
+    }
+
+    public HisTrendExtEntity getHisData1() {
+        return hisData1;
+    }
+
+    public HisTrendExtEntity getHisData2() {
+        return hisData2;
+    }
+
+    public HisTrendExtEntity getHisData3() {
+        return hisData3;
+    }
+
+    public HisTrendExtEntity getHisData4() {
+        return hisData4;
+    }
+
+    public HisTrendExtEntity getHisData5() {
+        return hisData5;
+    }
 }

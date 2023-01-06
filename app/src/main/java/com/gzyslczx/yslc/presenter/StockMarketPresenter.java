@@ -60,5 +60,15 @@ public class StockMarketPresenter {
     public void RequestHistoryTrend(Stock stock, int time){
         YRBasePresenter.Create().RequestHistoryTrad(stock, time);
     }
+    public void RequestHistoryTrendOnLoop(BaseActivity baseActivity, Stock stock, int time){
+        Observable<Long> observable = YRBasePresenter.Create().RequestMinuteChart(3);
+        observable = ConnTool.AddExtraReqOfAct(observable, TAG, baseActivity);
+        observable.subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Throwable {
+                YRBasePresenter.Create().RequestHistoryTrad(stock, time);
+            }
+        });
+    }
 
 }

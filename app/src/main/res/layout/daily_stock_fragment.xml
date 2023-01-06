@@ -9,7 +9,7 @@
     <!--MD类型-->
     <View
         android:layout_width="0dp"
-        android:layout_height="@dimen/d24"
+        android:layout_height="@dimen/d20"
         android:id="@+id/MDSignBg"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -111,7 +111,7 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_height="@dimen/d24"
+        android:layout_height="@dimen/d20"
         android:id="@+id/TopSubSignBg"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -203,101 +203,101 @@
         app:VolumeType="@integer/default_kdj"
         android:background="@color/white" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/d24"
-        android:id="@+id/BtmSubSignBg"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TopSubChartView"
-        android:background="@color/gray_FAF8F9"
-        android:layout_marginTop="@dimen/d2"/>
-    <View
-        android:layout_width="@dimen/d48"
-        android:layout_height="0dp"
-        android:id="@+id/BtmSubSetBg"
-        app:layout_constraintLeft_toLeftOf="@id/BtmSubSignBg"
-        app:layout_constraintTop_toTopOf="@id/BtmSubSignBg"
-        app:layout_constraintBottom_toBottomOf="@id/BtmSubSignBg"
-        android:background="@color/gray_e6" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/BtmSubSetSign"
-        app:layout_constraintLeft_toLeftOf="@id/BtmSubSetBg"
-        app:layout_constraintRight_toLeftOf="@id/BtmSubSetImg"
-        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
-        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
-        android:textSize="@dimen/s10"
-        android:textColor="@color/black_333"
-        android:text="MACD"
-        android:textStyle="bold"
-        android:tag="0"/>
-    <ImageView
-        android:layout_width="@dimen/d8"
-        android:layout_height="@dimen/d8"
-        android:id="@+id/BtmSubSetImg"
-        app:layout_constraintLeft_toRightOf="@id/BtmSubSetSign"
-        app:layout_constraintRight_toRightOf="@id/BtmSubSetBg"
-        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
-        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:src="@drawable/moredown" />
+<!--    <View-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/d24"-->
+<!--        android:id="@+id/BtmSubSignBg"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/TopSubChartView"-->
+<!--        android:background="@color/gray_FAF8F9"-->
+<!--        android:layout_marginTop="@dimen/d2"/>-->
+<!--    <View-->
+<!--        android:layout_width="@dimen/d48"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:id="@+id/BtmSubSetBg"-->
+<!--        app:layout_constraintLeft_toLeftOf="@id/BtmSubSignBg"-->
+<!--        app:layout_constraintTop_toTopOf="@id/BtmSubSignBg"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/BtmSubSignBg"-->
+<!--        android:background="@color/gray_e6" />-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/BtmSubSetSign"-->
+<!--        app:layout_constraintLeft_toLeftOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintRight_toLeftOf="@id/BtmSubSetImg"-->
+<!--        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"-->
+<!--        android:textSize="@dimen/s10"-->
+<!--        android:textColor="@color/black_333"-->
+<!--        android:text="MACD"-->
+<!--        android:textStyle="bold"-->
+<!--        android:tag="0"/>-->
+<!--    <ImageView-->
+<!--        android:layout_width="@dimen/d8"-->
+<!--        android:layout_height="@dimen/d8"-->
+<!--        android:id="@+id/BtmSubSetImg"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/BtmSubSetSign"-->
+<!--        app:layout_constraintRight_toRightOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:src="@drawable/moredown" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/MACDSign"
-        app:layout_constraintLeft_toRightOf="@id/BtmSubSetBg"
-        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
-        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
-        android:layout_marginLeft="@dimen/d8"
-        android:textSize="@dimen/s10"
-        android:text="MACD:--"
-        android:textColor="@color/red_up"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/MACDSign"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"-->
+<!--        android:layout_marginLeft="@dimen/d8"-->
+<!--        android:textSize="@dimen/s10"-->
+<!--        android:text="MACD:&#45;&#45;"-->
+<!--        android:textColor="@color/red_up"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/DIFFSign"
-        app:layout_constraintLeft_toRightOf="@id/MACDSign"
-        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
-        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
-        android:layout_marginLeft="@dimen/d8"
-        android:textSize="@dimen/s10"
-        android:text="DIFF:--"
-        android:textColor="@color/black"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/DIFFSign"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/MACDSign"-->
+<!--        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"-->
+<!--        android:layout_marginLeft="@dimen/d8"-->
+<!--        android:textSize="@dimen/s10"-->
+<!--        android:text="DIFF:&#45;&#45;"-->
+<!--        android:textColor="@color/black"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/DEASign"
-        app:layout_constraintLeft_toRightOf="@id/DIFFSign"
-        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"
-        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"
-        android:layout_marginLeft="@dimen/d8"
-        android:textSize="@dimen/s10"
-        android:text="DEA:--"
-        android:textColor="@color/orange_FF8C00"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/DEASign"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/DIFFSign"-->
+<!--        app:layout_constraintTop_toTopOf="@id/BtmSubSetBg"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/BtmSubSetBg"-->
+<!--        android:layout_marginLeft="@dimen/d8"-->
+<!--        android:textSize="@dimen/s10"-->
+<!--        android:text="DEA:&#45;&#45;"-->
+<!--        android:textColor="@color/orange_FF8C00"/>-->
 
-    <com.gzyslczx.yslc.tools.yourui.myviews.VolumeChartView
-        android:id="@+id/BtmSubChartView"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/d100"
-        android:background="@color/white"
-        app:DColor="@color/orange_FF8C00"
-        app:DottedLineColor="@color/gray_999"
-        app:DownColor="@color/green_down"
-        app:GrayColor="@color/gray_eee"
-        app:JColor="@color/pink_FF69B4"
-        app:KColor="@color/black"
-        app:UpColor="@color/red_up"
-        app:VolumeType="@integer/default_macd"
-        app:equalColor="@color/gray_666"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@id/DailyKlineChartView"
-        app:layout_constraintRight_toRightOf="@id/DailyKlineChartView"
-        app:layout_constraintTop_toBottomOf="@id/BtmSubSignBg" />
+<!--    <com.gzyslczx.yslc.tools.yourui.myviews.VolumeChartView-->
+<!--        android:id="@+id/BtmSubChartView"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/d100"-->
+<!--        android:background="@color/white"-->
+<!--        app:DColor="@color/orange_FF8C00"-->
+<!--        app:DottedLineColor="@color/gray_999"-->
+<!--        app:DownColor="@color/green_down"-->
+<!--        app:GrayColor="@color/gray_eee"-->
+<!--        app:JColor="@color/pink_FF69B4"-->
+<!--        app:KColor="@color/black"-->
+<!--        app:UpColor="@color/red_up"-->
+<!--        app:VolumeType="@integer/default_macd"-->
+<!--        app:equalColor="@color/gray_666"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintLeft_toLeftOf="@id/DailyKlineChartView"-->
+<!--        app:layout_constraintRight_toRightOf="@id/DailyKlineChartView"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/BtmSubSignBg" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

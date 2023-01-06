@@ -25,4 +25,6 @@ public interface OnDailyLongPressListener {
 
     void onVRLongPress(double vr);
 
+    void onCancelLongPress();
+
 }

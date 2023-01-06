@@ -389,7 +389,11 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void OnNoticeFiveDayMinuteEvent(NoticeFiveDayMinuteEvent event){
         Log.d(getClass().getSimpleName(), "请求五日分时数据");
-        mPresenter.RequestHistoryTrend(stock, event.getDate());
+        if (event.isLoop()){
+            mPresenter.RequestHistoryTrendOnLoop(StockMarketActivity.this, stock, event.getDate());
+        }else {
+            mPresenter.RequestHistoryTrend(stock, event.getDate());
+        }
     }
 
     @Override

@@ -48,6 +48,17 @@
         <entry key="..\:/AndroidProjects/YslcGuBbApp/app/src/main/res/layout/stock_sub_type_list_item.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProjects/YslcGuBbApp/app/src/main/res/layout/stock_value_item.xml" value="0.3651041666666667" />
         <entry key="..\:/AndroidProjects/YslcGuBbApp/app/src/main/res/menu/home_act_btm_bar_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/activity_stock_market.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/daily_long_press_dialog.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/daily_stock_fragment.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/deal_detail_fragment.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/five_range_fragment.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/fiveday_minute_stock_fragment.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/kl_long_press_dialog.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/minute_detail_item.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/minute_long_press_dialog.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/minute_stock_fragment.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/leake/StudioProjects/YslcGbbApp/app/src/main/res/layout/stock_market_value_item.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>

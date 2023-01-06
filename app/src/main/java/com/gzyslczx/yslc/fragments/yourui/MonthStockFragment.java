@@ -2,6 +2,7 @@ package com.gzyslczx.yslc.fragments.yourui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,12 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gzyslczx.yslc.R;
 import com.gzyslczx.yslc.adapters.stockmarket.StockSubTypeListAdapter;
 import com.gzyslczx.yslc.databinding.DailyStockFragmentBinding;
+import com.gzyslczx.yslc.databinding.KlLongPressDialogBinding;
 import com.gzyslczx.yslc.databinding.StockSubTypeListBinding;
 import com.gzyslczx.yslc.events.yourui.DailyKLineEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDailyKLineLoadMoreEvent;
 import com.gzyslczx.yslc.fragments.BaseFragment;
+import com.gzyslczx.yslc.tools.DisplayTool;
 import com.gzyslczx.yslc.tools.yourui.DailyMAEntity;
 import com.gzyslczx.yslc.tools.yourui.myviews.OnDailyLongPressListener;
 import com.gzyslczx.yslc.tools.yourui.myviews.OnDailyStockLoadMoreListener;
@@ -48,6 +51,9 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
     private StockSubTypeListBinding subTypeListBinding;
     private int SelectSubSign = -1;
 
+    private KlLongPressDialogBinding longPressDialogBinding;
+    private PopupWindow longPressWindow;
+
     @Override
     protected void InitParentLayout(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -60,28 +66,59 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
         mViewBinding.DailyKlineChartView.setEnableLongPress(true); //允许长按
         mViewBinding.DailyKlineChartView.setLongPressListener(this); //长按监听
         mViewBinding.TopSubChartView.setDailyLongPressListener(this); //长按显示数据
-        mViewBinding.BtmSubChartView.setDailyLongPressListener(this); //长按显示数据
+//        mViewBinding.BtmSubChartView.setDailyLongPressListener(this); //长按显示数据
         mViewBinding.DailyKlineChartView.setLoadMoreListener(this::onLoadMoreDailyStock); //加载更多监听
         mViewBinding.DailyKlineChartView.setSubLink(mViewBinding.TopSubChartView); //添加副图关联
-        mViewBinding.DailyKlineChartView.setSubLink(mViewBinding.BtmSubChartView); //添加副图关联
+//        mViewBinding.DailyKlineChartView.setSubLink(mViewBinding.BtmSubChartView); //添加副图关联
         //上附图左标志设置点击监听
         mViewBinding.TopSubSetSign.setTag("0");
         mViewBinding.TopSubSetBg.setOnClickListener(this::onClick);
         mViewBinding.TopSubSetSign.setOnClickListener(this::onClick);
         mViewBinding.TopSubSetImg.setOnClickListener(this::onClick);
         //下附图左标志设置点击监听
-        mViewBinding.BtmSubSetSign.setTag("0");
-        mViewBinding.BtmSubSetBg.setOnClickListener(this::onClick);
-        mViewBinding.BtmSubSetSign.setOnClickListener(this::onClick);
-        mViewBinding.BtmSubSetImg.setOnClickListener(this::onClick);
+//        mViewBinding.BtmSubSetSign.setTag("0");
+//        mViewBinding.BtmSubSetBg.setOnClickListener(this::onClick);
+//        mViewBinding.BtmSubSetSign.setOnClickListener(this::onClick);
+//        mViewBinding.BtmSubSetImg.setOnClickListener(this::onClick);
         decimalFormat = new DecimalFormat("#0.00");
+        if (longPressDialogBinding==null){
+            longPressDialogBinding = KlLongPressDialogBinding.bind(LayoutInflater.from(getContext()).inflate(R.layout.kl_long_press_dialog, null));
+        }
         EventBus.getDefault().post(new NoticeDailyKLineLoadMoreEvent(OFFSET, PERIOD, REMIT));
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (subTypePop != null && subTypePop.isShowing()) {
+            subTypePop.dismiss();
+        }
+        if (longPressWindow != null && longPressWindow.isShowing()) {
+            longPressWindow.dismiss();
+        }
         EventBus.getDefault().unregister(this);
+    }
+
+    private void UpdateLongPressValue(StockKLine stockKLine){
+        if (stockKLine.closePrice>=stockKLine.openPrice){
+            longPressDialogBinding.highPri.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
+            longPressDialogBinding.lowPri.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
+            longPressDialogBinding.openPri.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
+            longPressDialogBinding.closePri.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
+        }else {
+            longPressDialogBinding.highPri.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
+            longPressDialogBinding.lowPri.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
+            longPressDialogBinding.openPri.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
+            longPressDialogBinding.closePri.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
+        }
+        longPressDialogBinding.highPri.setText(String.format("最高价:%s", decimalFormat.format(stockKLine.highPrice)));
+        longPressDialogBinding.lowPri.setText(String.format("最低价:%s", decimalFormat.format(stockKLine.lowPrice)));
+        longPressDialogBinding.openPri.setText(String.format("开盘价:%s", decimalFormat.format(stockKLine.openPrice)));
+        longPressDialogBinding.closePri.setText(String.format("收盘价:%s", decimalFormat.format(stockKLine.closePrice)));
+        longPressDialogBinding.volNum.setText(String.format("成交量:%s手", CountUnit(stockKLine.volume)));
+        longPressDialogBinding.volCount.setText(String.format("成交额:%s", CountUnit(stockKLine.money)));
+        String Date = String.valueOf(stockKLine.date);
+        longPressDialogBinding.time.setText(String.format(String.format("%s-%s-%s", Date.substring(0, 4), Date.substring(4, 6), Date.substring(6))));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -122,6 +159,19 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
         }else {
             mViewBinding.MD30Sign.setText(String.format("MA30:%s", "--"));
         }
+        if (needTime) {
+            if (longPressWindow==null){
+                longPressWindow = new PopupWindow();
+                longPressWindow.setHeight(DisplayTool.dp2px(getContext(), 186));
+                longPressWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                longPressWindow.setOutsideTouchable(false);
+                longPressWindow.setContentView(longPressDialogBinding.getRoot());
+            }
+            UpdateLongPressValue(stockKLine);
+            if (!longPressWindow.isShowing()) {
+                longPressWindow.showAtLocation(mViewBinding.MDSignBg, Gravity.TOP, 0, 0);
+            }
+        }
     }
 
     @Override
@@ -133,46 +183,60 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
 
     @Override
     public void onMACDLongPress(double MACD, double DIFF, double DEA) {
-        if (MACD>0){
-            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
-        }else if (MACD<0){
-            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
-        }else {
-            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+//        if (MACD>0){
+//            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
+//        }else if (MACD<0){
+//            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
+//        }else {
+//            mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+//        }
+//        mViewBinding.MACDSign.setText(String.format("MACD:%s", decimalFormat.format(MACD)));
+//        mViewBinding.DIFFSign.setText(String.format("DIFF:%s", decimalFormat.format(DIFF)));
+//        mViewBinding.DEASign.setText(String.format("DEA:%s", decimalFormat.format(DEA)));
+        if (mViewBinding.TopSubSetSign.getText().toString().equals("MACD")){
+            if (MACD > 0) {
+                mViewBinding.KSign.setTextColor(mViewBinding.TopSubChartView.getUpColor());
+            } else if (MACD < 0) {
+                mViewBinding.KSign.setTextColor(mViewBinding.TopSubChartView.getDownColor());
+            } else {
+                mViewBinding.KSign.setTextColor(mViewBinding.TopSubChartView.getEqualColor());
+            }
+            mViewBinding.KSign.setText(String.format("MACD:%s", decimalFormat.format(MACD)));
+            mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            mViewBinding.DSign.setText(String.format("DIFF:%s", decimalFormat.format(DIFF)));
+            mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+            mViewBinding.JSign.setText(String.format("DEA:%s", decimalFormat.format(DEA)));
         }
-        mViewBinding.MACDSign.setText(String.format("MACD:%s", decimalFormat.format(MACD)));
-        mViewBinding.DIFFSign.setText(String.format("DIFF:%s", decimalFormat.format(DIFF)));
-        mViewBinding.DEASign.setText(String.format("DEA:%s", decimalFormat.format(DEA)));
     }
 
     @Override
     public void onVOLLongPress(long volume, long money, int color) {
         if (mViewBinding.TopSubSetSign.getText().toString().equals("成交量")){
             if (color==0){
-                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+                mViewBinding.KSign.setTextColor(mViewBinding.TopSubChartView.getEqualColor());
             }else if (color==1) {
-                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
+                mViewBinding.KSign.setTextColor(mViewBinding.TopSubChartView.getUpColor());
             }else {
-                mViewBinding.KSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
+                mViewBinding.KSign.setTextColor(mViewBinding.TopSubChartView.getDownColor());
             }
             mViewBinding.KSign.setText(String.format("成交量:%s手", CountUnit(volume)));
             mViewBinding.DSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
             mViewBinding.DSign.setText(String.format("成交额:%s", CountUnit(money)));
             mViewBinding.JSign.setText("");
         }
-        if (mViewBinding.BtmSubSetSign.getText().toString().equals("成交量")){
-            if (color==0){
-                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
-            }else if (color==1) {
-                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
-            }else {
-                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
-            }
-            mViewBinding.MACDSign.setText(String.format("成交量:%s手", CountUnit(volume)));
-            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            mViewBinding.DIFFSign.setText(String.format("成交额:%s", CountUnit(money)));
-            mViewBinding.DEASign.setText("");
-        }
+//        if (mViewBinding.BtmSubSetSign.getText().toString().equals("成交量")){
+//            if (color==0){
+//                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getEqualColor());
+//            }else if (color==1) {
+//                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getUpColor());
+//            }else {
+//                mViewBinding.MACDSign.setTextColor(mViewBinding.BtmSubChartView.getDownColor());
+//            }
+//            mViewBinding.MACDSign.setText(String.format("成交量:%s手", CountUnit(volume)));
+//            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            mViewBinding.DIFFSign.setText(String.format("成交额:%s", CountUnit(money)));
+//            mViewBinding.DEASign.setText("");
+//        }
     }
 
     private String CountUnit(long value){
@@ -198,14 +262,14 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
             mViewBinding.JSign.setText(String.format("DN:%s", decimalFormat.format(D)));
         }
-        if (mViewBinding.BtmSubSetSign.getText().toString().equals("BOLL")){
-            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            mViewBinding.MACDSign.setText(String.format("MB:%s", decimalFormat.format(M)));
-            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
-            mViewBinding.DIFFSign.setText(String.format("UP:%s", decimalFormat.format(U)));
-            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
-            mViewBinding.DEASign.setText(String.format("DN:%s", decimalFormat.format(D)));
-        }
+//        if (mViewBinding.BtmSubSetSign.getText().toString().equals("BOLL")){
+//            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            mViewBinding.MACDSign.setText(String.format("MB:%s", decimalFormat.format(M)));
+//            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+//            mViewBinding.DIFFSign.setText(String.format("UP:%s", decimalFormat.format(U)));
+//            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+//            mViewBinding.DEASign.setText(String.format("DN:%s", decimalFormat.format(D)));
+//        }
     }
 
     @Override
@@ -217,13 +281,13 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.DSign.setText(String.format("ASIMA:%s", decimalFormat.format(asit)));
             mViewBinding.JSign.setText("");
         }
-        if (mViewBinding.BtmSubSetSign.getText().toString().equals("ASI")){
-            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            mViewBinding.MACDSign.setText(String.format("ASI:%s", decimalFormat.format(asi)));
-            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
-            mViewBinding.DIFFSign.setText(String.format("ASIMA:%s", decimalFormat.format(asit)));
-            mViewBinding.DEASign.setText("");
-        }
+//        if (mViewBinding.BtmSubSetSign.getText().toString().equals("ASI")){
+//            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            mViewBinding.MACDSign.setText(String.format("ASI:%s", decimalFormat.format(asi)));
+//            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+//            mViewBinding.DIFFSign.setText(String.format("ASIMA:%s", decimalFormat.format(asit)));
+//            mViewBinding.DEASign.setText("");
+//        }
     }
 
     @Override
@@ -235,13 +299,13 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.DSign.setText(String.format("WR28:%s", decimalFormat.format(wr28)));
             mViewBinding.JSign.setText("");
         }
-        if (mViewBinding.BtmSubSetSign.getText().toString().equals("WR")){
-            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            mViewBinding.MACDSign.setText(String.format("WR14:%s", decimalFormat.format(wr14)));
-            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
-            mViewBinding.DIFFSign.setText(String.format("WR28:%s", decimalFormat.format(wr28)));
-            mViewBinding.DEASign.setText("");
-        }
+//        if (mViewBinding.BtmSubSetSign.getText().toString().equals("WR")){
+//            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            mViewBinding.MACDSign.setText(String.format("WR14:%s", decimalFormat.format(wr14)));
+//            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+//            mViewBinding.DIFFSign.setText(String.format("WR28:%s", decimalFormat.format(wr28)));
+//            mViewBinding.DEASign.setText("");
+//        }
     }
 
     @Override
@@ -254,14 +318,14 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
             mViewBinding.JSign.setText(String.format("BIAS24:%s", decimalFormat.format(bias24)));
         }
-        if (mViewBinding.BtmSubSetSign.getText().toString().equals("BIAS")){
-            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            mViewBinding.MACDSign.setText(String.format("BIAS6:%s", decimalFormat.format(bias6)));
-            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
-            mViewBinding.DIFFSign.setText(String.format("BIAS12:%s", decimalFormat.format(bias12)));
-            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
-            mViewBinding.DEASign.setText(String.format("BIAS24:%s", decimalFormat.format(bias24)));
-        }
+//        if (mViewBinding.BtmSubSetSign.getText().toString().equals("BIAS")){
+//            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            mViewBinding.MACDSign.setText(String.format("BIAS6:%s", decimalFormat.format(bias6)));
+//            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+//            mViewBinding.DIFFSign.setText(String.format("BIAS12:%s", decimalFormat.format(bias12)));
+//            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+//            mViewBinding.DEASign.setText(String.format("BIAS24:%s", decimalFormat.format(bias24)));
+//        }
     }
 
     @Override
@@ -274,14 +338,14 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.JSign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
             mViewBinding.JSign.setText(String.format("RSI24:%s", decimalFormat.format(rsi24)));
         }
-        if (mViewBinding.BtmSubSetSign.getText().toString().equals("RSI")){
-            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            mViewBinding.MACDSign.setText(String.format("RSI6:%s", decimalFormat.format(rsi6)));
-            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
-            mViewBinding.DIFFSign.setText(String.format("RSI12:%s", decimalFormat.format(rsi12)));
-            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
-            mViewBinding.DEASign.setText(String.format("RSI24:%s", decimalFormat.format(rsi24)));
-        }
+//        if (mViewBinding.BtmSubSetSign.getText().toString().equals("RSI")){
+//            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            mViewBinding.MACDSign.setText(String.format("RSI6:%s", decimalFormat.format(rsi6)));
+//            mViewBinding.DIFFSign.setTextColor(ContextCompat.getColor(getContext(), R.color.orange_FF8C00));
+//            mViewBinding.DIFFSign.setText(String.format("RSI12:%s", decimalFormat.format(rsi12)));
+//            mViewBinding.DEASign.setTextColor(ContextCompat.getColor(getContext(), R.color.pink_FF69B4));
+//            mViewBinding.DEASign.setText(String.format("RSI24:%s", decimalFormat.format(rsi24)));
+//        }
     }
 
     @Override
@@ -292,11 +356,18 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
             mViewBinding.DSign.setText("");
             mViewBinding.JSign.setText("");
         }
-        if (mViewBinding.BtmSubSetSign.getText().toString().equals("VR")){
-            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            mViewBinding.MACDSign.setText(String.format("VR:%s", decimalFormat.format(vr)));
-            mViewBinding.DIFFSign.setText("");
-            mViewBinding.DEASign.setText("");
+//        if (mViewBinding.BtmSubSetSign.getText().toString().equals("VR")){
+//            mViewBinding.MACDSign.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            mViewBinding.MACDSign.setText(String.format("VR:%s", decimalFormat.format(vr)));
+//            mViewBinding.DIFFSign.setText("");
+//            mViewBinding.DEASign.setText("");
+//        }
+    }
+
+    @Override
+    public void onCancelLongPress() {
+        if (longPressWindow.isShowing()){
+            longPressWindow.dismiss();
         }
     }
 
@@ -322,16 +393,16 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
                     subTypeListAdapter.notifyDataSetChanged();
                 }
                 break;
-            case R.id.BtmSubSetBg:
-            case R.id.BtmSubSetSign:
-            case R.id.BtmSubSetImg:
-                SelectSubSign=2;
-                ShowSubTypePop();
-                if (subTypeListAdapter != null) {
-                    subTypeListAdapter.setSelect(subTypeListAdapter.getItemPosition(mViewBinding.BtmSubSetSign.getText().toString()));
-                    subTypeListAdapter.notifyDataSetChanged();
-                }
-                break;
+//            case R.id.BtmSubSetBg:
+//            case R.id.BtmSubSetSign:
+//            case R.id.BtmSubSetImg:
+//                SelectSubSign=2;
+//                ShowSubTypePop();
+//                if (subTypeListAdapter != null) {
+//                    subTypeListAdapter.setSelect(subTypeListAdapter.getItemPosition(mViewBinding.BtmSubSetSign.getText().toString()));
+//                    subTypeListAdapter.notifyDataSetChanged();
+//                }
+//                break;
         }
     }
 
@@ -340,9 +411,8 @@ public class MonthStockFragment extends BaseFragment<DailyStockFragmentBinding> 
         if (SelectSubSign==1){
             mViewBinding.TopSubSetSign.setText(subTypeListAdapter.getData().get(position));
             mViewBinding.TopSubChartView.setType(subTypeListAdapter.getType(position));
-        }else if (SelectSubSign==2){
-            mViewBinding.BtmSubSetSign.setText(subTypeListAdapter.getData().get(position));
-            mViewBinding.BtmSubChartView.setType(subTypeListAdapter.getType(position));
+            mViewBinding.DailyKlineChartView.invalidate();
+            mViewBinding.TopSubChartView.invalidate();
         }
         subTypePop.dismiss();
     }

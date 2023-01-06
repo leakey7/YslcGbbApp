@@ -42,7 +42,6 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     private HisTrendExtEntity hisData1, hisData2, hisData3, hisData4, hisData5;
     private KlineKDJ klineKDJ;
     private KlineMACD klineMACD;
-    private KlineVOL klineVOL;
     private KlineBOLL klineBOLL;
     private KlineASI klineASI;
     private KlineWR klineWR;
@@ -60,6 +59,7 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
     private boolean isDoublePress = false; //是否双指操作
     private int markStartIndexOfScale = 0; //记录右端Index
     private OnDailyLongPressListener dailyLongPressListener;
+    private UpdateDailySubSign updateDailySubSign;
 
 
     public VolumeChartView(Context context) {
@@ -1158,55 +1158,47 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
         if (type == VolumeTypeConstance.KDJ) {
             PrintLogD("更新KDJ数据");
             klineKDJ = YRBasePresenter.Create().GetKLineKDJ(this.kLineList);
-            invalidate();
             return;
         }
         if (type == VolumeTypeConstance.MACD) {
             PrintLogD("更新MACD数据");
             klineMACD = YRBasePresenter.Create().GetKLineMACD(this.kLineList);
-            invalidate();
             return;
         }
         if (type == VolumeTypeConstance.Volume) {
             PrintLogD("更新成交量数据");
-            invalidate();
             return;
         }
         if (type==VolumeTypeConstance.BOLL){
             PrintLogD("更新BOLL数据");
             klineBOLL = YRBasePresenter.Create().GetKLineBOLL(this.kLineList);
-            invalidate();
             return;
         }
         if (type==VolumeTypeConstance.ASI){
             PrintLogD("更新ASI数据");
             klineASI= YRBasePresenter.Create().GetKLineASI(this.kLineList);
-            invalidate();
             return;
         }
         if (type==VolumeTypeConstance.WR){
             PrintLogD("更新WR数据");
             klineWR = YRBasePresenter.Create().GetKLineWR(this.kLineList);
-            invalidate();
             return;
         }
         if (type==VolumeTypeConstance.BIAS){
             PrintLogD("更新BIAS数据");
             klineBIAS = YRBasePresenter.Create().GetKLineBIAS(this.kLineList);
-            invalidate();
             return;
         }
         if (type==VolumeTypeConstance.RSI){
             PrintLogD("更新RSI数据");
             klineRSI = YRBasePresenter.Create().GetKLineRSI(this.kLineList);
-            invalidate();
             return;
         }
         if (type==VolumeTypeConstance.VR){
             PrintLogD("更新VR数据");
             klineVR= YRBasePresenter.Create().GetKLineVR(this.kLineList);
-            invalidate();
             return;
         }
     }
+
 }

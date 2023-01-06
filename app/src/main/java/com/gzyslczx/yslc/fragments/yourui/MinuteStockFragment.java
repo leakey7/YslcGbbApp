@@ -2,9 +2,11 @@ package com.gzyslczx.yslc.fragments.yourui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,9 +14,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.gzyslczx.yslc.R;
+import com.gzyslczx.yslc.databinding.MinuteLongPressDialogBinding;
 import com.gzyslczx.yslc.databinding.MinuteStockFragmentBinding;
 import com.gzyslczx.yslc.events.yourui.MinuteTrendEvent;
 import com.gzyslczx.yslc.fragments.BaseFragment;
+import com.gzyslczx.yslc.tools.DisplayTool;
 import com.gzyslczx.yslc.tools.yourui.myviews.OnMinuteLongPressListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,6 +32,8 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
     private DecimalFormat decimalFormat;
     private FiveDayStockFragment fiveDayStockFragment;
     private MinuteDealDetailFragment minuteDealDetailFragment;
+    private MinuteLongPressDialogBinding longPressDialogBinding;
+    private PopupWindow longPressWindow;
 
 
     @Override
@@ -40,6 +46,9 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (longPressWindow!=null && longPressWindow.isShowing()){
+            longPressWindow.dismiss();
+        }
         EventBus.getDefault().unregister(this);
     }
 
@@ -47,11 +56,14 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
     protected void InitView() {
         mViewBinding.MinuteChartView.setMinuteVolumeLink(mViewBinding.VolumeChartView);
         mViewBinding.MinuteChartView.setEnableLongPress(true);
-        mViewBinding.MinuteChartView.setLongPressListener(this::onMinuteLongPress);
+        mViewBinding.MinuteChartView.setLongPressListener(this);
         ChangeSubFragment(0);
         mViewBinding.FiveRange.setOnClickListener(this::onClick);
         mViewBinding.TheDetail.setOnClickListener(this::onClick);
         decimalFormat = new DecimalFormat("#0.00");
+        if (longPressDialogBinding==null){
+            longPressDialogBinding = MinuteLongPressDialogBinding.bind(LayoutInflater.from(getContext()).inflate(R.layout.minute_long_press_dialog, null));
+        }
     }
 
     /*
@@ -97,16 +109,26 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
     private void UpDateRealValue(float avePrice, double newPrice, double gainValue, boolean needTime, String time){
         mViewBinding.AvePriceSign.setText(String.format("均价:%s", decimalFormat.format(avePrice)));
         mViewBinding.RealPriceSign.setText(String.format("最新:%s", decimalFormat.format(newPrice)));
+        longPressDialogBinding.realPri.setText(decimalFormat.format(newPrice));
+        longPressDialogBinding.avePri.setText(String.format("均价:%s", decimalFormat.format(avePrice)));
         if (gainValue<0){
             mViewBinding.GainSign.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
+            longPressDialogBinding.diffPri.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
+            longPressDialogBinding.diffGain.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
         }else if (gainValue>0){
             mViewBinding.GainSign.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
+            longPressDialogBinding.diffPri.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
+            longPressDialogBinding.diffGain.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
         }else {
             mViewBinding.GainSign.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_666));
+            longPressDialogBinding.diffPri.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_666));
+            longPressDialogBinding.diffGain.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_666));
         }
-        mViewBinding.GainSign.setText(String.format("涨幅:%s", decimalFormat.format(gainValue)));
+        mViewBinding.GainSign.setText(String.format("涨幅:%s%%", decimalFormat.format(gainValue)));
+        longPressDialogBinding.diffGain.setText(String.format("涨跌幅:%s%%", decimalFormat.format(gainValue)));
         if (needTime){
             mViewBinding.TimeSign.setText(time);
+            longPressDialogBinding.dealTime.setText(time);
         }else {
             mViewBinding.TimeSign.setText("");
         }
@@ -118,14 +140,19 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
     private void UpdateVolumeValue(double newPrice, long volume, double oldPrice){
         if (oldPrice==newPrice){
             mViewBinding.VolumeSign.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_666));
+            longPressDialogBinding.volNum.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_666));
         }else if (oldPrice>newPrice){
             mViewBinding.VolumeSign.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
+            longPressDialogBinding.volNum.setTextColor(ContextCompat.getColor(getContext(), R.color.green_down));
         }else {
             mViewBinding.VolumeSign.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
+            longPressDialogBinding.volNum.setTextColor(ContextCompat.getColor(getContext(), R.color.red_up));
         }
         mViewBinding.VolumeSign.setText(String.format("成交量:%s手", volume));
+        longPressDialogBinding.volNum.setText(String.format("成交量:%s手", volume));
         double amount = newPrice*volume*100f;
         mViewBinding.VolumeCountSign.setText(String.format("成交额:%s", ShiftUnit(amount)));
+        longPressDialogBinding.volCount.setText(String.format("成交额:%s", ShiftUnit(amount)));
     }
 
     /*
@@ -198,9 +225,30 @@ public class MinuteStockFragment extends BaseFragment<MinuteStockFragmentBinding
     * 长按监听
     * */
     @Override
-    public void onMinuteLongPress(double realPrice, float avePrice, double gain, boolean needTime, String time, long volume, double oldPrice) {
+    public void onMinuteLongPress(float yesterdayPrice, double realPrice, float avePrice, double gain, boolean needTime, String time, long volume, double oldPrice) {
+        //长按滑动
+        if (longPressWindow==null){
+            longPressWindow = new PopupWindow();
+            longPressWindow.setHeight(DisplayTool.dp2px(getContext(), 186));
+            longPressWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            longPressWindow.setOutsideTouchable(false);
+            longPressWindow.setContentView(longPressDialogBinding.getRoot());
+        }
         UpDateRealValue(avePrice, realPrice, gain, needTime, time);
         UpdateVolumeValue(realPrice, volume, oldPrice);
+        longPressDialogBinding.lastPri.setText(String.format("昨收价:%s", decimalFormat.format(yesterdayPrice)));
+        longPressDialogBinding.diffPri.setText(String.format("涨跌值:%s", decimalFormat.format(realPrice-yesterdayPrice)));
+        if (!longPressWindow.isShowing()){
+            longPressWindow.showAtLocation(mViewBinding.MinuteSignBg, Gravity.TOP, 0, 0);
+        }
+    }
+
+    @Override
+    public void onCancelMinuteLongPress() {
+        //取消长按
+        if (longPressWindow!=null){
+            longPressWindow.dismiss();
+        }
     }
 
     @Override
