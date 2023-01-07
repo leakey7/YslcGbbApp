@@ -579,6 +579,26 @@ public class VolumeChartView extends View implements MinuteVolumeLink, DailyVolu
                             LineOnX, (float) (AveHeight * (Max - klineASI.getASIMAData(q))), DPaint);
                 }
             }
+        }else if (type == VolumeTypeConstance.WR){
+            PrintLogD("绘制WR");
+            float HalfAveWidth = AveWidth * 0.5f;
+            float AveWidthWithInterval = (AveWidth + ItemInterval);
+            int size = this.kLineList.size() - 1;
+            for (int i = starIndex; i <= endIndex; i++) {
+                int q = Math.abs(size - i);
+                float right = RightAxis - AveWidthWithInterval * i;
+                float LineOnX = right - HalfAveWidth;
+                if (i == 0) {
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[0], q))), 1, KPaint);
+                    canvas.drawCircle(LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[1], q))), 1, DPaint);
+                } else {
+                    float lastLineOnX = LineOnX + AveWidthWithInterval;
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[0], q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[0], q))), KPaint);
+                    canvas.drawLine(lastLineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[1], q + 1))),
+                            LineOnX, (float) (AveHeight * (Max - klineWR.getWR(KlineWR.PARAM_VALUE[1], q))), DPaint);
+                }
+            }
         }else if (type == VolumeTypeConstance.BIAS){
             PrintLogD("绘制BIAS");
             float HalfAveWidth = AveWidth * 0.5f;

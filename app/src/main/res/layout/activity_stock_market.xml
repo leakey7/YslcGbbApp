@@ -258,6 +258,7 @@
                     android:textSize="@dimen/s14"
                     android:textColor="@color/black_333"
                     android:text="更多"
+                    android:gravity="center"
                     app:layout_constraintHorizontal_bias="0.4"/>
                 <ImageView
                     android:layout_width="@dimen/d8"

@@ -1,6 +1,8 @@
 package com.gzyslczx.yslc;
 
+import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,7 +21,9 @@ import com.gzyslczx.yslc.adapters.stockmarket.MoreRealTimeGridAdapter;
 import com.gzyslczx.yslc.adapters.stockmarket.StockMarketValueGridAdapter;
 import com.gzyslczx.yslc.databinding.ActivityStockMarketBinding;
 import com.gzyslczx.yslc.databinding.RealPriceExPopBinding;
+import com.gzyslczx.yslc.databinding.StockMoreTypeListBinding;
 import com.gzyslczx.yslc.events.yourui.FiveRangeEvent;
+import com.gzyslczx.yslc.events.yourui.MoreTypeStockEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDailyKLineLoadMoreEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeDealEvent;
 import com.gzyslczx.yslc.events.yourui.NoticeFiveDayMinuteEvent;
@@ -28,12 +32,14 @@ import com.gzyslczx.yslc.fragments.yourui.DailyStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.FiveDayMinuteStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.MinuteStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.MonthStockFragment;
+import com.gzyslczx.yslc.fragments.yourui.MoreFragment;
 import com.gzyslczx.yslc.fragments.yourui.WeekStockFragment;
 import com.gzyslczx.yslc.presenter.StockMarketPresenter;
 import com.gzyslczx.yslc.tools.DateTool;
 import com.gzyslczx.yslc.tools.DisplayTool;
 import com.gzyslczx.yslc.tools.TransStatusTool;
 import com.gzyslczx.yslc.tools.yourui.CodeTypeTool;
+import com.yourui.sdk.message.api.protocol.QuoteConstants;
 import com.yourui.sdk.message.use.Realtime;
 import com.yourui.sdk.message.use.Stock;
 
@@ -60,10 +66,13 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     private DailyStockFragment dailyStockFragment;
     private WeekStockFragment weekStockFragment;
     private MonthStockFragment monthStockFragment;
+    private MoreFragment moreStockFragment;
     private Stock stock;
     public static double PrePrice;
     private RealPriceExPopBinding realPriceExPopBinding;
     private PopupWindow realPriceExPop;
+    private StockMoreTypeListBinding moreTypeListBinding;
+    private Short SelectMoreType;
 
     @Override
     void InitParentLayout() {
@@ -82,6 +91,8 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         mViewBinding.Back.setOnClickListener(this::onClick);
         mViewBinding.Search.setOnClickListener(this::onClick);
         mViewBinding.MoreValue.setOnClickListener(this::onClick);
+        mViewBinding.MoreTab.setOnClickListener(this::onClick);
+        mViewBinding.MoreTabImg.setOnClickListener(this::onClick);
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mViewBinding.StockMarketAppBar.getLayoutParams();
         AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
         behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
@@ -213,6 +224,26 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                 return;
             }
         }
+        if (index==5){
+            //更多Fragment
+            FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
+            if (moreStockFragment==null){
+                moreStockFragment = new MoreFragment();
+                Bundle bundle = new Bundle();
+                bundle.putShort(MoreFragment.MoreType, SelectMoreType);
+                moreStockFragment.setArguments(bundle);
+                transaction.add(mViewBinding.StockMarketFrame.getId(), moreStockFragment);
+                transaction.commit();
+                return;
+            }else {
+                EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
+            }
+            if (moreStockFragment.isHidden()){
+                transaction.show(moreStockFragment);
+                transaction.commit();
+                return;
+            }
+        }
     }
     /*
     * 隐藏Fragment
@@ -252,6 +283,13 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                 if (monthStockFragment!=null) {
                     monthTransaction.hide(monthStockFragment);
                     monthTransaction.commit();
+                }
+                break;
+            default:
+                FragmentTransaction moreTransaction =  getSupportFragmentManager().beginTransaction();
+                if (moreStockFragment!=null) {
+                    moreTransaction.hide(moreStockFragment);
+                    moreTransaction.commit();
                 }
                 break;
         }
@@ -412,6 +450,57 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                 break;
             case R.id.Search:
                 //查询股票
+                break;
+            case R.id.MoreTab:
+            case R.id.MoreTabImg:
+                //更多类型弹窗
+                if (moreTypeListBinding==null){
+                    moreTypeListBinding = StockMoreTypeListBinding.bind(LayoutInflater.from(this).inflate(R.layout.stock_more_type_list, null));
+                    moreTypeListBinding.minute5.setOnClickListener(this::onClick);
+                    moreTypeListBinding.minute15.setOnClickListener(this::onClick);
+                    moreTypeListBinding.minute30.setOnClickListener(this::onClick);
+                    moreTypeListBinding.minute60.setOnClickListener(this::onClick);
+                    moreTypeListBinding.minute120.setOnClickListener(this::onClick);
+                }
+                PopupWindow popupWindow = new PopupWindow();
+                popupWindow.setWidth(DisplayTool.dp2px(this, 40));
+                popupWindow.setHeight(DisplayTool.dp2px(this, 120));
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setContentView(moreTypeListBinding.getRoot());
+                popupWindow.showAtLocation(mViewBinding.MoreTab, Gravity.BOTTOM, DisplayTool.dp2px(this, 4), 0);
+                break;
+            case R.id.minute5:
+                mViewBinding.MoreTab.setText("5分");
+                SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE5;
+
+                break;
+            case R.id.minute15:
+                mViewBinding.MoreTab.setText("15分");
+                SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE15;
+                int hidden5 = mViewBinding.StyleTab.getSelectedTabPosition();
+                ChangeFragment(5);
+                HiddenFragment(hidden5);
+                break;
+            case R.id.minute30:
+                mViewBinding.MoreTab.setText("30分");
+                SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE30;
+                int hidden30 = mViewBinding.StyleTab.getSelectedTabPosition();
+                ChangeFragment(5);
+                HiddenFragment(hidden30);
+                break;
+            case R.id.minute60:
+                mViewBinding.MoreTab.setText("60分");
+                SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE60;
+                int hidden60 = mViewBinding.StyleTab.getSelectedTabPosition();
+                ChangeFragment(5);
+                HiddenFragment(hidden60);
+                break;
+            case R.id.minute120:
+                mViewBinding.MoreTab.setText("120分");
+                SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE120;
+                int hidden120 = mViewBinding.StyleTab.getSelectedTabPosition();
+                ChangeFragment(5);
+                HiddenFragment(hidden120);
                 break;
         }
     }
