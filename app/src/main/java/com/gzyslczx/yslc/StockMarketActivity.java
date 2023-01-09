@@ -72,6 +72,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     private RealPriceExPopBinding realPriceExPopBinding;
     private PopupWindow realPriceExPop;
     private StockMoreTypeListBinding moreTypeListBinding;
+    private PopupWindow moreTypeWindow;
     private Short SelectMoreType;
 
     @Override
@@ -139,6 +140,9 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     protected void onDestroy() {
         if (realPriceExPop!=null && realPriceExPop.isShowing()) {
             realPriceExPop.dismiss();
+        }
+        if (moreTypeWindow!=null && moreTypeWindow.isShowing()){
+            moreTypeWindow.dismiss();
         }
         super.onDestroy();
         EventBus.getDefault().unregister(this);
@@ -234,6 +238,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                 moreStockFragment.setArguments(bundle);
                 transaction.add(mViewBinding.StockMarketFrame.getId(), moreStockFragment);
                 transaction.commit();
+                mViewBinding.StyleTab.setSelected(false);
                 return;
             }else {
                 EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
@@ -426,10 +431,11 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     * */
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void OnNoticeFiveDayMinuteEvent(NoticeFiveDayMinuteEvent event){
-        Log.d(getClass().getSimpleName(), "请求五日分时数据");
         if (event.isLoop()){
+            Log.d(getClass().getSimpleName(), String.format("发起五日分时轮询:%d", event.getDate()));
             mPresenter.RequestHistoryTrendOnLoop(StockMarketActivity.this, stock, event.getDate());
         }else {
+            Log.d(getClass().getSimpleName(), String.format("请求五日分时数据:%d", event.getDate()));
             mPresenter.RequestHistoryTrend(stock, event.getDate());
         }
     }
@@ -462,12 +468,18 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                     moreTypeListBinding.minute60.setOnClickListener(this::onClick);
                     moreTypeListBinding.minute120.setOnClickListener(this::onClick);
                 }
-                PopupWindow popupWindow = new PopupWindow();
-                popupWindow.setWidth(DisplayTool.dp2px(this, 40));
-                popupWindow.setHeight(DisplayTool.dp2px(this, 120));
-                popupWindow.setOutsideTouchable(true);
-                popupWindow.setContentView(moreTypeListBinding.getRoot());
-                popupWindow.showAtLocation(mViewBinding.MoreTab, Gravity.BOTTOM, DisplayTool.dp2px(this, 4), 0);
+                if (moreTypeWindow==null) {
+                    moreTypeWindow = new PopupWindow();
+                    moreTypeWindow.setWidth(DisplayTool.dp2px(this, 40));
+                    moreTypeWindow.setHeight(DisplayTool.dp2px(this, 120));
+                    moreTypeWindow.setOutsideTouchable(true);
+                    moreTypeWindow.setContentView(moreTypeListBinding.getRoot());
+                }
+                if (moreTypeWindow.isShowing()){
+                    moreTypeWindow.dismiss();
+                }else {
+                    moreTypeWindow.showAsDropDown(mViewBinding.MoreTab, Gravity.BOTTOM, DisplayTool.dp2px(this, 4), 0);
+                }
                 break;
             case R.id.minute5:
                 mViewBinding.MoreTab.setText("5分");

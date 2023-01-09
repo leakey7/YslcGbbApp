@@ -126,10 +126,11 @@ public class DailyStockFragment extends BaseFragment<DailyStockFragmentBinding> 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnDailyKLineEvent(DailyKLineEvent event) {
         if (PERIOD == event.getPeriod()) {
+            if (OFFSET==-1){
+                mViewBinding.DailyKlineChartView.SetDataList(event.getKlineEntity().getStockKLineList());
+            }
             if (!event.isEnd()) {
-                if (OFFSET==-1){
-                    mViewBinding.DailyKlineChartView.SetDataList(event.getKlineEntity().getStockKLineList());
-                }else {
+                if (OFFSET!=-1){
                     mViewBinding.DailyKlineChartView.AddData(event.getKlineEntity().getStockKLineList());
                 }
             } else {

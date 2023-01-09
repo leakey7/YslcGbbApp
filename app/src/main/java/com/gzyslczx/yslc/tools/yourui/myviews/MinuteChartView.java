@@ -364,11 +364,11 @@ public class MinuteChartView extends View {
                         index = (int) ((indicateLineX-twoInFive) / aveW);
                     }
                     else if (indicateLineX <= fourInFive){
-                        hisTrendExtEntity = hisData4;
+                        hisTrendExtEntity = hisData2;
                         index = (int) ((indicateLineX-threeInFive) / aveW);
                     }
                     else if (indicateLineX <= right){
-                        hisTrendExtEntity = hisData5;
+                        hisTrendExtEntity = hisData1;
                         index = (int) ((indicateLineX-fourInFive) / aveW);
                     }
                     canvas.drawLine(indicateLineX, top, indicateLineX, btm, BlackPaint); //指示竖线

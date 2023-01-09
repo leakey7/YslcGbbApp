@@ -637,7 +637,11 @@ public class DailyKLineChartView extends View {
      * */
     public void SetDataList(List<StockKLine> DataList) {
         PrintLogD("初始化数据集");
-        this.DataList.clear();
+        if (this.DataList==null){
+            this.DataList = new ArrayList<StockKLine>();
+        }else {
+            this.DataList.clear();
+        }
         if (this.DataList.addAll(DataList)) {
             SetMA(true);
             if (SubLinkList!=null){

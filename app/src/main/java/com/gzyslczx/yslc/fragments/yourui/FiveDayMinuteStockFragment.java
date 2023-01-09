@@ -43,6 +43,7 @@ public class FiveDayMinuteStockFragment extends BaseFragment<FivedayMinuteStockF
     private Calendar cal;
     private int count=0, num=0;
     private boolean isLoop = false;
+    private int newDate;
 
     private MinuteLongPressDialogBinding longPressDialogBinding;
     private PopupWindow longPressWindow;
@@ -84,14 +85,13 @@ public class FiveDayMinuteStockFragment extends BaseFragment<FivedayMinuteStockF
     public void onFiveDayMinuteEvent(FiveDayMinuteEvent event){
         if (event.getDate() == 0){
             //获取历史分时数据无效
-            num++;
+            ++num;
             if (num==10){
                 Log.d(TAG, "连续十次访问数据无效");
                 num=0;
                 mViewBinding.FiveDayMinuteChart.invalidate();
                 mViewBinding.FiveDayMinuteVolumeChartView.invalidate();
-                if (mViewBinding.FiveDayMinuteChart.getHisData1()!=null) {
-                    isLoop = true;
+                if (mViewBinding.FiveDayMinuteChart.getHisData1()!=null && !isLoop) {
                     RequestOnLoop();
                 }
                 return;
@@ -102,16 +102,21 @@ public class FiveDayMinuteStockFragment extends BaseFragment<FivedayMinuteStockF
         }else {
             //获取历史分时数据有效
             if (isLoop){
+                Log.d(TAG, "更新五日分时轮询数据");
                 mViewBinding.FiveDayMinuteChart.UpdateHisData1(event.getHisTrendExtEntity());
                 UpdateNewValue(event.getHisTrendExtEntity());
                 mViewBinding.FiveDayMinuteChart.invalidate();
                 mViewBinding.FiveDayMinuteVolumeChartView.invalidate();
+                return;
             }
             mViewBinding.FiveDayMinuteChart.AddFiveDayMinuteData(event.getHisTrendExtEntity());
             if (count<4){
                 //不够五日，继续请求
                 num=0;
                 ++count;
+                if (count==1){
+                    newDate = date;
+                }
                 cal.add(Calendar.DATE, -1);
                 date = Integer.valueOf(ymdFormat.format(cal.getTime()));
                 EventBus.getDefault().post(new NoticeFiveDayMinuteEvent(date));
@@ -121,10 +126,11 @@ public class FiveDayMinuteStockFragment extends BaseFragment<FivedayMinuteStockF
             }else {
                 //足够五日
                 Log.d(TAG, "已满五日");
-                mViewBinding.FiveDayMinuteChart.invalidate();
-                mViewBinding.FiveDayMinuteVolumeChartView.invalidate();
-                isLoop = true;
-                RequestOnLoop();
+                if (!isLoop) {
+                    mViewBinding.FiveDayMinuteChart.invalidate();
+                    mViewBinding.FiveDayMinuteVolumeChartView.invalidate();
+                    RequestOnLoop();
+                }
             }
         }
     }
@@ -225,10 +231,8 @@ public class FiveDayMinuteStockFragment extends BaseFragment<FivedayMinuteStockF
     }
 
     private void RequestOnLoop(){
-        cal.clear();
-        cal.add(Calendar.DATE, 0);
-        date = Integer.valueOf(ymdFormat.format(cal.getTime()));
-        EventBus.getDefault().post(new NoticeFiveDayMinuteEvent(date, true));
+        EventBus.getDefault().post(new NoticeFiveDayMinuteEvent(newDate, true));
+        isLoop=true;
     }
 
     private void UpdateNewValue(HisTrendExtEntity hisTrendExtEntity){
