@@ -11,6 +11,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/stockmarketlibrary/YslcGbbApp.stockmarketlibrary.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.iml" filepath="$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/youruismapp/YslcGbbApp.youruismapp.unitTest.iml" />
     </modules>
   </component>
 </project>

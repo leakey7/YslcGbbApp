@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MinuteChartView extends BaseChartView {
 
-    private final String TAG = "分数图";
+    private final String TAG = "分时图";
 
     private float DefItemSize = 241; //默认数据量
 

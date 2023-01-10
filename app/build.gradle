@@ -149,7 +149,6 @@ dependencies {
     implementation 'com.github.soulqw:Curtain:0.2.1'
     //预览图片
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-
     //行情
     implementation files('libs/lib-yr-market-sdk-1.0.7.jar')
 

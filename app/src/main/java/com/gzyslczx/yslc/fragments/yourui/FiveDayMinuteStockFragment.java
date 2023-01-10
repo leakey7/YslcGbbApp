@@ -83,6 +83,7 @@ public class FiveDayMinuteStockFragment extends BaseFragment<FivedayMinuteStockF
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFiveDayMinuteEvent(FiveDayMinuteEvent event){
+        Log.d(TAG, "接收到五日数据");
         if (event.getDate() == 0){
             //获取历史分时数据无效
             ++num;
@@ -114,13 +115,12 @@ public class FiveDayMinuteStockFragment extends BaseFragment<FivedayMinuteStockF
                 //不够五日，继续请求
                 num=0;
                 ++count;
-                if (count==1){
-                    newDate = date;
-                }
                 cal.add(Calendar.DATE, -1);
                 date = Integer.valueOf(ymdFormat.format(cal.getTime()));
+                Log.d(TAG, String.format("不够五日，继续请求:%d", date));
                 EventBus.getDefault().post(new NoticeFiveDayMinuteEvent(date));
                 if (count==1){
+                    newDate = date;
                     UpdateNewValue(event.getHisTrendExtEntity());
                 }
             }else {

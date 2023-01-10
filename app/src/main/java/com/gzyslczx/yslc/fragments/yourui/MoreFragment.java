@@ -46,7 +46,7 @@ public class MoreFragment extends BaseFragment<DailyStockFragmentBinding> implem
 
     private int OFFSET = -1;
     private int COUNT;
-    private short PERIOD = QuoteConstants.PERIOD_TYPE_MINUTE1;
+    private short PERIOD = QuoteConstants.PERIOD_TYPE_MINUTE5;
     private short REMIT = QuoteConstants.NO_REMIT_MODE;
     private DecimalFormat decimalFormat;
     private StockSubTypeListAdapter subTypeListAdapter;
@@ -79,7 +79,6 @@ public class MoreFragment extends BaseFragment<DailyStockFragmentBinding> implem
         if (longPressDialogBinding==null){
             longPressDialogBinding = KlLongPressDialogBinding.bind(LayoutInflater.from(getContext()).inflate(R.layout.kl_long_press_dialog, null));
         }
-        PERIOD = getArguments().getShort(MoreType, QuoteConstants.PERIOD_TYPE_MINUTE1);
         EventBus.getDefault().post(new NoticeDailyKLineLoadMoreEvent(OFFSET, PERIOD, REMIT));
     }
 

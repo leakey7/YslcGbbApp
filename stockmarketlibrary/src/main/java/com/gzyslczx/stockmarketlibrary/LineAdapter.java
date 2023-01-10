@@ -31,7 +31,7 @@ public abstract class LineAdapter {
          * */
         for (String tag : lineTag) { //遍历线段条目
             //获取线段数据
-            if (lineMap.get(tag) != null) {
+            if (lineMap.get(tag) != null && lineMap.size()>0) {
                 for (int i = 0; i < lineMap.get(tag).getLine().size(); i++) {
                     lineMap.get(tag).getLine().get(i).setXValue(i); //设置X点值
                     lineMap.get(tag).getLine().get(i).setXPoint(HalfOfAveWidth + AveWidth * i); //设置X点坐标位置

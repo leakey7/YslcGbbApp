@@ -1,10 +1,8 @@
 package com.gzyslczx.yslc;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
@@ -35,7 +33,6 @@ import com.gzyslczx.yslc.fragments.yourui.MonthStockFragment;
 import com.gzyslczx.yslc.fragments.yourui.MoreFragment;
 import com.gzyslczx.yslc.fragments.yourui.WeekStockFragment;
 import com.gzyslczx.yslc.presenter.StockMarketPresenter;
-import com.gzyslczx.yslc.tools.DateTool;
 import com.gzyslczx.yslc.tools.DisplayTool;
 import com.gzyslczx.yslc.tools.TransStatusTool;
 import com.gzyslczx.yslc.tools.yourui.CodeTypeTool;
@@ -48,10 +45,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding> implements View.OnClickListener {
@@ -73,7 +67,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
     private PopupWindow realPriceExPop;
     private StockMoreTypeListBinding moreTypeListBinding;
     private PopupWindow moreTypeWindow;
-    private Short SelectMoreType;
+    private Short SelectMoreType=-2;
 
     @Override
     void InitParentLayout() {
@@ -92,8 +86,8 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         mViewBinding.Back.setOnClickListener(this::onClick);
         mViewBinding.Search.setOnClickListener(this::onClick);
         mViewBinding.MoreValue.setOnClickListener(this::onClick);
-        mViewBinding.MoreTab.setOnClickListener(this::onClick);
-        mViewBinding.MoreTabImg.setOnClickListener(this::onClick);
+//        mViewBinding.MoreTab.setOnClickListener(this::onClick);
+//        mViewBinding.MoreTabImg.setOnClickListener(this::onClick);
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mViewBinding.StockMarketAppBar.getLayoutParams();
         AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
         behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
@@ -230,23 +224,40 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
         }
         if (index==5){
             //更多Fragment
+            if (SelectMoreType==-2) {
+                mViewBinding.StyleTab.getTabAt(5).setText("5min");
+            }
             FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
             if (moreStockFragment==null){
                 moreStockFragment = new MoreFragment();
-                Bundle bundle = new Bundle();
-                bundle.putShort(MoreFragment.MoreType, SelectMoreType);
-                moreStockFragment.setArguments(bundle);
                 transaction.add(mViewBinding.StockMarketFrame.getId(), moreStockFragment);
                 transaction.commit();
-                mViewBinding.StyleTab.setSelected(false);
-                return;
-            }else {
-                EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
             }
             if (moreStockFragment.isHidden()){
                 transaction.show(moreStockFragment);
                 transaction.commit();
-                return;
+            }
+            //更多Fragment
+            //更多类型弹窗
+            if (moreTypeListBinding==null){
+                moreTypeListBinding = StockMoreTypeListBinding.bind(LayoutInflater.from(this).inflate(R.layout.stock_more_type_list, null));
+                moreTypeListBinding.minute5.setOnClickListener(this::onClick);
+                moreTypeListBinding.minute15.setOnClickListener(this::onClick);
+                moreTypeListBinding.minute30.setOnClickListener(this::onClick);
+                moreTypeListBinding.minute60.setOnClickListener(this::onClick);
+                moreTypeListBinding.minute120.setOnClickListener(this::onClick);
+            }
+            if (moreTypeWindow==null) {
+                moreTypeWindow = new PopupWindow();
+                moreTypeWindow.setWidth(DisplayTool.dp2px(this, 40));
+                moreTypeWindow.setHeight(DisplayTool.dp2px(this, 120));
+                moreTypeWindow.setOutsideTouchable(true);
+                moreTypeWindow.setContentView(moreTypeListBinding.getRoot());
+            }
+            if (moreTypeWindow.isShowing()){
+                moreTypeWindow.dismiss();
+            }else {
+                moreTypeWindow.showAsDropDown(mViewBinding.StyleTab, Gravity.RIGHT, 0, 0);
             }
         }
     }
@@ -276,6 +287,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                     dailyTransaction.hide(dailyStockFragment);
                     dailyTransaction.commit();
                 }
+                break;
             case 3:
                 FragmentTransaction weekTransaction =  getSupportFragmentManager().beginTransaction();
                 if (weekStockFragment!=null) {
@@ -290,7 +302,7 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
                     monthTransaction.commit();
                 }
                 break;
-            default:
+            case 5:
                 FragmentTransaction moreTransaction =  getSupportFragmentManager().beginTransaction();
                 if (moreStockFragment!=null) {
                     moreTransaction.hide(moreStockFragment);
@@ -457,65 +469,43 @@ public class StockMarketActivity extends BaseActivity<ActivityStockMarketBinding
             case R.id.Search:
                 //查询股票
                 break;
-            case R.id.MoreTab:
-            case R.id.MoreTabImg:
-                //更多类型弹窗
-                if (moreTypeListBinding==null){
-                    moreTypeListBinding = StockMoreTypeListBinding.bind(LayoutInflater.from(this).inflate(R.layout.stock_more_type_list, null));
-                    moreTypeListBinding.minute5.setOnClickListener(this::onClick);
-                    moreTypeListBinding.minute15.setOnClickListener(this::onClick);
-                    moreTypeListBinding.minute30.setOnClickListener(this::onClick);
-                    moreTypeListBinding.minute60.setOnClickListener(this::onClick);
-                    moreTypeListBinding.minute120.setOnClickListener(this::onClick);
-                }
-                if (moreTypeWindow==null) {
-                    moreTypeWindow = new PopupWindow();
-                    moreTypeWindow.setWidth(DisplayTool.dp2px(this, 40));
-                    moreTypeWindow.setHeight(DisplayTool.dp2px(this, 120));
-                    moreTypeWindow.setOutsideTouchable(true);
-                    moreTypeWindow.setContentView(moreTypeListBinding.getRoot());
-                }
-                if (moreTypeWindow.isShowing()){
-                    moreTypeWindow.dismiss();
-                }else {
-                    moreTypeWindow.showAsDropDown(mViewBinding.MoreTab, Gravity.BOTTOM, DisplayTool.dp2px(this, 4), 0);
-                }
-                break;
             case R.id.minute5:
-                mViewBinding.MoreTab.setText("5分");
+                mViewBinding.StyleTab.getTabAt(5).setText("5min");
                 SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE5;
-
+                EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
+                moreTypeWindow.dismiss();
                 break;
             case R.id.minute15:
-                mViewBinding.MoreTab.setText("15分");
+                mViewBinding.StyleTab.getTabAt(5).setText("15min");
                 SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE15;
-                int hidden5 = mViewBinding.StyleTab.getSelectedTabPosition();
-                ChangeFragment(5);
-                HiddenFragment(hidden5);
+                EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
+                moreTypeWindow.dismiss();
                 break;
             case R.id.minute30:
-                mViewBinding.MoreTab.setText("30分");
+                mViewBinding.StyleTab.getTabAt(5).setText("30min");
                 SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE30;
-                int hidden30 = mViewBinding.StyleTab.getSelectedTabPosition();
-                ChangeFragment(5);
-                HiddenFragment(hidden30);
+                EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
+                moreTypeWindow.dismiss();
                 break;
             case R.id.minute60:
-                mViewBinding.MoreTab.setText("60分");
+                mViewBinding.StyleTab.getTabAt(5).setText("60min");
                 SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE60;
-                int hidden60 = mViewBinding.StyleTab.getSelectedTabPosition();
-                ChangeFragment(5);
-                HiddenFragment(hidden60);
+                EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
+                moreTypeWindow.dismiss();
                 break;
             case R.id.minute120:
-                mViewBinding.MoreTab.setText("120分");
+                mViewBinding.StyleTab.getTabAt(5).setText("120min");
                 SelectMoreType = QuoteConstants.PERIOD_TYPE_MINUTE120;
-                int hidden120 = mViewBinding.StyleTab.getSelectedTabPosition();
-                ChangeFragment(5);
-                HiddenFragment(hidden120);
+                EventBus.getDefault().post(new MoreTypeStockEvent(SelectMoreType));
+                moreTypeWindow.dismiss();
                 break;
         }
     }
+
+    /*
+    * 显示更多Fragment
+    * */
+
 
     /*
      * 接受到通知请求交易明细

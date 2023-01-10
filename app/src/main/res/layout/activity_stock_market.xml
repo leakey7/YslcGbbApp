@@ -201,7 +201,7 @@
                     android:overScrollMode="never"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ValueSegLine"
-                    app:layout_constraintWidth_percent="0.7"
+                    app:layout_constraintRight_toLeftOf="@id/SetImg"
                     app:tabBackground="@android:color/transparent"
                     app:tabIndicatorColor="@color/yellow_FFCF00"
                     app:tabIndicatorFullWidth="false"
@@ -233,6 +233,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="月K" />
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="更多" />
                 </com.google.android.material.tabs.TabLayout>
 
                 <ImageView
@@ -247,29 +251,29 @@
                     android:adjustViewBounds="true"
                     android:background="@drawable/set"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/MoreTab"
-                    app:layout_constraintLeft_toRightOf="@id/StyleTab"
-                    app:layout_constraintRight_toLeftOf="@id/SetImg"
-                    app:layout_constraintTop_toTopOf="@id/StyleTab"
-                    app:layout_constraintBottom_toBottomOf="@id/StyleTab"
-                    android:textSize="@dimen/s14"
-                    android:textColor="@color/black_333"
-                    android:text="更多"
-                    android:gravity="center"
-                    app:layout_constraintHorizontal_bias="0.4"/>
-                <ImageView
-                    android:layout_width="@dimen/d8"
-                    android:layout_height="@dimen/d8"
-                    android:id="@+id/MoreTabImg"
-                    app:layout_constraintTop_toTopOf="@id/MoreTab"
-                    app:layout_constraintBottom_toBottomOf="@id/MoreTab"
-                    app:layout_constraintLeft_toRightOf="@id/MoreTab"
-                    android:src="@drawable/moredown"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/MoreTab"-->
+<!--                    app:layout_constraintLeft_toRightOf="@id/StyleTab"-->
+<!--                    app:layout_constraintRight_toLeftOf="@id/SetImg"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/StyleTab"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/StyleTab"-->
+<!--                    android:textSize="@dimen/s14"-->
+<!--                    android:textColor="@color/black_333"-->
+<!--                    android:text="更多"-->
+<!--                    android:gravity="center"-->
+<!--                    app:layout_constraintHorizontal_bias="0.4"/>-->
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/d8"-->
+<!--                    android:layout_height="@dimen/d8"-->
+<!--                    android:id="@+id/MoreTabImg"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/MoreTab"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/MoreTab"-->
+<!--                    app:layout_constraintLeft_toRightOf="@id/MoreTab"-->
+<!--                    android:src="@drawable/moredown"-->
+<!--                    android:scaleType="fitCenter"-->
+<!--                    android:adjustViewBounds="true"/>-->
 
                 <FrameLayout
                     android:layout_width="0dp"

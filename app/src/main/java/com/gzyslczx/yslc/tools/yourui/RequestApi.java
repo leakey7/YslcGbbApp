@@ -907,16 +907,19 @@ public class RequestApi implements IDataApi {
                             }
                         }
                         mTrendExtEntity.setTrendDataModelList(trendDataModelList);
+                        Log.d("FDM", new Gson().toJson(mTrendExtEntity));
                         EventBus.getDefault().post(new FiveDayMinuteEvent(mTrendExtEntity, mTrendExtEntity.getHistoryTime()));
 //                        sendMessage(mTrendExtEntity, handler, mAnsLeadData.getDataHead().getType());
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Log.d("FDM", e.getMessage());
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d("FDM1", e.getMessage());
         }
     }
 
