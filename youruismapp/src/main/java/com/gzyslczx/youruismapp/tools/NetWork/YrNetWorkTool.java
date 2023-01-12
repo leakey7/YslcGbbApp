@@ -3,11 +3,14 @@ package com.gzyslczx.youruismapp.tools.NetWork;
 import android.util.Log;
 
 import com.gzyslczx.youruismapp.BaseActivity;
+import com.gzyslczx.youruismapp.events.UpdateYRTokenEvent;
 import com.gzyslczx.youruismapp.fragments.BaseFragment;
 import com.gzyslczx.youruismapp.requestes.TokenReqBody;
 import com.gzyslczx.youruismapp.responses.TokenRes;
 import com.gzyslczx.youruismapp.tools.BaseTool;
 import com.gzyslczx.youruismapp.tools.SPTool;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,7 +55,7 @@ public class YrNetWorkTool extends BaseTool {
     /*
     * 请求友睿Token
     * */
-    public void ReqToken(BaseActivity baseActivity, BaseFragment baseFragment){
+    public void ReqYRToken(BaseActivity baseActivity, BaseFragment baseFragment){
         Observable<TokenRes> observable = yrNetWorkUnit.ReqToken(new TokenReqBody(YrAppKey, YrAppSecret, 1));
         observable = AddRetryExtraAll(observable, baseActivity, baseFragment, TAG);
         observable.subscribe(new Consumer<TokenRes>() {
@@ -61,8 +64,11 @@ public class YrNetWorkTool extends BaseTool {
                 if (tokenRes.getCode()==0){
                     PrintLogD(TAG, "获取友睿Token成功");
                     if (baseActivity!=null){
-                        SPTool.init(baseActivity).SaveInfo(SPTool.SpToken, tokenRes.getToken());
-                        SPTool.init(baseActivity).SaveInfo(SPTool.SpTokenTime, new SimpleDateFormat("yyyyMMdd").format(new Date()));
+                        if (SPTool.init(baseActivity).SaveInfo(SPTool.SpToken, tokenRes.getToken())
+                                && SPTool.init(baseActivity).SaveInfo(SPTool.SpTokenTime, new SimpleDateFormat("yyyyMMdd").format(new Date()))){
+                            PrintLogD(TAG, "友睿Token存储成功");
+                            EventBus.getDefault().post(new UpdateYRTokenEvent(true, tokenRes.getToken()));
+                        }
                     }else if (baseFragment!=null){
                         SPTool.init(baseFragment.getContext()).SaveInfo(SPTool.SpToken, tokenRes.getToken());
                     }

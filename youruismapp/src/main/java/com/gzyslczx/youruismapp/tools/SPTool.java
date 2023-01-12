@@ -7,7 +7,7 @@ public class SPTool extends BaseTool{
 
     public static final String TAG = "SpTool";
 
-    private final String SPName = "YrSmSp";
+    private final String SPName = "YrSmSp.cfg";
 
     private static volatile SPTool spTool;
     private SharedPreferences sharedPreferences;
