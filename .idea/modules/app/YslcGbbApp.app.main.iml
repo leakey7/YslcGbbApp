@@ -118,7 +118,7 @@
     <orderEntry type="library" name="Gradle: com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.databinding:databinding-runtime:3.6.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.databinding:databinding-adapters:3.6.3@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.tencent.liteav:LiteAVSDK_Professional:10.9.0.13092@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.tencent.liteav:LiteAVSDK_Professional:10.9.0.13102@aar" level="project" />
     <orderEntry type="library" name="Gradle: cn.jiguang.sdk:jverification:2.9.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: cn.jiguang.sdk:jpush:4.8.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: cn.jiguang.sdk:jcore:3.3.2@aar" level="project" />
